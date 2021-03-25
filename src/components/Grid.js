@@ -3,30 +3,20 @@ import Node from './Node.js'
 import { useState } from 'react'
 import { getNodeTypeEnum } from '../utils/util.js'
 
-const Grid = ({ rows, cols, nodeSize }) => {
-    const [selectingStart, setSelectingStart] = useState(false);
-    const [selectingTarget, setSelectingTarget] = useState(false);
-    const [selectingObstacle, setSelectingObstacle] = useState(false);
+const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle }) => {
+    const [draggingSelection, setDraggingSelection] = useState(getNodeTypeEnum('none'));
 
     // fill nodes in the grid
     const nodes = [];
     for (let x = 0; x < rows; x++) {
         for (let y = 0; y < cols; y++) {
-            let type = [getNodeTypeEnum('none')];
+            let nodeId = `${x}:${y}`
 
-            if (x === 0 && y === 0) {
-                type.unshift(getNodeTypeEnum('start'));
-            }
-            else if (x === (rows - 1) && y === (cols - 1)) {
-                type.unshift(getNodeTypeEnum('target'));
-            }
-
-            nodes.push(<Node size={nodeSize} nodeType={type} selectingStart={selectingStart} setSelectingStart={setSelectingStart} selectingTarget={selectingTarget} setSelectingTarget={setSelectingTarget} selectingObstacle={selectingObstacle} setSelectingObstacle={setSelectingObstacle} key={[x, y]} />);
+            nodes.push(<Node nodeId={nodeId} size={nodeSize} nodeState={gridState[nodeId]} setGridState={setGridState} draggingSelection={draggingSelection} setDraggingSelection={setDraggingSelection} key={nodeId} />);
         }
     }
 
     const gridStyle = {
-        marginTop: 150,
         width: (cols * nodeSize) + cols,
         height: (rows * nodeSize) + rows
     };

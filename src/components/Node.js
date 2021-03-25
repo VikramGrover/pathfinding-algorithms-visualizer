@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import React from 'react'
-import { getNodeTypeEnum } from '../utils/util.js'
+import { getNodeColor, getNodeTypeEnum } from '../utils/util.js'
 import startNodeImg from '../images/start.png'
 import targetNodeImg from '../images/target.png'
 import obstacleNodeImg from '../images/obstacle.png'
 
-const Node = ({ size, nodeType, selectingStart, setSelectingStart, selectingTarget, setSelectingTarget, selectingObstacle, setSelectingObstacle }) => {
-    const [type, setType] = useState(nodeType);
+const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection }) => {
     const nodeDim = {
         width: size,
         height: size
@@ -18,81 +17,52 @@ const Node = ({ size, nodeType, selectingStart, setSelectingStart, selectingTarg
     };
 
     const mouseDowned = () => {
-        if (type[0] === getNodeTypeEnum('start')) {
-            setSelectingStart(true);
+        const currNodeState = nodeState;
+
+        if (currNodeState[0] === getNodeTypeEnum('none')) {
+            setDraggingSelection(getNodeTypeEnum('obstacle'));
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), ...prevState[nodeId]] }));
+            return;
+        }
+        else if (currNodeState[0] === getNodeTypeEnum('obstacle')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
             return;
         }
 
-        if (type[0] === getNodeTypeEnum('target')) {
-            setSelectingTarget(true);
-            return;
-        }
-
-        if (type[0] === getNodeTypeEnum('none')) {
-            setSelectingObstacle(true);
-            setType([getNodeTypeEnum('obstacle'), ...type]);
-            return;
-        }
-
-        if (type[0] === getNodeTypeEnum('obstacle')) {
-            setType(type.slice(1))
-            return;
-        }
+        setDraggingSelection(currNodeState[0]);
     };
 
     const mouseEntered = () => {
-        if (type[0] === getNodeTypeEnum('obstacle')) {
-            console.log("MOUSE ENTERED");
-        }
+        let currNodeState = nodeState;
 
-        if (selectingStart) {
-            setType([getNodeTypeEnum('start'), ...type]);
-            return;
+        if (draggingSelection === getNodeTypeEnum('obstacle') && currNodeState[0] === getNodeTypeEnum('none')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), ...prevState[nodeId]] }));
         }
-
-        if (selectingTarget) {
-            setType([getNodeTypeEnum('target'), ...type]);
-            return;
+        else if (draggingSelection === getNodeTypeEnum('start')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('start'), ...prevState[nodeId]] }));
         }
-
-        if (selectingObstacle && type[0] === getNodeTypeEnum('none')) {
-            setType([getNodeTypeEnum('obstacle'), ...type]);
-            return;
+        else if (draggingSelection === getNodeTypeEnum('target')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('target'), ...prevState[nodeId]] }));
         }
     };
 
     const mouseLeft = () => {
-        if (selectingStart || selectingTarget) {
-            setType(type.slice(1));
-            if (type[1] === getNodeTypeEnum('obstacle')) {
-                console.log("MOUSE LEFT");
-            }
+        let currNodeState = nodeState;
+
+        if (draggingSelection === getNodeTypeEnum('start') || draggingSelection === getNodeTypeEnum('target')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
             return;
         }
     };
 
     const mouseUped = () => {
-        if (selectingStart) {
-            setSelectingStart(false);
-            return;
-        }
-
-        if (selectingTarget) {
-            setSelectingTarget(false);
-            return;
-        }
-
-        if (selectingObstacle) {
-            setSelectingObstacle(false);
+        if (draggingSelection !== getNodeTypeEnum('none')) {
+            setDraggingSelection(getNodeTypeEnum('none'));
         }
     };
 
     return (
-        <div style={nodeDim} className="node" >
-            {type[0] === getNodeTypeEnum('start') && <img className='img-node' alt='Start Node' style={imgDim} src={startNodeImg} />}
-            {type[0] === getNodeTypeEnum('target') && <img className='img-node' alt='Target Node' style={imgDim} src={targetNodeImg} />}
-            {type[0] === getNodeTypeEnum('obstacle') && <img className='img-node' alt='Obstacle' style={imgDim} src={obstacleNodeImg} />}
-            <div style={{ ...nodeDim, position: 'absolute', top: 0, left: 0 }} onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} />
+        <div style={{ ...nodeDim, backgroundColor: getNodeColor(nodeState[0]) }} className='node' onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} >
         </div>
     )
 }
