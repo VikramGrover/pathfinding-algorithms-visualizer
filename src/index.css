@@ -8,6 +8,8 @@
   --start-node-color: #43b581;
   --target-node-color: #f14846;
   --obstacle-node-color: #18191c;
+  --visited-node-color: #3f70dd;
+  --path-node-color: #f9a719;
 }
 
 body {
@@ -25,13 +27,14 @@ code {
     monospace;
 }
 
+/* GRID */
 .grid {
   position: fixed;
   left: 50%;
   transform: translate(-50%);
-  /* border: 1px solid var(--accent-color); */
 }
 
+/* NODE */
 .node {
   margin-top: -1px;
   margin-left: -1px;
@@ -41,16 +44,30 @@ code {
   transition: background-color 100ms ease-in;
 }
 
-.img-node {
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.node.start {
+  background-color: var(--start-node-color);
+}
+
+.node.empty {
+  background-color: var(--grid-color);
+}
+
+.node.target {
+  background-color: var(--target-node-color);
+}
+
+.node.obstacle {
+  background-color: var(--obstacle-node-color);
+}
+
+.node.visited {
+  background-color: var(--visited-node-color);
+  transition: background-color 200ms linear;
+}
+
+.node.path {
+  background-color: var(--path-node-color);
+  transition: background-color 100ms linear;
 }
 
 /* HEADER */
@@ -92,18 +109,4 @@ code {
   transition: box-shadow 0.2s;
 }
 
-.start-node {
-  background-color: var(--start-node-color);
-}
 
-.empty-node {
-  background-color: var(--grid-color);
-}
-
-.target-node {
-  background-color: var(--target-node-color);
-}
-
-.obstacle-node {
-  background-color: var(--obstacle-node-color);
-}

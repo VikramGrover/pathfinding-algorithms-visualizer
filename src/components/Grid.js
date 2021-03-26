@@ -3,7 +3,7 @@ import Node from './Node.js'
 import { useState } from 'react'
 import { getNodeTypeEnum } from '../utils/util.js'
 
-const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle }) => {
+const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle, setStartCord, setTargetCord }) => {
     const [draggingSelection, setDraggingSelection] = useState(getNodeTypeEnum('none'));
 
     // fill nodes in the grid
@@ -15,7 +15,8 @@ const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle 
             nodes.push(<Node nodeId={nodeId}
                 size={nodeSize} nodeState={gridState[nodeId]} setGridState={setGridState}
                 draggingSelection={draggingSelection}
-                setDraggingSelection={setDraggingSelection} key={nodeId} />);
+                setDraggingSelection={setDraggingSelection}
+                setStartCord={setStartCord} setTargetCord={setTargetCord} key={nodeId} />);
         }
     }
 

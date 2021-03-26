@@ -36,11 +36,13 @@ function App() {
   };
 
   const [selectedObstacle, setSelectedObstacle] = useState(defaultSelectedObstacle);
+  const [startCord, setStartCord] = useState('0:0');
+  const [targetCord, setTargetCord] = useState(`${rows - 1}:${cols - 1}`);
 
   return (
     <>
-      <Header />
-      <Grid rows={rows} cols={cols} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} />
+      <Header rows={rows} cols={cols} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} />
+      <Grid rows={rows} cols={cols} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} />
     </>
   );
 }

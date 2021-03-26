@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import React from 'react'
 import { getNodeColorClass, getNodeTypeEnum } from '../utils/util.js'
 
-const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection }) => {
+const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord }) => {
     const nodeDim = {
         width: size,
         height: size
@@ -32,15 +31,15 @@ const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDra
         }
         else if (draggingSelection === getNodeTypeEnum('start')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('start'), ...prevState[nodeId]] }));
+            setStartCord(nodeId);
         }
         else if (draggingSelection === getNodeTypeEnum('target')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('target'), ...prevState[nodeId]] }));
+            setTargetCord(nodeId);
         }
     };
 
     const mouseLeft = () => {
-        let currNodeState = nodeState;
-
         if (draggingSelection === getNodeTypeEnum('start') || draggingSelection === getNodeTypeEnum('target')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
             return;
