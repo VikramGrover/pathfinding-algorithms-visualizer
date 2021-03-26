@@ -12,17 +12,20 @@ const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle 
         for (let y = 0; y < cols; y++) {
             let nodeId = `${x}:${y}`
 
-            nodes.push(<Node nodeId={nodeId} size={nodeSize} nodeState={gridState[nodeId]} setGridState={setGridState} draggingSelection={draggingSelection} setDraggingSelection={setDraggingSelection} key={nodeId} />);
+            nodes.push(<Node nodeId={nodeId}
+                size={nodeSize} nodeState={gridState[nodeId]} setGridState={setGridState}
+                draggingSelection={draggingSelection}
+                setDraggingSelection={setDraggingSelection} key={nodeId} />);
         }
     }
 
-    const gridStyle = {
+    const gridDimensions = {
         width: (cols * nodeSize) + cols,
         height: (rows * nodeSize) + rows
     };
 
     return (
-        <div className='grid' style={gridStyle}>
+        <div className='grid' style={gridDimensions}>
             { nodes}
         </div >
     )

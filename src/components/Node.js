@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
-import { getNodeColor, getNodeTypeEnum } from '../utils/util.js'
-import startNodeImg from '../images/start.png'
-import targetNodeImg from '../images/target.png'
-import obstacleNodeImg from '../images/obstacle.png'
+import { getNodeColorClass, getNodeTypeEnum } from '../utils/util.js'
 
 const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection }) => {
     const nodeDim = {
@@ -11,31 +8,26 @@ const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDra
         height: size
     };
 
-    const imgDim = {
-        width: size * 0.8,
-        height: size * 0.8
-    };
-
     const mouseDowned = () => {
-        const currNodeState = nodeState;
-
-        if (currNodeState[0] === getNodeTypeEnum('none')) {
+        if (nodeState[0] === getNodeTypeEnum('none')) {
             setDraggingSelection(getNodeTypeEnum('obstacle'));
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), ...prevState[nodeId]] }));
             return;
         }
-        else if (currNodeState[0] === getNodeTypeEnum('obstacle')) {
+        else if (nodeState[0] === getNodeTypeEnum('obstacle')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
+            setDraggingSelection(getNodeTypeEnum('remObstacle'));
             return;
         }
 
-        setDraggingSelection(currNodeState[0]);
+        setDraggingSelection(nodeState[0]);
     };
 
     const mouseEntered = () => {
-        let currNodeState = nodeState;
-
-        if (draggingSelection === getNodeTypeEnum('obstacle') && currNodeState[0] === getNodeTypeEnum('none')) {
+        if (draggingSelection === getNodeTypeEnum('remObstacle') && nodeState[0] === getNodeTypeEnum('obstacle')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
+        }
+        else if (draggingSelection === getNodeTypeEnum('obstacle') && nodeState[0] === getNodeTypeEnum('none')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), ...prevState[nodeId]] }));
         }
         else if (draggingSelection === getNodeTypeEnum('start')) {
@@ -62,7 +54,7 @@ const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDra
     };
 
     return (
-        <div style={{ ...nodeDim, backgroundColor: getNodeColor(nodeState[0]) }} className='node' onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} >
+        <div style={{ ...nodeDim }} className={`node ${getNodeColorClass(nodeState[0])}`} onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} >
         </div>
     )
 }

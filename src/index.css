@@ -5,6 +5,9 @@
   --accent-color: #7389da;
   --grid-color: #36363c;
   --visualize-button-color: #43b581;
+  --start-node-color: #43b581;
+  --target-node-color: #f14846;
+  --obstacle-node-color: #18191c;
 }
 
 body {
@@ -33,15 +36,9 @@ code {
   margin-top: -1px;
   margin-left: -1px;
   border: 1px solid var(--node-border-color);
-  background-color: var(--grid-color);
   float: left;
   position: relative;
   transition: background-color 100ms ease-in;
-}
-
-.node:hover {
-    background-color: var(--node-border-color);
-    transition: background-color 100ms ease-in;
 }
 
 .img-node {
@@ -93,4 +90,20 @@ code {
   outline: none;
   cursor: pointer;
   transition: box-shadow 0.2s;
+}
+
+.start-node {
+  background-color: var(--start-node-color);
+}
+
+.empty-node {
+  background-color: var(--grid-color);
+}
+
+.target-node {
+  background-color: var(--target-node-color);
+}
+
+.obstacle-node {
+  background-color: var(--obstacle-node-color);
 }
