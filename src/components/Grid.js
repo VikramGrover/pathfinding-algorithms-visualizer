@@ -1,12 +1,12 @@
-import React from 'react'
 import Node from './Node.js'
 import { useState } from 'react'
 import { getNodeTypeEnum } from '../utils/util.js'
 
-const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle, setStartCord, setTargetCord }) => {
+const Grid = ({ rows, cols, padding, nodeSize, gridState, setGridState, selectedObstacle, setStartCord, setTargetCord }) => {
     const [draggingSelection, setDraggingSelection] = useState(getNodeTypeEnum('none'));
 
     // fill nodes in the grid
+    // console.log("RERENDERING GRID");
     const nodes = [];
     for (let x = 0; x < rows; x++) {
         for (let y = 0; y < cols; y++) {
@@ -25,10 +25,18 @@ const Grid = ({ rows, cols, nodeSize, gridState, setGridState, selectedObstacle,
         height: (rows * nodeSize) + rows
     };
 
+    const containerStyle = {
+        paddingLeft: padding,
+        paddingRight: padding,
+        paddingBottom: padding
+    }
+
     return (
-        <div className='grid' style={gridDimensions}>
-            { nodes}
-        </div >
+        <div style={containerStyle}>
+            <div className='grid' style={gridDimensions}>
+                {nodes}
+            </div >
+        </div>
     )
 }
 

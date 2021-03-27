@@ -1,7 +1,7 @@
 import React from 'react'
 import { getNodeColorClass, getNodeTypeEnum } from '../utils/util.js'
 
-const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord }) => {
+const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord }) => {
     const nodeDim = {
         width: size,
         height: size
@@ -55,7 +55,7 @@ const Node = ({ nodeId, size, nodeState, setGridState, draggingSelection, setDra
     return (
         <div style={{ ...nodeDim }} className={`node ${getNodeColorClass(nodeState[0])}`} onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} >
         </div>
-    )
-}
+    );
+}, (oldProps, newProps) => oldProps.nodeState === newProps.nodeState);
 
 export default Node

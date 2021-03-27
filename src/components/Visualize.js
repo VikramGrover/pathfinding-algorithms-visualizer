@@ -1,22 +1,22 @@
-import React from 'react'
 import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
 import { getNodeTypeEnum } from '../utils/util.js'
 
-const Visualize = ({ rows, cols, gridState, setGridState, startCord, targetCord }) => {
-    const visualizeOnClick = () => {
+const Visualize = ({ rows, cols, gridState, setGridState, startCord, targetCord, clearForReRun }) => {
+    const run = async () => {
+        // clearForReRun();
         const path = dijkstras(startCord, targetCord, gridState, setGridState, rows, cols);
 
-        for (const cord of path) {
+        for (let i = path.length; i >= 0; i--) {
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [cord]: [getNodeTypeEnum('path')] }));
-            }, 200);
+                setGridState(prevState => ({ ...prevState, [path[i]]: [getNodeTypeEnum('path')] }));
+            }, 1);
         }
     };
 
     return (
-        <button className='pure-material-button-contained' onClick={visualizeOnClick}>
-            VISUALIZE
-        </button >
+        <div className='button green' onClick={run} >
+            Run
+        </div >
     )
 }
 

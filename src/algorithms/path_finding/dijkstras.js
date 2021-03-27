@@ -1,4 +1,4 @@
-import { getNodeTypeEnum, getNodeWeight } from '../../utils/util.js'
+import { getNodeTypeEnum, getNodeWeight, shuffleArray } from '../../utils/util.js'
 
 export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols) => {
     console.log("STARTING DIJSTRAS");
@@ -28,7 +28,7 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
         if (minKey !== startCord && minKey !== targetCord) {
             setTimeout(() => {
                 setGridState(prevState => ({ ...prevState, [minKey]: [getNodeTypeEnum('visited')] }));
-            }, 200);
+            }, 1);
         }
         else if (minKey === targetCord) {
             console.log("ENDING DIJSTRAS");
@@ -55,14 +55,6 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
     return [];
 };
 
-const sleep = (ms) => {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < ms);
-};
-
 const createPath = (startCord, targetCord, prevNodes) => {
     let cord = targetCord;
     let path = [];
@@ -85,6 +77,9 @@ const getNeighbourNodes = (node, rows, cols, gridState) => {
     const col = parseInt(node.split(':')[1]);
 
     let res = [];
+    if ((col + 1 < cols) && (gridState[`${row}:${col + 1}`][0] !== getNodeTypeEnum('obstacle'))) {
+        res.push(`${row}:${col + 1}`)
+    }
     if ((row - 1 >= 0) && (gridState[`${row - 1}:${col}`][0] !== getNodeTypeEnum('obstacle'))) {
         res.push(`${row - 1}:${col}`)
     }
@@ -94,10 +89,8 @@ const getNeighbourNodes = (node, rows, cols, gridState) => {
     if ((col - 1 >= 0) && (gridState[`${row}:${col - 1}`][0] !== getNodeTypeEnum('obstacle'))) {
         res.push(`${row}:${col - 1}`)
     }
-    if ((col + 1 < cols) && (gridState[`${row}:${col + 1}`][0] !== getNodeTypeEnum('obstacle'))) {
-        res.push(`${row}:${col + 1}`)
-    }
 
+    shuffleArray(res);
     return res;
 };
 

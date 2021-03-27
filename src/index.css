@@ -5,11 +5,15 @@
   --accent-color: #7389da;
   --grid-color: #36363c;
   --visualize-button-color: #43b581;
+  --reset-button-color: #f14846;
+  --visualize-button-background: 67, 181, 129;
+  --reset-button-background: 241, 72, 70;
   --start-node-color: #43b581;
   --target-node-color: #f14846;
   --obstacle-node-color: #18191c;
   --visited-node-color: #3f70dd;
   --path-node-color: #f9a719;
+  --button-deafult-color: 24, 25, 28;
 }
 
 body {
@@ -29,7 +33,7 @@ code {
 
 /* GRID */
 .grid {
-  position: fixed;
+  position: relative;
   left: 50%;
   transform: translate(-50%);
 }
@@ -72,41 +76,54 @@ code {
 
 /* HEADER */
 .header {
-  margin: 30px;
-  height: 90px;
   display: flex;
   flex-direction: row-reverse;
 }
 
-/* VISUALIZE */
-.pure-material-button-contained {
-  margin-left: 40px;
+/* BUTTON */
+.button {
+  margin-left: 20px;
   position: relative;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  display: inline-block;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 4px;
-  padding: 0 16px;
-  min-width: 94px;
-  height: 46px;
-  vertical-align: middle;
+  padding: 10px 20px;
   text-align: center;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
-  background-color: var(--visualize-button-color);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+  margin-bottom: 2px;
+  border-radius: 4px;
+  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
   font-size: 16px;
   font-weight: 500;
-  line-height: 36px;
-  overflow: hidden;
-  outline: none;
+  background-color: var(--body-color);
   cursor: pointer;
-  transition: box-shadow 0.2s;
+  display: table;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  height: auto;
+  transition: color 70ms linear;
+  transition: background-color 70ms linear;
+}
+
+.button.green {
+  color: var(--visualize-button-color);
+  background-color: rgba(var(--visualize-button-background), 0.1);
+}
+
+.button.green:hover {
+  color:white;
+  background-color: rgba(var(--visualize-button-background), 1);
+}
+
+.button.red {
+  color: var(--reset-button-color);
+  background-color: rgba(var(--reset-button-background), 0.1);
+}
+
+.button.red:hover {
+  color: white;
+  background-color: rgba(var(--reset-button-background), 1);
 }
 
 
