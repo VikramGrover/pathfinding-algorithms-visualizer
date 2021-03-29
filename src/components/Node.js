@@ -56,6 +56,6 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
         <div style={{ ...nodeDim }} className={`node ${getNodeColorClass(nodeState[0])}`} onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} >
         </div>
     );
-}, (oldProps, newProps) => oldProps.nodeState === newProps.nodeState);
+});
 
 export default Node
