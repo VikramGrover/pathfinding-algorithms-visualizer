@@ -16,9 +16,9 @@ const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCo
 
         console.log("ENDED: ", selectedAlgo);
 
-        for (let i = path.length; i >= 0; i--) {
+        for (let i = path.length - 1; i >= 0; i--) {
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [path[i]]: [getNodeTypeEnum('path')] }));
+                setGridState(prevState => ({ ...prevState, [path[i]]: [getNodeTypeEnum('path'), ...updatedGridState[path[i]]] }));
             }, 1);
         }
 

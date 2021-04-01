@@ -1,21 +1,19 @@
 import React from 'react'
 import { getNodeColorClass, getNodeTypeEnum } from '../utils/util.js'
 
-const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord, runningAlgo }) => {
+const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord, runningAlgo, selectedObstacle }) => {
     const nodeDim = {
         width: size,
         height: size
     };
 
     const mouseDowned = () => {
-        console.log("HEELLLLLLOOOO");
         if (nodeState[0] === getNodeTypeEnum('none') || nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited')) {
-
-            setDraggingSelection(getNodeTypeEnum('obstacle'));
-            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), getNodeTypeEnum('none')] }));
+            setDraggingSelection(getNodeTypeEnum(selectedObstacle));
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum(selectedObstacle), getNodeTypeEnum('none')] }));
             return;
         }
-        else if (nodeState[0] === getNodeTypeEnum('obstacle')) {
+        else if (nodeState[0] >= getNodeTypeEnum('wall')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
             setDraggingSelection(getNodeTypeEnum('remObstacle'));
             return;
@@ -25,11 +23,11 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
     };
 
     const mouseEntered = () => {
-        if (draggingSelection === getNodeTypeEnum('remObstacle') && nodeState[0] >= getNodeTypeEnum('obstacle')) {
+        if (draggingSelection === getNodeTypeEnum('remObstacle') && nodeState[0] >= getNodeTypeEnum('wall')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
         }
-        else if (draggingSelection === getNodeTypeEnum('obstacle') && nodeState[0] !== getNodeTypeEnum('start') && nodeState[0] !== getNodeTypeEnum('target')) {
-            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), getNodeTypeEnum('none')] }));
+        else if (draggingSelection === getNodeTypeEnum(selectedObstacle) && (nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited') || nodeState[0] === getNodeTypeEnum('none'))) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum(selectedObstacle), getNodeTypeEnum('none')] }));
         }
         else if (draggingSelection === getNodeTypeEnum('start')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('start'), ...prevState[nodeId]] }));

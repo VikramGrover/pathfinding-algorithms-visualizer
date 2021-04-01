@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [gridState, setGridState] = useState({});
-  const [selectedObstacle, setSelectedObstacle] = useState({});
+  const [selectedObstacle, setSelectedObstacle] = useState('wall');
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
   const [startCord, setStartCord] = useState('0:0');
@@ -53,12 +53,6 @@ function App() {
     }
 
     setGridState(gridMap);
-
-    let defaultSelectedObstacle = {
-      'obstacle': false
-    };
-
-    setSelectedObstacle(defaultSelectedObstacle);
   };
 
   const clearObstacles = () => {
@@ -71,7 +65,7 @@ function App() {
         gridMap[id] = gridState[id];
         let currState = gridState[id][0];
 
-        if (currState >= getNodeTypeEnum('obstacle')) {
+        if (currState >= getNodeTypeEnum('wall')) {
           gridMap[id] = [getNodeTypeEnum('none')];
           change = true;
         }
@@ -95,7 +89,7 @@ function App() {
         let currState = gridState[id][0];
 
         if (currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('path')) {
-          gridMap[id] = [getNodeTypeEnum('none')];
+          gridMap[id] = gridMap[id].slice(1);
           change = true;
         }
       }

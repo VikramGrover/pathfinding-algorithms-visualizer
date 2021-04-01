@@ -12,6 +12,7 @@
   --start-node-color: #43b581;
   --target-node-color: #f14846;
   --obstacle-node-color: #18191c;
+  --weighted-node-color: 24, 25, 28;
   --dark-selection: #34363d;
   --visited-node-color: 63, 112, 221;
   --path-node-color: #f9a719;
@@ -67,7 +68,7 @@ code {
   background-color: var(--target-node-color);
 }
 
-.node.obstacle {
+.node.wall {
   background-color: var(--obstacle-node-color);
 }
 
@@ -79,6 +80,22 @@ code {
 .node.path {
   background-color: var(--path-node-color);
   transition: background-color 100ms linear;
+}
+
+.node.weighted-100{
+  background-color: rgba(var(--weighted-node-color), 0.9);
+}
+.node.weighted-80{
+  background-color: rgba(var(--weighted-node-color), 0.8);
+}
+.node.weighted-60{
+  background-color: rgba(var(--weighted-node-color), 0.6);
+}
+.node.weighted-40{
+  background-color: rgba(var(--weighted-node-color), 0.4);
+}
+.node.weighted-20{
+  background-color: rgba(var(--weighted-node-color), 0.2);
 }
 
 /* HEADER */
