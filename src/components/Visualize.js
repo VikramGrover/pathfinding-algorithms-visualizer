@@ -1,20 +1,25 @@
 import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
 import { getNodeTypeEnum } from '../utils/util.js'
 
-const Visualize = ({ rows, cols, gridState, setGridState, startCord, targetCord, clearForReRun }) => {
+const Visualize = ({ rows, cols, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
     const run = async () => {
-        // clearForReRun();
-        const path = dijkstras(startCord, targetCord, gridState, setGridState, rows, cols);
+        console.log("I AM RUNNING");
+        const updatedGridState = clearForReRun();
+        const path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
 
         for (let i = path.length; i >= 0; i--) {
             setTimeout(() => {
                 setGridState(prevState => ({ ...prevState, [path[i]]: [getNodeTypeEnum('path')] }));
             }, 1);
         }
+
+        setTimeout(() => {
+            setRunningAlgo(false);
+        }, 1);
     };
 
     return (
-        <div className='button green' onClick={run} >
+        <div className={`button ${runningAlgo ? 'disabled' : 'green'}`} onClick={runningAlgo ? null : run} >
             Run
         </div >
     )

@@ -10,10 +10,10 @@ function App() {
   const [cols, setCols] = useState(0);
   const [startCord, setStartCord] = useState('0:0');
   const [targetCord, setTargetCord] = useState('0:0');
-
+  const [runningAlgo, setRunningAlgo] = useState(false);
   const margin = 30;
   const nodeSize = 28;
-  const navBarHeight = 60;
+  const navBarHeight = 80;
 
   useEffect(() => {
     resetBoard();
@@ -31,6 +31,7 @@ function App() {
     const rows = parseInt(adjustedWinHeight / (nodeSize + 1));
     const cols = parseInt(adjustedWinWidth / (nodeSize + 1));
 
+    setRunningAlgo(false);
     setRows(rows);
     setCols(cols);
     setStartCord('0:0');
@@ -61,14 +62,24 @@ function App() {
   };
 
   const clearObstacles = () => {
+    let gridMap = {};
+    let change = false;
+
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
-        let currState = gridState[`${x}:${y}`][0];
+        let id = `${x}:${y}`;
+        gridMap[id] = gridState[id];
+        let currState = gridState[id][0];
 
         if (currState >= getNodeTypeEnum('obstacle')) {
-          setGridState(prevState => ({ ...prevState, [`${x}:${y}`]: [getNodeTypeEnum('none')] }));
+          gridMap[id] = [getNodeTypeEnum('none')];
+          change = true;
         }
       }
+    }
+
+    if (change) {
+      setGridState(prevState => (gridMap));
     }
   };
 
@@ -80,8 +91,8 @@ function App() {
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
+        gridMap[id] = gridState[id];
         let currState = gridState[id][0];
-        gridMap[id] = currState;
 
         if (currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('path')) {
           gridMap[id] = [getNodeTypeEnum('none')];
@@ -92,14 +103,17 @@ function App() {
 
     if (change) {
       console.log("DONE CLEARING FOR RE RUN")
-      setGridState(gridMap);
+      setGridState(prevState => (gridMap));
     }
+
+    setRunningAlgo(true);
+    return gridMap;
   };
 
   return (
     <>
-      <Header rows={rows} cols={cols} padding={margin} height={navBarHeight} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} resetBoard={resetBoard} clearObstacles={clearObstacles} clearForReRun={clearForReRun} />
-      <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} />
+      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} resetBoard={resetBoard} clearObstacles={clearObstacles} clearForReRun={clearForReRun} />
+      <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
     </>
   );
 }

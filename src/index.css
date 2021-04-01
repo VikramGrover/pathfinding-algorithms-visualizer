@@ -1,9 +1,9 @@
 :root {
-  --node-border-color: rgba(119, 119, 119,0.25);
+  --node-border-color: rgba(185, 187, 190, 0.1);
   --node-hover-color: #f0efeb;
   --body-color: #2f3137;
   --accent-color: #7389da;
-  --grid-color: #36363c;
+  --grid-color: #35393f;
   --visualize-button-color: #43b581;
   --reset-button-color: #f14846;
   --visualize-button-background: 67, 181, 129;
@@ -11,9 +11,10 @@
   --start-node-color: #43b581;
   --target-node-color: #f14846;
   --obstacle-node-color: #18191c;
-  --visited-node-color: #3f70dd;
+  --visited-node-color: 63, 112, 221;
   --path-node-color: #f9a719;
   --button-deafult-color: 24, 25, 28;
+  --clear-button-color: 249,167,25;
 }
 
 body {
@@ -36,6 +37,8 @@ code {
   position: relative;
   left: 50%;
   transform: translate(-50%);
+  border-radius: 4px;
+  border: 13px solid var(--grid-color);
 }
 
 /* NODE */
@@ -65,7 +68,7 @@ code {
 }
 
 .node.visited {
-  background-color: var(--visited-node-color);
+  background-color: rgba(var(--visited-node-color), 1);
   transition: background-color 200ms linear;
 }
 
@@ -108,22 +111,31 @@ code {
 
 .button.green {
   color: var(--visualize-button-color);
-  background-color: rgba(var(--visualize-button-background), 0.1);
 }
 
 .button.green:hover {
-  color:white;
-  background-color: rgba(var(--visualize-button-background), 1);
+  background-color: rgba(var(--visualize-button-background), 0.1);
 }
 
 .button.red {
   color: var(--reset-button-color);
-  background-color: rgba(var(--reset-button-background), 0.1);
 }
 
 .button.red:hover {
-  color: white;
-  background-color: rgba(var(--reset-button-background), 1);
+  background-color: rgba(var(--reset-button-background), 0.1);
+}
+
+.button.orange {
+  color: rgb(var(--clear-button-color));
+}
+
+.button.orange:hover {
+  background-color: rgba(var(--clear-button-color), 0.1);
+}
+
+.button.disabled {
+  color: var(--body-color);
+  background-color: rgb(var(--button-deafult-color));
 }
 
 

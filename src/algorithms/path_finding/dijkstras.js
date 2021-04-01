@@ -2,6 +2,12 @@ import { getNodeTypeEnum, getNodeWeight, shuffleArray } from '../../utils/util.j
 
 export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols) => {
     console.log("STARTING DIJSTRAS");
+
+    if (startCord === targetCord) {
+        console.log("ENDING DIJSTRAS");
+        return [];
+    }
+
     let totalCosts = {};
     let prevNodes = {};
     let minPQ = {};

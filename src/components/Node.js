@@ -1,14 +1,14 @@
 import React from 'react'
 import { getNodeColorClass, getNodeTypeEnum } from '../utils/util.js'
 
-const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord }) => {
+const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord, runningAlgo }) => {
     const nodeDim = {
         width: size,
         height: size
     };
 
     const mouseDowned = () => {
-        if (nodeState[0] === getNodeTypeEnum('none')) {
+        if (nodeState[0] === getNodeTypeEnum('none') || nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited')) {
             setDraggingSelection(getNodeTypeEnum('obstacle'));
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), ...prevState[nodeId]] }));
             return;
@@ -23,11 +23,11 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
     };
 
     const mouseEntered = () => {
-        if (draggingSelection === getNodeTypeEnum('remObstacle') && nodeState[0] === getNodeTypeEnum('obstacle')) {
+        if (draggingSelection === getNodeTypeEnum('remObstacle') && nodeState[0] >= getNodeTypeEnum('obstacle')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
         }
-        else if (draggingSelection === getNodeTypeEnum('obstacle') && nodeState[0] === getNodeTypeEnum('none')) {
-            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), ...prevState[nodeId]] }));
+        else if (draggingSelection === getNodeTypeEnum('obstacle') && nodeState[0] !== getNodeTypeEnum('start') && nodeState[0] !== getNodeTypeEnum('target')) {
+            setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), getNodeTypeEnum('none')] }));
         }
         else if (draggingSelection === getNodeTypeEnum('start')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('start'), ...prevState[nodeId]] }));
@@ -53,7 +53,7 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
     };
 
     return (
-        <div style={{ ...nodeDim }} className={`node ${getNodeColorClass(nodeState[0])}`} onMouseDown={mouseDowned} onMouseUp={mouseUped} onMouseEnter={mouseEntered} onMouseLeave={mouseLeft} >
+        <div style={{ ...nodeDim }} className={`node ${getNodeColorClass(nodeState[0])}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
         </div>
     );
 });

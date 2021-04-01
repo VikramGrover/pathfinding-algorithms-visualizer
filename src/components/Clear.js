@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Clear = ({ clearObstacles }) => {
+const Clear = ({ clearObstacles, runningAlgo }) => {
     return (
-        <div>
-
-        </div>
+        <div className={`button ${runningAlgo ? 'disabled' : 'orange'}`} onClick={runningAlgo ? null : clearObstacles}>
+            Clear Obstacles
+        </div >
     )
 }
 
