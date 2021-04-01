@@ -6,7 +6,7 @@ const Grid = ({ rows, cols, padding, nodeSize, gridState, setGridState, selected
     const [draggingSelection, setDraggingSelection] = useState(getNodeTypeEnum('none'));
 
     // fill nodes in the grid
-    // console.log("RERENDERING GRID");
+    console.log("RERENDERING GRID");
     const nodes = [];
     for (let x = 0; x < rows; x++) {
         for (let y = 0; y < cols; y++) {
@@ -27,8 +27,7 @@ const Grid = ({ rows, cols, padding, nodeSize, gridState, setGridState, selected
 
     const containerStyle = {
         paddingLeft: padding,
-        paddingRight: padding,
-        paddingBottom: padding
+        paddingRight: padding
     }
 
     return (

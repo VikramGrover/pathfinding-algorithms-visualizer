@@ -1,3 +1,5 @@
+import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
+
 const nodeTypeEnum = {
     'none': 0,
     'target': 1,
@@ -27,6 +29,8 @@ const nodeWeight = {
 }
 Object.freeze(nodeWeight);
 
+const pathAlgos = ["Dijkstra's", "A-Star", "Breadth First Search", "Depth First Search"];
+
 export const getNodeTypeEnum = (key) => {
     return nodeTypeEnum[key];
 };
@@ -45,5 +49,16 @@ export const shuffleArray = (array) => {
         var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+};
+
+export const getPathAlgos = () => {
+    return pathAlgos;
+};
+
+export const runPathAlgo = (selectedAlgo, startCord, targetCord, updatedGridState, setGridState, rows, cols) => {
+    switch (selectedAlgo) {
+        case "Dijkstra's":
+            return dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
     }
 };

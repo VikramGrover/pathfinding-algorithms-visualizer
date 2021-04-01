@@ -1,11 +1,20 @@
 import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
-import { getNodeTypeEnum } from '../utils/util.js'
+import { getNodeTypeEnum, runPathAlgo } from '../utils/util.js'
 
-const Visualize = ({ rows, cols, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
+const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
     const run = async () => {
-        console.log("I AM RUNNING");
         const updatedGridState = clearForReRun();
-        const path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
+
+        console.log("STARTING: ", selectedAlgo);
+
+        let path = [];
+        switch (selectedAlgo) {
+            case "Dijkstra's":
+                path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
+                break;
+        }
+
+        console.log("ENDED: ", selectedAlgo);
 
         for (let i = path.length; i >= 0; i--) {
             setTimeout(() => {

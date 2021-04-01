@@ -13,7 +13,7 @@ function App() {
   const [runningAlgo, setRunningAlgo] = useState(false);
   const margin = 30;
   const nodeSize = 28;
-  const navBarHeight = 80;
+  const navBarHeight = 90;
 
   useEffect(() => {
     resetBoard();
@@ -25,7 +25,7 @@ function App() {
   // }, []);
 
   const resetBoard = () => {
-    const adjustedWinHeight = window.innerHeight - (navBarHeight + (margin * 2)) - margin;
+    const adjustedWinHeight = window.innerHeight - (navBarHeight + (margin * 3));
     const adjustedWinWidth = window.innerWidth - (2 * margin);
 
     const rows = parseInt(adjustedWinHeight / (nodeSize + 1));

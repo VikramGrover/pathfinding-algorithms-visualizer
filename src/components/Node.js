@@ -8,7 +8,9 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
     };
 
     const mouseDowned = () => {
+        console.log("HEELLLLLLOOOO");
         if (nodeState[0] === getNodeTypeEnum('none') || nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited')) {
+
             setDraggingSelection(getNodeTypeEnum('obstacle'));
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum('obstacle'), getNodeTypeEnum('none')] }));
             return;

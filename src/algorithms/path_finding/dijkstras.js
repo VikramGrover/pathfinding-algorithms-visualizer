@@ -1,10 +1,7 @@
 import { getNodeTypeEnum, getNodeWeight, shuffleArray } from '../../utils/util.js'
 
 export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols) => {
-    console.log("STARTING DIJSTRAS");
-
     if (startCord === targetCord) {
-        console.log("ENDING DIJSTRAS");
         return [];
     }
 
@@ -37,7 +34,6 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
             }, 1);
         }
         else if (minKey === targetCord) {
-            console.log("ENDING DIJSTRAS");
             return createPath(startCord, targetCord, prevNodes);
         }
 
@@ -57,7 +53,6 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
         }
     }
 
-    console.log("ENDING DIJSTRAS");
     return [];
 };
 
