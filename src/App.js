@@ -112,7 +112,7 @@ function App() {
 
   return (
     <>
-      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} resetBoard={resetBoard} clearObstacles={clearObstacles} clearForReRun={clearForReRun} />
+      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} resetBoard={resetBoard} clearObstacles={clearObstacles} clearForReRun={clearForReRun} setSelectedObstacle={setSelectedObstacle} />
       <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
     </>
   );

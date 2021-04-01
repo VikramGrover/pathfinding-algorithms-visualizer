@@ -1,5 +1,3 @@
-import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
-
 const nodeTypeEnum = {
     'none': 0,
     'target': 1,
@@ -29,7 +27,9 @@ const nodeWeight = {
 }
 Object.freeze(nodeWeight);
 
-const pathAlgos = ["Dijkstra's", "A-Star", "Breadth First Search", "Depth First Search"];
+const pathAlgos = ["Dijkstra's", "A-Star", "BFS", "DFS"];
+const terrainAlgos = ["Algo 1", "Algo 2"];
+const obstacleTypes = ['Wall (∞)', 'Weighted (100)', 'Weighted (80)', 'Weighted (60)', 'Weighted (40)', 'Weighted (20)'];
 
 export const getNodeTypeEnum = (key) => {
     return nodeTypeEnum[key];
@@ -56,9 +56,10 @@ export const getPathAlgos = () => {
     return pathAlgos;
 };
 
-export const runPathAlgo = (selectedAlgo, startCord, targetCord, updatedGridState, setGridState, rows, cols) => {
-    switch (selectedAlgo) {
-        case "Dijkstra's":
-            return dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
-    }
+export const getTerrainAlgos = () => {
+    return terrainAlgos;
 };
+
+export const getObstacleTypes = () => {
+    return obstacleTypes;
+}

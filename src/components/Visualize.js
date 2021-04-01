@@ -1,5 +1,5 @@
 import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
-import { getNodeTypeEnum, runPathAlgo } from '../utils/util.js'
+import { getNodeTypeEnum } from '../utils/util.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
     const run = async () => {

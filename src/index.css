@@ -191,6 +191,7 @@ code {
 }
 
 .dropdown-header {
+  user-select: none;
   padding: 10px 20px;
   text-align: left;
   border-radius: 4px;
@@ -205,7 +206,7 @@ code {
   text-rendering: optimizeLegibility;
   white-space: nowrap;
   height: auto;
-  min-width: 250px;
+  min-width: 180px;
 }
 
 .dropdown-header.open {
@@ -222,6 +223,7 @@ code {
 }
 
 .dropdown-list-item {
+  user-select: none;
   display: inline-block;
   padding: 10px 20px;
   text-align: left;
@@ -236,7 +238,7 @@ code {
   text-rendering: optimizeLegibility;
   white-space: nowrap;
   height: auto;
-  min-width: 250px;
+  min-width: 180px;
 }
 
 .dropdown-list-item.selected {
@@ -255,4 +257,74 @@ code {
   height: 13px;
 }
 
+/* CHOOSE TERRAIN */
+.choose-terrain {
+  margin-left: 20px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  text-align: center;
+  margin-bottom: 2px;
+  border-radius: 4px;
+  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-size: 16px;
+  font-weight: 500;
+  background-color: var(--dropdown-container-background);
+  display: flex;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  height: 70px;
+}
 
+.choose-terrain::before {
+  position: absolute;
+  content: "choose terrain";
+  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--light-text-color);
+  top: -20px;
+  left: 5px;
+  text-rendering: optimizeLegibility;
+}
+
+/* CHOOSE OBSTACLE */
+.choose-obstacle {
+  margin-left: 20px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  text-align: center;
+  margin-bottom: 2px;
+  border-radius: 4px;
+  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-size: 16px;
+  font-weight: 500;
+  background-color: var(--dropdown-container-background);
+  display: flex;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  height: 70px;
+}
+
+.choose-obstacle::before {
+  position: absolute;
+  content: "choose obstacle";
+  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--light-text-color);
+  top: -20px;
+  left: 5px;
+  text-rendering: optimizeLegibility;
+}
