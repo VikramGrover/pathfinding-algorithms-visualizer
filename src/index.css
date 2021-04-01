@@ -247,4 +247,12 @@ code {
   background-color: var(--dark-selection);
 }
 
+.down-arrow {
+  position: relative;
+  float: right;
+  top: 4px;
+  width: 13px;
+  height: 13px;
+}
+
 

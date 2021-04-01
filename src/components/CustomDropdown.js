@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import downArrow from '../images/down_arrow.svg';
 
 const CustomDropdown = ({ setSelection, items }) => {
     const [dropDownOpen, setDropDownOpen] = useState(false);
@@ -26,6 +27,7 @@ const CustomDropdown = ({ setSelection, items }) => {
         <div className='dropdown'>
             <div className={`dropdown-header ${dropDownOpen && 'open'}`} onClick={toggle}>
                 {selectedVal}
+                <img className="down-arrow" src={downArrow}></img>
             </div>
             {dropDownOpen &&
                 <div className='dropdown-list'>
