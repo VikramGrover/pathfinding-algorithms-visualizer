@@ -79,6 +79,7 @@ code {
 .node.visited {
   background-color: rgba(var(--visited-node-color), 1);
   border: 1px solid rgba(var(--visited-node-color), 1);
+  transition: border 200ms ease-in;
 }
 
 .node.path {
