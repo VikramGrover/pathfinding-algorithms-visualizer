@@ -59,6 +59,7 @@ code {
 .node.start {
   background-color: var(--start-node-color);
   border: 1px solid var(--start-node-color);
+  transition: border 150ms ease-in;
 }
 
 .node.empty {
@@ -69,6 +70,7 @@ code {
 .node.target {
   background-color: var(--target-node-color);
   border: 1px solid var(--target-node-color);
+  transition: border 150ms ease-in;
 }
 
 .node.wall {
