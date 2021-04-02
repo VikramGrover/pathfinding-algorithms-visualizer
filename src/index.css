@@ -79,12 +79,13 @@ code {
 .node.visited {
   background-color: rgba(var(--visited-node-color), 1);
   border: 1px solid rgba(var(--visited-node-color), 1);
-  transition: border 200ms ease-in;
+  transition: border 150ms ease-in;
 }
 
 .node.path {
   background-color: var(--path-node-color);
   border: 1px solid var(--path-node-color);
+  transition: border 150ms ease-in;
 }
 
 .node.weighted-100{
