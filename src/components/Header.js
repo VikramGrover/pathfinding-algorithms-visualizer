@@ -7,6 +7,7 @@ import ChooseObstacle from './ChooseObstacle.js'
 const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, setGridState, startCord, targetCord, resetBoard, clearObstacles, clearForReRun, setSelectedObstacle }) => {
     const style = {
         padding: padding,
+        paddingBottom: padding / 2,
         height: height
     };
 
