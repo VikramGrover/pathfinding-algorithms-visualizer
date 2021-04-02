@@ -108,6 +108,7 @@ code {
 
 /* BUTTON */
 .button {
+  user-select: none;
   margin-left: 20px;
   position: relative;
   top: 50%;
