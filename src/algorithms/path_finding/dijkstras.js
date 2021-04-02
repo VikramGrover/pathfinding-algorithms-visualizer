@@ -31,7 +31,7 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
         if (minKey !== startCord && minKey !== targetCord) {
             setTimeout(() => {
                 setGridState(prevState => ({ ...prevState, [minKey]: [getNodeTypeEnum('visited'), ...prevState[minKey]] }));
-            }, 1);
+            }, 1 * getNodeWeight(gridState[minKey][0]));
         }
         else if (minKey === targetCord) {
             return createPath(startCord, targetCord, prevNodes);

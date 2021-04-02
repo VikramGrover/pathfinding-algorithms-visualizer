@@ -65,6 +65,10 @@ function App() {
         gridMap[id] = gridState[id];
         let currState = gridState[id][0];
 
+        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited')) {
+          currState = gridState[id][1];
+        }
+
         if (currState >= getNodeTypeEnum('wall')) {
           gridMap[id] = [getNodeTypeEnum('none')];
           change = true;
