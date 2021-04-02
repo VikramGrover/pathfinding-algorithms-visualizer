@@ -18,7 +18,7 @@ const CustomDropdown = ({ setSelection, items }) => {
 
     const dropdownItems = [];
     for (let i = 0; i < items.length; i++) {
-        dropdownItems.push(<div className={`dropdown-list-item ${i === selectedId && 'selected'}`} onClick={() => { madeSelection(i) }} key={i}>
+        dropdownItems.push(<div className={`dropdown-list-item ${i === selectedId && 'selected'} ${i === items.length - 1 && 'last'}`} onClick={() => { madeSelection(i) }} key={i}>
             {items[i]}
         </div>)
     }
