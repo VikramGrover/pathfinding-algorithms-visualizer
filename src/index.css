@@ -54,48 +54,58 @@ code {
   float: left;
   position: relative;
   transition: background-color 100ms ease-in;
+  transition: border 100ms ease-in;
 }
 
 .node.start {
   background-color: var(--start-node-color);
+  border: 1px solid var(--start-node-color);
 }
 
 .node.empty {
   background-color: var(--grid-color);
+  border: 1px solid var(--node-border-color);
 }
 
 .node.target {
   background-color: var(--target-node-color);
+  border: 1px solid var(--target-node-color);
 }
 
 .node.wall {
   background-color: var(--obstacle-node-color);
+  border: 1px solid var(--obstacle-node-color);
 }
 
 .node.visited {
   background-color: rgba(var(--visited-node-color), 1);
-  transition: background-color 200ms linear;
+  border: 1px solid rgba(var(--visited-node-color), 1);
 }
 
 .node.path {
   background-color: var(--path-node-color);
-  transition: background-color 100ms linear;
+  border: 1px solid var(--path-node-color);
 }
 
 .node.weighted-100{
   background-color: rgba(var(--weighted-node-color), 0.9);
+  border: 1px solid rgba(var(--weighted-node-color), 0.9);
 }
 .node.weighted-80{
   background-color: rgba(var(--weighted-node-color), 0.8);
+  border: 1px solid rgba(var(--weighted-node-color), 0.8);
 }
 .node.weighted-60{
   background-color: rgba(var(--weighted-node-color), 0.6);
+  border: 1px solid rgba(var(--weighted-node-color), 0.6);
 }
 .node.weighted-40{
   background-color: rgba(var(--weighted-node-color), 0.4);
+  border: 1px solid rgba(var(--weighted-node-color), 0.4);
 }
 .node.weighted-20{
   background-color: rgba(var(--weighted-node-color), 0.2);
+  border: 1px solid rgba(var(--weighted-node-color), 0.2);
 }
 
 /* HEADER */
