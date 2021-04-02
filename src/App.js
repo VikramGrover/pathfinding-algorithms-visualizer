@@ -55,6 +55,30 @@ function App() {
     setGridState(gridMap);
   };
 
+  const clearPath = () => {
+    let gridMap = {};
+    let change = false;
+
+    for (let x = 0; x < rows; x++) {
+      for (let y = 0; y < cols; y++) {
+        let id = `${x}:${y}`;
+        gridMap[id] = gridState[id];
+        let currState = gridState[id][0];
+
+        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited')) {
+          gridMap[id] = gridMap[id].slice(1);
+          change = true;
+        }
+      }
+    }
+
+    if (change) {
+      setGridState(prevState => (gridMap));
+    }
+
+    return gridMap;
+  };
+
   const clearObstacles = () => {
     let gridMap = {};
     let change = false;
@@ -110,7 +134,7 @@ function App() {
 
   return (
     <>
-      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} resetBoard={resetBoard} clearObstacles={clearObstacles} clearForReRun={clearForReRun} setSelectedObstacle={setSelectedObstacle} />
+      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} />
       <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
     </>
   );

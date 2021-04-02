@@ -1,7 +1,7 @@
-const Reset = ({ resetBoard, runningAlgo }) => {
+const Reset = ({ clearObstacles, runningAlgo }) => {
     return (
-        <div className={`button ${runningAlgo ? 'disabled' : 'red'}`} onClick={runningAlgo ? null : resetBoard}>
-            Reset Grid
+        <div className={`button ${runningAlgo ? 'disabled' : 'red'}`} onClick={runningAlgo ? null : clearObstacles}>
+            Clear Obstacles
         </div >
     )
 }

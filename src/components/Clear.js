@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Clear = ({ clearObstacles, runningAlgo }) => {
+const Clear = ({ clearPath, runningAlgo }) => {
     return (
-        <div className={`button ${runningAlgo ? 'disabled' : 'orange'}`} onClick={runningAlgo ? null : clearObstacles}>
-            Clear Obstacles
+        <div className={`button ${runningAlgo ? 'disabled' : 'orange'}`} onClick={runningAlgo ? null : clearPath}>
+            Clear Path
         </div >
     )
 }
