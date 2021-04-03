@@ -48,6 +48,7 @@ code {
 
 /* NODE */
 .node {
+  user-select: none;
   margin-top: -1px;
   margin-left: -1px;
   border: 1px solid var(--node-border-color);
