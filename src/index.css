@@ -3,7 +3,7 @@
   --node-hover-color: #f0efeb;
   --body-color: #2f3137;
   --light-text-color: #b9bbbe;
-  --accent-color: #7389da;
+  --visiting-node-color: #4988dc;
   --grid-color: #35393f;
   --visualize-button-color: #43b581;
   --reset-button-color: #f14846;
@@ -74,6 +74,11 @@ code {
 .node.wall {
   background-color: var(--obstacle-node-color);
   border: 1px solid var(--obstacle-node-color);
+}
+
+.node.visiting {
+  background-color: var(--visiting-node-color);
+  border: 1px solid var(--visiting-node-color);
 }
 
 .node.visited {

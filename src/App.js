@@ -65,7 +65,7 @@ function App() {
         gridMap[id] = gridState[id];
         let currState = gridState[id][0];
 
-        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited')) {
+        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
           gridMap[id] = gridMap[id].slice(1);
           change = true;
         }
@@ -89,7 +89,7 @@ function App() {
         gridMap[id] = gridState[id];
         let currState = gridState[id][0];
 
-        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited')) {
+        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
           currState = gridState[id][1];
         }
 
@@ -103,33 +103,6 @@ function App() {
     if (change) {
       setGridState(prevState => (gridMap));
     }
-  };
-
-  const clearForReRun = () => {
-    console.log('CLEARING GRID FOR RE RERUN');
-    let gridMap = {};
-    let change = false;
-
-    for (let x = 0; x < rows; x++) {
-      for (let y = 0; y < cols; y++) {
-        let id = `${x}:${y}`;
-        gridMap[id] = gridState[id];
-        let currState = gridState[id][0];
-
-        if (currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('path')) {
-          gridMap[id] = gridMap[id].slice(1);
-          change = true;
-        }
-      }
-    }
-
-    if (change) {
-      console.log("DONE CLEARING FOR RE RUN")
-      setGridState(prevState => (gridMap));
-    }
-
-    setRunningAlgo(true);
-    return gridMap;
   };
 
   return (

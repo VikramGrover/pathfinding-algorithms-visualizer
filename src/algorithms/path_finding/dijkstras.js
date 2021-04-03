@@ -30,7 +30,7 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
 
         if (minKey !== startCord && minKey !== targetCord) {
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [minKey]: [getNodeTypeEnum('visited'), ...prevState[minKey]] }));
+                setGridState(prevState => ({ ...prevState, [minKey]: [getNodeTypeEnum('visited'), ...prevState[minKey].slice(1)] }));
             }, 1);
         }
         else if (minKey === targetCord) {
@@ -49,6 +49,11 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
                 totalCosts[neighbour] = currPath;
                 prevNodes[neighbour] = minKey;
                 minPQ[neighbour] = currPath;
+                if (neighbour !== targetCord) {
+                    setTimeout(() => {
+                        setGridState(prevState => ({ ...prevState, [neighbour]: [getNodeTypeEnum('visiting'), ...prevState[neighbour]] }));
+                    }, 1);
+                }
             }
         }
     }

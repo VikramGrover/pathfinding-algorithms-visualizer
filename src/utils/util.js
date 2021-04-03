@@ -5,12 +5,13 @@ const nodeTypeEnum = {
     'start': 3,
     'remObstacle': 4,
     'visited': 5,
-    'wall': 6,
-    'weighted-100': 7,
-    'weighted-80': 8,
-    'weighted-60': 9,
-    'weighted-40': 10,
-    'weighted-20': 11
+    'visiting': 6,
+    'wall': 7,
+    'weighted-100': 8,
+    'weighted-80': 9,
+    'weighted-60': 10,
+    'weighted-40': 11,
+    'weighted-20': 12
 };
 Object.freeze(nodeTypeEnum);
 
@@ -18,6 +19,7 @@ const nodeColorClass = {
     [nodeTypeEnum.none]: 'empty',
     [nodeTypeEnum.target]: 'target',
     [nodeTypeEnum.wall]: 'wall',
+    [nodeTypeEnum.visiting]: 'visiting',
     [nodeTypeEnum.start]: 'start',
     [nodeTypeEnum.visited]: 'visited',
     [nodeTypeEnum.path]: 'path',
