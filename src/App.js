@@ -65,6 +65,12 @@ function App() {
         gridMap[id] = gridState[id];
         let currState = gridState[id][0];
 
+        // check under start and target node for path
+        if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] === getNodeTypeEnum('path') || gridState[id][1] === getNodeTypeEnum('visited') || gridState[id][1] === getNodeTypeEnum('visiting'))) {
+          gridMap[id].splice(1, 1);
+          change = true;
+        }
+
         if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
           gridMap[id] = gridMap[id].slice(1);
           change = true;
