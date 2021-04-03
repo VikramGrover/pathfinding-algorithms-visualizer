@@ -1,4 +1,5 @@
 import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
+import { dfs } from '../algorithms/path_finding/dfs.js'
 import { getNodeTypeEnum } from '../utils/util.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
@@ -11,6 +12,9 @@ const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCo
         switch (selectedAlgo) {
             case "Dijkstra's":
                 path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
+                break;
+            case "DFS":
+                path = dfs(startCord, targetCord, updatedGridState, setGridState, rows, cols);
                 break;
         }
 
