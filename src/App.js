@@ -69,6 +69,7 @@ function App() {
         if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] === getNodeTypeEnum('path') || gridState[id][1] === getNodeTypeEnum('visited') || gridState[id][1] === getNodeTypeEnum('visiting'))) {
           gridMap[id].splice(1, 1);
           change = true;
+          continue;
         }
 
         if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
@@ -94,6 +95,13 @@ function App() {
         let id = `${x}:${y}`;
         gridMap[id] = gridState[id];
         let currState = gridState[id][0];
+
+        // check under start and target node for obstacle
+        if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] >= getNodeTypeEnum('wall'))) {
+          gridMap[id].splice(1, 1);
+          change = true;
+          continue;
+        }
 
         if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
           currState = gridState[id][1];
