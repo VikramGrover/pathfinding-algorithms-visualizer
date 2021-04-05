@@ -4,6 +4,10 @@ import { getNodeTypeEnum } from '../utils/util.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
     const run = async () => {
+        if (startCord === targetCord) {
+            return;
+        }
+
         const updatedGridState = clearForReRun();
         setRunningAlgo(true);
         console.log("STARTING: ", selectedAlgo);
