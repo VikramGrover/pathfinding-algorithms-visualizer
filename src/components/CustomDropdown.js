@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import downArrow from '../images/down_arrow.svg';
 
-const CustomDropdown = ({ setSelection, items }) => {
+const CustomDropdown = ({ setSelection, items, disabled }) => {
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [selectedVal, setSelectedVal] = useState(items[0]);
     const [selectedId, setSelectedId] = useState(0);
+
+    useEffect(() => {
+        if (disabled) {
+            setSelectedVal(items[0]);
+            setSelectedId(0);
+            setDropDownOpen(false);
+            setSelection(items[0]);
+        }
+    }, [disabled])
+
     const toggle = () => {
         setDropDownOpen(prevState => !prevState);
     }
@@ -25,9 +35,9 @@ const CustomDropdown = ({ setSelection, items }) => {
 
     return (
         <div className='dropdown'>
-            <div className={`dropdown-header ${dropDownOpen && 'open'}`} onClick={toggle}>
+            <div className={`dropdown-header ${dropDownOpen && 'open'} ${disabled && 'disabled'}`} onClick={disabled ? null : toggle}>
                 {selectedVal}
-                <img className="down-arrow" src={downArrow}></img>
+                {!disabled && <img className="down-arrow" src={downArrow}></img>}
             </div>
             {dropDownOpen &&
                 <div className='dropdown-list'>

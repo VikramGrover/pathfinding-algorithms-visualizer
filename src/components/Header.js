@@ -4,7 +4,7 @@ import ChooseAlgorithm from './ChooseAlgorithm.js'
 import ChooseTerrain from './ChooseTerrain.js'
 import ChooseObstacle from './ChooseObstacle.js'
 
-const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, setGridState, startCord, targetCord, clearObstacles, clearPath, setSelectedObstacle }) => {
+const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, setGridState, startCord, targetCord, clearObstacles, clearPath, setSelectedObstacle, weightedObsDisabled, setWeightedObsDisabled, clearWeightedObstacles }) => {
     const style = {
         padding: padding,
         paddingBottom: padding / 2,
@@ -15,9 +15,9 @@ const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, setG
         <div style={style} className='header'>
             <Reset clearObstacles={clearObstacles} runningAlgo={runningAlgo} />
             <Clear clearPath={clearPath} runningAlgo={runningAlgo} />
-            <ChooseAlgorithm rows={rows} cols={cols} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearPath} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} />
+            <ChooseAlgorithm rows={rows} cols={cols} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearPath} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} setWeightedObsDisabled={setWeightedObsDisabled} clearWeightedObstacles={clearWeightedObstacles} />
             <ChooseTerrain rows={rows} cols={cols} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearPath} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} />
-            <ChooseObstacle setSelectedObstacle={setSelectedObstacle} />
+            <ChooseObstacle setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} />
         </div>
     )
 }

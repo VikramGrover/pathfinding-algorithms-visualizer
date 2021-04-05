@@ -11,6 +11,7 @@ function App() {
   const [startCord, setStartCord] = useState('0:0');
   const [targetCord, setTargetCord] = useState('0:0');
   const [runningAlgo, setRunningAlgo] = useState(false);
+  const [weightedObsDisabled, setWeightedObsDisabled] = useState(false);
   const margin = 30;
   const nodeSize = 28;
   const navBarHeight = 90;
@@ -119,9 +120,42 @@ function App() {
     }
   };
 
+  const clearWeightedObstacles = () => {
+    let gridMap = {};
+    let change = false;
+
+    for (let x = 0; x < rows; x++) {
+      for (let y = 0; y < cols; y++) {
+        let id = `${x}:${y}`;
+        gridMap[id] = gridState[id];
+        let currState = gridState[id][0];
+
+        // check under start and target node for weighted obstacle
+        if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] > getNodeTypeEnum('wall'))) {
+          gridMap[id].splice(1, 1);
+          change = true;
+          continue;
+        }
+
+        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
+          currState = gridState[id][1];
+        }
+
+        if (currState > getNodeTypeEnum('wall')) {
+          gridMap[id] = [getNodeTypeEnum('none')];
+          change = true;
+        }
+      }
+    }
+
+    if (change) {
+      setGridState(prevState => (gridMap));
+    }
+  };
+
   return (
     <>
-      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} />
+      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} setWeightedObsDisabled={setWeightedObsDisabled} clearWeightedObstacles={clearWeightedObstacles} />
       <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
     </>
   );

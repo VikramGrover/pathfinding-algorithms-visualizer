@@ -245,6 +245,11 @@ code {
   border-radius: 4px 4px 0px 0px;
 }
 
+.dropdown-header.disabled {
+  background-color: var(--obstacle-node-color);
+  color: var(--body-color);
+}
+
 .dropdown-list {
   z-index: 100;
   position: absolute;
