@@ -9,7 +9,7 @@ export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols) 
         const currCord = stack[0];
         if (currCord !== targetCord && currCord !== startCord) {
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currCord]: [getNodeTypeEnum('visiting'), ...prevState[currCord]] }));
+                setGridState(prevState => ({ ...prevState, [currCord]: [getNodeTypeEnum('visiting'), getNodeTypeEnum('none')] }));
             }, 1);
         }
 
@@ -23,13 +23,12 @@ export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols) 
             path.unshift(currCord);
             visited[currCord] = 1;
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currCord]: [getNodeTypeEnum('visited'), ...prevState[currCord].slice(1)] }));
+                setGridState(prevState => ({ ...prevState, [currCord]: [getNodeTypeEnum('visited'), getNodeTypeEnum('none')] }));
             }, 1);
         }
 
         const neighbours = getNeighbourNodes(currCord, rows, cols, gridState);
         let unvisitedNeighbourFound = false;
-
         for (const neighbour of neighbours) {
             if (neighbour in visited) {
                 continue;
