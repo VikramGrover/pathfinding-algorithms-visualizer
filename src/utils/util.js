@@ -46,6 +46,7 @@ Object.freeze(nodeWeight);
 
 const pathAlgos = ["Dijkstra's", "A-Star", "BFS", "DFS"];
 const unweightedPathAlgos = ["DFS", "BFS"];
+const optimalPathAlgos = ["Dijkstra's", "A-Star", "BFS"]
 
 const terrainAlgos = ["Algo 1", "Algo 2"];
 const obstacleTypes = ['Wall (∞)', 'Weighted (100)', 'Weighted (80)', 'Weighted (60)', 'Weighted (40)', 'Weighted (20)'];
@@ -108,4 +109,8 @@ export const getNeighbourNodes = (node, rows, cols, gridState) => {
 
 export const isAlgoUnweighted = (algo) => {
     return unweightedPathAlgos.includes(algo);
+};
+
+export const isAlgoOptimal = (algo) => {
+    return optimalPathAlgos.includes(algo);
 };
