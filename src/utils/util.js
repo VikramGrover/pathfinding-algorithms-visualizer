@@ -67,15 +67,6 @@ export const getNodeWeight = (key) => {
     return nodeWeight[key];
 };
 
-export const shuffleArray = (array) => {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-};
-
 export const getPathAlgos = () => {
     return pathAlgos;
 };
@@ -90,4 +81,25 @@ export const getObstacleTypes = () => {
 
 export const getObstacleEnum = (key) => {
     return obsEnum[key];
+};
+
+export const getNeighbourNodes = (node, rows, cols, gridState) => {
+    const row = parseInt(node.split(':')[0]);
+    const col = parseInt(node.split(':')[1]);
+
+    let res = [];
+    if ((row - 1 >= 0) && (gridState[`${row - 1}:${col}`][0] !== getNodeTypeEnum('wall'))) {
+        res.push(`${row - 1}:${col}`)
+    }
+    if ((col + 1 < cols) && (gridState[`${row}:${col + 1}`][0] !== getNodeTypeEnum('wall'))) {
+        res.push(`${row}:${col + 1}`)
+    }
+    if ((row + 1) < rows && (gridState[`${row + 1}:${col}`][0] !== getNodeTypeEnum('wall'))) {
+        res.push(`${row + 1}:${col}`)
+    }
+    if ((col - 1 >= 0) && (gridState[`${row}:${col - 1}`][0] !== getNodeTypeEnum('wall'))) {
+        res.push(`${row}:${col - 1}`)
+    }
+
+    return res;
 };

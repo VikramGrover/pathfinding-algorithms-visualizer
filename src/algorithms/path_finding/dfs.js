@@ -1,4 +1,4 @@
-import { getNodeTypeEnum, getNodeWeight, shuffleArray } from '../../utils/util.js'
+import { getNodeTypeEnum, getNeighbourNodes } from '../../utils/util.js'
 
 export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols) => {
     const stack = [startCord];
@@ -46,25 +46,4 @@ export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols) 
     }
 
     return [];
-};
-
-const getNeighbourNodes = (node, rows, cols, gridState) => {
-    const row = parseInt(node.split(':')[0]);
-    const col = parseInt(node.split(':')[1]);
-
-    let res = [];
-    if ((row - 1 >= 0) && (gridState[`${row - 1}:${col}`][0] !== getNodeTypeEnum('wall'))) {
-        res.push(`${row - 1}:${col}`)
-    }
-    if ((col + 1 < cols) && (gridState[`${row}:${col + 1}`][0] !== getNodeTypeEnum('wall'))) {
-        res.push(`${row}:${col + 1}`)
-    }
-    if ((row + 1) < rows && (gridState[`${row + 1}:${col}`][0] !== getNodeTypeEnum('wall'))) {
-        res.push(`${row + 1}:${col}`)
-    }
-    if ((col - 1 >= 0) && (gridState[`${row}:${col - 1}`][0] !== getNodeTypeEnum('wall'))) {
-        res.push(`${row}:${col - 1}`)
-    }
-
-    return res;
 };
