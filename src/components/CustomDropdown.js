@@ -40,8 +40,8 @@ const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth }) => {
     for (let i = 0; i < items.length; i++) {
         dropdownItems.push(<div style={style} className={`dropdown-list-item ${i === selectedId && 'selected'} ${i === items.length - 1 && 'last'}`} onClick={() => { madeSelection(i) }} key={i}>
             {items[i]}
-            {isAlgoSelector && !isAlgoUnweighted(items[i]) ? <img className="algo-property-badge" src={weight} title={`${items[i]} is a weighted path-finding algorithm.`}></img> : <img className="algo-property-badge" src={weightUnfilled} title={`${items[i]} is not a weighted path-finding algorithm.`}></img>}
-            {isAlgoSelector && isAlgoOptimal(items[i]) ? <img className="algo-property-badge" src={optimal} title={`${items[i]} guarantees shortest path.`}></img> : <img className="algo-property-badge" src={optimalUnfilled} title={`${items[i]} does not guarantee shortest path.`}></img>}
+            {isAlgoSelector && (!isAlgoUnweighted(items[i]) ? <img className="algo-property-badge" src={weight} title={`${items[i]} is a weighted path-finding algorithm.`}></img> : <img className="algo-property-badge" src={weightUnfilled} title={`${items[i]} is not a weighted path-finding algorithm.`}></img>)}
+            {isAlgoSelector && (isAlgoOptimal(items[i]) ? <img className="algo-property-badge" src={optimal} title={`${items[i]} guarantees shortest path.`}></img> : <img className="algo-property-badge" src={optimalUnfilled} title={`${items[i]} does not guarantee shortest path.`}></img>)}
         </div>)
     }
 
