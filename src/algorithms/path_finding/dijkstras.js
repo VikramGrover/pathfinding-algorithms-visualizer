@@ -1,6 +1,6 @@
-import { getNodeTypeEnum, getNodeWeight, getNeighbourNodes } from '../../utils/util.js'
+import { getNodeTypeEnum, getNodeWeight, getNeighbourNodes, createPath } from '../../utils/util.js'
 
-export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols) => {
+export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
     let totalCosts = {};
     let prevNodes = {};
     let minPQ = {};
@@ -27,7 +27,7 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
         if (minKey !== startCord && minKey !== targetCord) {
             setTimeout(() => {
                 setGridState(prevState => ({ ...prevState, [minKey]: [getNodeTypeEnum('visited'), ...prevState[minKey].slice(1)] }));
-            }, 1);
+            }, timeout);
         }
         else if (minKey === targetCord) {
             return createPath(startCord, targetCord, prevNodes);
@@ -48,30 +48,13 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
                 if (neighbour !== targetCord) {
                     setTimeout(() => {
                         setGridState(prevState => ({ ...prevState, [neighbour]: [getNodeTypeEnum('visiting'), ...prevState[neighbour]] }));
-                    }, 1);
+                    }, timeout);
                 }
             }
         }
     }
 
     return [];
-};
-
-const createPath = (startCord, targetCord, prevNodes) => {
-    let cord = targetCord;
-    let path = [];
-
-    while (true) {
-        cord = prevNodes[cord];
-
-        if (cord === startCord) {
-            break;
-        }
-
-        path.push(cord);
-    }
-
-    return path;
 };
 
 const findMinPriorityNode = (minPQ) => {

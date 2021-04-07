@@ -1,5 +1,6 @@
 import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
 import { dfs } from '../algorithms/path_finding/dfs.js'
+import { bfs } from '../algorithms/path_finding/bfs.js'
 import { getNodeTypeEnum } from '../utils/util.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
@@ -13,12 +14,20 @@ const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCo
         console.log("STARTING: ", selectedAlgo);
 
         let path = [];
+        let timeout = 1;
         switch (selectedAlgo) {
             case "Dijkstra's":
-                path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols);
+                path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
                 break;
             case "DFS":
-                path = dfs(startCord, targetCord, updatedGridState, setGridState, rows, cols);
+                timeout = 100;
+                path = dfs(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
+                break;
+            case "BFS":
+                timeout = 1;
+                path = bfs(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
+                break;
+            default:
                 break;
         }
 
@@ -27,12 +36,12 @@ const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCo
         for (let i = path.length - 1; i >= 0; i--) {
             setTimeout(() => {
                 setGridState(prevState => ({ ...prevState, [path[i]]: [getNodeTypeEnum('path'), ...updatedGridState[path[i]]] }));
-            }, 1);
+            }, timeout);
         }
 
         setTimeout(() => {
             setRunningAlgo(false);
-        }, 1);
+        }, timeout);
     };
 
     return (

@@ -107,6 +107,23 @@ export const getNeighbourNodes = (node, rows, cols, gridState) => {
     return res;
 };
 
+export const createPath = (startCord, targetCord, prevNodes) => {
+    let cord = targetCord;
+    let path = [];
+
+    while (true) {
+        cord = prevNodes[cord];
+
+        if (cord === startCord) {
+            break;
+        }
+
+        path.push(cord);
+    }
+
+    return path;
+};
+
 export const isAlgoUnweighted = (algo) => {
     return unweightedPathAlgos.includes(algo);
 };
