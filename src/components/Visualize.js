@@ -20,7 +20,6 @@ const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCo
                 path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
                 break;
             case "DFS":
-                timeout = 1000;
                 path = dfs(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
                 break;
             case "BFS":
