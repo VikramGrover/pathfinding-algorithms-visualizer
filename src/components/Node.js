@@ -8,7 +8,7 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
     };
 
     const mouseDowned = () => {
-        if (nodeState[0] === getNodeTypeEnum('none') || nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited')) {
+        if (nodeState[0] === getNodeTypeEnum('none') || nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited') || nodeState[0] === getNodeTypeEnum('visiting')) {
             setDraggingSelection(getNodeTypeEnum(selectedObstacle));
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum(selectedObstacle), getNodeTypeEnum('none')] }));
             return;
@@ -26,7 +26,7 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
         if (draggingSelection === getNodeTypeEnum('remObstacle') && nodeState[0] >= getNodeTypeEnum('wall')) {
             setGridState(prevState => ({ ...prevState, [nodeId]: prevState[nodeId].slice(1) }));
         }
-        else if (draggingSelection === getNodeTypeEnum(selectedObstacle) && (nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited') || nodeState[0] === getNodeTypeEnum('none'))) {
+        else if (draggingSelection === getNodeTypeEnum(selectedObstacle) && (nodeState[0] === getNodeTypeEnum('path') || nodeState[0] === getNodeTypeEnum('visited') || nodeState[0] === getNodeTypeEnum('none') || nodeState[0] === getNodeTypeEnum('visiting'))) {
             setGridState(prevState => ({ ...prevState, [nodeId]: [getNodeTypeEnum(selectedObstacle), getNodeTypeEnum('none')] }));
         }
         else if (draggingSelection === getNodeTypeEnum('start')) {

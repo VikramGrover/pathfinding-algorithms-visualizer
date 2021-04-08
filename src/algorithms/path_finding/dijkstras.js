@@ -1,4 +1,4 @@
-import { getNodeTypeEnum, getNodeWeight, getNeighbourNodes, createPath } from '../../utils/util.js'
+import { getNodeTypeEnum, getNodeWeight, getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/util.js'
 
 export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
     let totalCosts = {};
@@ -55,14 +55,4 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
     }
 
     return [];
-};
-
-const findMinPriorityNode = (minPQ) => {
-    let minPriority = Math.min(...Object.values(minPQ));
-
-    for (const key in minPQ) {
-        if (minPQ[key] === minPriority) {
-            return key;
-        }
-    }
 };

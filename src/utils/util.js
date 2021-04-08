@@ -44,9 +44,9 @@ const nodeWeight = {
 }
 Object.freeze(nodeWeight);
 
-const pathAlgos = ["Dijkstra's", "A-Star", "BFS", "DFS"];
+const pathAlgos = ["Dijkstra's", "A*", "BFS", "DFS"];
 const unweightedPathAlgos = ["DFS", "BFS"];
-const optimalPathAlgos = ["Dijkstra's", "A-Star", "BFS"]
+const optimalPathAlgos = ["Dijkstra's", "A*", "BFS"]
 
 const terrainAlgos = ["Algo 1", "Algo 2"];
 const obstacleTypes = ['Wall (∞)', 'Weighted (100)', 'Weighted (80)', 'Weighted (60)', 'Weighted (40)', 'Weighted (20)'];
@@ -122,6 +122,16 @@ export const createPath = (startCord, targetCord, prevNodes) => {
     }
 
     return path;
+};
+
+export const findMinPriorityNode = (minPQ) => {
+    let minPriority = Math.min(...Object.values(minPQ));
+
+    for (const key in minPQ) {
+        if (minPQ[key] === minPriority) {
+            return key;
+        }
+    }
 };
 
 export const isAlgoUnweighted = (algo) => {
