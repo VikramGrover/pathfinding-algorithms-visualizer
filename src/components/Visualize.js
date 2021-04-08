@@ -1,8 +1,4 @@
-import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
-import { dfs } from '../algorithms/path_finding/dfs.js'
-import { bfs } from '../algorithms/path_finding/bfs.js'
-import { aStar } from '../algorithms/path_finding/aStar.js'
-import { DIJKSTRAS, DFS, BFS, ASTAR, nodeTypeEnum } from '../utils/constants.js'
+import { algoFunctions, nodeTypeEnum } from '../utils/constants.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
     const run = async () => {
@@ -16,22 +12,7 @@ const Visualize = ({ rows, cols, selectedAlgo, setGridState, startCord, targetCo
 
         let path = [];
         let timeout = 1;
-        switch (selectedAlgo) {
-            case DIJKSTRAS:
-                path = dijkstras(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
-                break;
-            case DFS:
-                path = dfs(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
-                break;
-            case BFS:
-                path = bfs(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
-                break;
-            case ASTAR:
-                path = aStar(startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
-                break;
-            default:
-                break;
-        }
+        path = algoFunctions[selectedAlgo](startCord, targetCord, updatedGridState, setGridState, rows, cols, timeout);
 
         console.log("ENDED: ", selectedAlgo);
 

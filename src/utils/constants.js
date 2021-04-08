@@ -1,19 +1,32 @@
+import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
+import { dfs } from '../algorithms/path_finding/dfs.js'
+import { bfs } from '../algorithms/path_finding/bfs.js'
+import { aStar } from '../algorithms/path_finding/aStar.js'
+
 // PATHFINDING ALGORITHM CONSTANTS -------------------------------------------
 const DIJKSTRAS = "Dijkstra's";
 const ASTAR = "A*";
 const BFS = "BFS";
 const DFS = "DFS";
 
-export { DIJKSTRAS, ASTAR, BFS, DFS };
+const algoFunctions = {
+    [DIJKSTRAS]: dijkstras,
+    [ASTAR]: aStar,
+    [BFS]: bfs,
+    [DFS]: dfs
+}
+Object.freeze(algoFunctions);
 
-const pathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS];
-Object.freeze(pathAlgos);
+export { DIJKSTRAS, ASTAR, BFS, DFS, algoFunctions };
+
+const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS];
+Object.freeze(allPathAlgos);
 const unweightedPathAlgos = [DFS, BFS];
 Object.freeze(unweightedPathAlgos);
 const optimalPathAlgos = [DIJKSTRAS, ASTAR, BFS];
 Object.freeze(optimalPathAlgos);
 
-export { pathAlgos, unweightedPathAlgos, optimalPathAlgos };
+export { allPathAlgos, unweightedPathAlgos, optimalPathAlgos };
 
 // TERRAIN ALGORTHIM CONSTANTS -------------------------------------------
 const ALGO1 = "ALGO 1";

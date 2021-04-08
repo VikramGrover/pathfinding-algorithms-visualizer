@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { isAlgoUnweighted, isAlgoOptimal } from '../utils/helper.js'
-import { pathAlgos } from '../utils/constants.js'
+import { allPathAlgos } from '../utils/constants.js'
 import downArrow from '../images/down_arrow.svg';
 import weight from '../images/weight.svg'
 import weightUnfilled from '../images/weight_unfilled.svg'
@@ -11,7 +11,7 @@ const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth }) => {
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [selectedVal, setSelectedVal] = useState(items[0]);
     const [selectedId, setSelectedId] = useState(0);
-    const isAlgoSelector = (pathAlgos === items);
+    const isAlgoSelector = (allPathAlgos[0] === items[0]);
 
     useEffect(() => {
         if (disabled) {
