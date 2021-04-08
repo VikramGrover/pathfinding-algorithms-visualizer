@@ -45,7 +45,7 @@ export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols
                 // newly calculated G score of neighbour is lower than the one in the table
                 // update all the scores
                 G[neighbour] = currGScore;
-                H[neighbour] = getHScoreEstimate(neighbour, targetCord);
+                H[neighbour] = h(neighbour, targetCord);
                 F[neighbour] = G[neighbour] + H[neighbour];
                 prevNodes[neighbour] = currNode;
                 openSet[neighbour] = F[neighbour];
@@ -58,7 +58,7 @@ export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols
 
 // this implements our H score heuristic
 // current heuristic: take the absolute sum of the difference in node N's co-ordinates and target's co-ordinates. Hence, the greater the distance between N and target, the greater the H score for node N
-const getHScoreEstimate = (currNodeCord, targetCord) => {
+const h = (currNodeCord, targetCord) => {
     if (currNodeCord === targetCord) {
         return 0;
     }
