@@ -63,7 +63,7 @@ code {
   border: 1px solid var(--start-node-color);
 }
 
-.node.empty {
+.node.none {
   background-color: var(--grid-color);
   border: 1px solid var(--node-border-color);
 }
@@ -93,23 +93,23 @@ code {
   border: 1px solid var(--path-node-color);
 }
 
-.node.weighted-100{
+.node.weighted100{
   background-color: rgba(var(--weighted-node-color), 0.9);
   border: 1px solid rgba(var(--weighted-node-color), 0.9);
 }
-.node.weighted-80{
+.node.weighted80{
   background-color: rgba(var(--weighted-node-color), 0.8);
   border: 1px solid rgba(var(--weighted-node-color), 0.8);
 }
-.node.weighted-60{
+.node.weighted60{
   background-color: rgba(var(--weighted-node-color), 0.6);
   border: 1px solid rgba(var(--weighted-node-color), 0.6);
 }
-.node.weighted-40{
+.node.weighted40{
   background-color: rgba(var(--weighted-node-color), 0.4);
   border: 1px solid rgba(var(--weighted-node-color), 0.4);
 }
-.node.weighted-20{
+.node.weighted20{
   background-color: rgba(var(--weighted-node-color), 0.2);
   border: 1px solid rgba(var(--weighted-node-color), 0.2);
 }

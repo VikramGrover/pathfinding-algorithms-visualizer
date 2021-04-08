@@ -1,4 +1,5 @@
-import { getNodeTypeEnum, getNodeWeight, getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/util.js'
+import { getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/helper.js'
+import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
 export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
     let openSet = { [startCord]: 0 };
@@ -24,7 +25,7 @@ export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols
 
         if (currNode !== startCord && currNode !== targetCord) {
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currNode]: [getNodeTypeEnum('visited'), ...prevState[currNode].slice(1)] }));
+                setGridState(prevState => ({ ...prevState, [currNode]: [nodeTypeEnum.visited, ...prevState[currNode].slice(1)] }));
             }, timeout);
         }
         else if (currNode === targetCord) {
@@ -34,12 +35,12 @@ export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols
 
         const neighbours = getNeighbourNodes(currNode, rows, cols, gridState);
         for (const neighbour of neighbours) {
-            const currGScore = G[currNode] + getNodeWeight(gridState[neighbour][0]);
+            const currGScore = G[currNode] + nodeWeight[gridState[neighbour][0]];
 
             if (currGScore < G[neighbour]) {
                 if (neighbour !== startCord && neighbour !== targetCord) {
                     setTimeout(() => {
-                        setGridState(prevState => ({ ...prevState, [neighbour]: [getNodeTypeEnum('visiting'), ...prevState[neighbour]] }));
+                        setGridState(prevState => ({ ...prevState, [neighbour]: [nodeTypeEnum.visiting, ...prevState[neighbour]] }));
                     }, timeout);
                 }
                 // newly calculated G score of neighbour is lower than the one in the table

@@ -1,14 +1,15 @@
 import CustomDropdown from './CustomDropdown.js'
-import { getObstacleTypes, getObstacleEnum } from '../utils/util.js'
+import { obstacleTypes, obsEnum } from '../utils/constants.js'
 
 const ChooseObstacle = ({ setSelectedObstacle, weightedObsDisabled, dropDownWidth }) => {
     const setObstacle = (obstacleName) => {
-        setSelectedObstacle(getObstacleEnum(obstacleName));
+        console.log("selected obs: ", obsEnum[obstacleName]);
+        setSelectedObstacle(obsEnum[obstacleName]);
     };
 
     return (
         <div className={`choose-obstacle`}>
-            <CustomDropdown setSelection={setObstacle} items={getObstacleTypes()} disabled={weightedObsDisabled} dropDownWidth={dropDownWidth} />
+            <CustomDropdown setSelection={setObstacle} items={obstacleTypes} disabled={weightedObsDisabled} dropDownWidth={dropDownWidth} />
         </div >
     )
 }

@@ -1,9 +1,9 @@
 import Node from './Node.js'
 import { useState } from 'react'
-import { getNodeTypeEnum } from '../utils/util.js'
+import { nodeTypeEnum } from '../utils/constants.js'
 
 const Grid = ({ rows, cols, padding, nodeSize, gridState, setGridState, selectedObstacle, setStartCord, setTargetCord, runningAlgo }) => {
-    const [draggingSelection, setDraggingSelection] = useState(getNodeTypeEnum('none'));
+    const [draggingSelection, setDraggingSelection] = useState(nodeTypeEnum.none);
 
     // fill nodes in the grid
     const nodes = [];

@@ -1,6 +1,6 @@
 import Grid from './components/Grid.js'
 import Header from './components/Header.js'
-import { getNodeTypeEnum } from './utils/util.js'
+import { nodeTypeEnum } from './utils/constants.js'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -41,12 +41,12 @@ function App() {
     let gridMap = {};
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
-        let nodeState = [getNodeTypeEnum('none')];
+        let nodeState = [nodeTypeEnum.none];
         if (x === 0 && y === 0) {
-          nodeState.unshift(getNodeTypeEnum('start'));
+          nodeState.unshift(nodeTypeEnum.start);
         }
         else if (x === (rows - 1) && y === (cols - 1)) {
-          nodeState.unshift(getNodeTypeEnum('target'));
+          nodeState.unshift(nodeTypeEnum.target);
         }
 
         gridMap[`${x}:${y}`] = nodeState;
@@ -67,13 +67,13 @@ function App() {
         let currState = gridState[id][0];
 
         // check under start and target node for path
-        if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] === getNodeTypeEnum('path') || gridState[id][1] === getNodeTypeEnum('visited') || gridState[id][1] === getNodeTypeEnum('visiting'))) {
+        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (gridState[id][1] === nodeTypeEnum.path || gridState[id][1] === nodeTypeEnum.visited || gridState[id][1] === nodeTypeEnum.visiting)) {
           gridMap[id].splice(1, 1);
           change = true;
           continue;
         }
 
-        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
+        if (currState === nodeTypeEnum.path || currState === nodeTypeEnum.visited || currState === nodeTypeEnum.visiting) {
           gridMap[id] = gridMap[id].slice(1);
           change = true;
         }
@@ -98,18 +98,18 @@ function App() {
         let currState = gridState[id][0];
 
         // check under start and target node for obstacle
-        if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] >= getNodeTypeEnum('wall'))) {
+        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (gridState[id][1] >= nodeTypeEnum.wall)) {
           gridMap[id].splice(1, 1);
           change = true;
           continue;
         }
 
-        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
+        if (currState === nodeTypeEnum.path || currState === nodeTypeEnum.visited || currState === nodeTypeEnum.visiting) {
           currState = gridState[id][1];
         }
 
-        if (currState >= getNodeTypeEnum('wall')) {
-          gridMap[id] = [getNodeTypeEnum('none')];
+        if (currState >= nodeTypeEnum.wall) {
+          gridMap[id] = [nodeTypeEnum.none];
           change = true;
         }
       }
@@ -131,18 +131,18 @@ function App() {
         let currState = gridState[id][0];
 
         // check under start and target node for weighted obstacle
-        if ((currState === getNodeTypeEnum('start') || currState === getNodeTypeEnum('target')) && (gridState[id][1] > getNodeTypeEnum('wall'))) {
+        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (gridState[id][1] > nodeTypeEnum.wall)) {
           gridMap[id].splice(1, 1);
           change = true;
           continue;
         }
 
-        if (currState === getNodeTypeEnum('path') || currState === getNodeTypeEnum('visited') || currState === getNodeTypeEnum('visiting')) {
+        if (currState === nodeTypeEnum.path || currState === nodeTypeEnum.visited || currState === nodeTypeEnum.visiting) {
           currState = gridState[id][1];
         }
 
-        if (currState > getNodeTypeEnum('wall')) {
-          gridMap[id] = [getNodeTypeEnum('none')];
+        if (currState > nodeTypeEnum.wall) {
+          gridMap[id] = [nodeTypeEnum.none];
           change = true;
         }
       }
