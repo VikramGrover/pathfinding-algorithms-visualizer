@@ -177,6 +177,14 @@ code {
   background-color: rgb(var(--button-deafult-color));
 }
 
+.button.blue {
+  color:  rgba(var(--visited-node-color), 1);
+}
+
+.button.blue:hover {
+  background-color: rgba(var(--visited-node-color), 0.1);
+}
+
 /* CHOOSE ALGORITHM CONTAINER */
 .choose-algo {
   margin-left: 20px;
@@ -384,3 +392,44 @@ code {
   left: 5px;
   text-rendering: optimizeLegibility;
 }
+
+/* INFO BOX */
+.info-box {
+  position: fixed;
+  background-color: var(--body-color);
+  width: 500px;
+  height: 500px;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  padding: 30px;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 4px;
+}
+
+.info-box.hidden {
+  visibility: hidden;
+}
+
+.info-box.visible {
+  visibility: visible;
+}
+
+.info-box h1 {
+  color: var(--light-text-color);
+}
+
+.close-info-icon {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+

@@ -1,11 +1,16 @@
 import Grid from './components/Grid.js'
 import Header from './components/Header.js'
-import { nodeTypeEnum } from './utils/constants.js'
+import InfoBox from './components/InfoBox.js'
+
+import { allPathAlgos, nodeTypeEnum } from './utils/constants.js'
 import { useState, useEffect } from 'react'
+import { isAlgoUnweighted } from './utils/helper.js'
 
 function App() {
   const [gridState, setGridState] = useState({});
   const [selectedObstacle, setSelectedObstacle] = useState('wall');
+  const [infoBoxOpen, setInfoBoxOpen] = useState(false);
+  const [selectedAlgo, setSelectedAlgo] = useState(allPathAlgos[0]);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
   const [startCord, setStartCord] = useState('0:0');
@@ -153,10 +158,24 @@ function App() {
     }
   };
 
+  const toggleInfoBox = () => {
+    setInfoBoxOpen(prevState => !prevState);
+  };
+
+  const alteredSetSelectedAlgo = (algoName) => {
+    const unweightedAlgo = isAlgoUnweighted(algoName);
+    setWeightedObsDisabled(unweightedAlgo);
+    setSelectedAlgo(algoName);
+    if (unweightedAlgo) {
+      clearWeightedObstacles();
+    }
+  };
+
   return (
     <>
-      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} setWeightedObsDisabled={setWeightedObsDisabled} clearWeightedObstacles={clearWeightedObstacles} />
+      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} setWeightedObsDisabled={setWeightedObsDisabled} clearWeightedObstacles={clearWeightedObstacles} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} setSelectedAlgo={alteredSetSelectedAlgo} />
       <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
+      <InfoBox infoBoxOpen={infoBoxOpen} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} />
     </>
   );
 }

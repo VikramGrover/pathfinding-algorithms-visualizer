@@ -5,7 +5,7 @@ import { aStar } from '../algorithms/path_finding/aStar.js'
 
 // PATHFINDING ALGORITHM CONSTANTS -------------------------------------------
 const DIJKSTRAS = "Dijkstra's";
-const ASTAR = "A*";
+const ASTAR = "A* (A-Star)";
 const BFS = "BFS";
 const DFS = "DFS";
 
