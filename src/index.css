@@ -3,6 +3,7 @@
   --node-hover-color: #f0efeb;
   --body-color: #2f3137;
   --light-text-color: #b9bbbe;
+  --normal-button-background: 185, 187, 190;
   --visiting-node-color: #4988dc;
   --grid-color: #35393f;
   --visualize-button-color: #43b581;
@@ -58,19 +59,26 @@ code {
   position: relative;
 }
 
+.erasing {
+  cursor: url(./images/eraser.svg), auto;
+}
+
 .node.start {
   background-color: var(--start-node-color);
   border: 1px solid var(--start-node-color);
+  cursor: grab;
 }
 
 .node.none {
   background-color: var(--grid-color);
   border: 1px solid var(--node-border-color);
+  
 }
 
 .node.target {
   background-color: var(--target-node-color);
   border: 1px solid var(--target-node-color);
+  cursor: grab;
 }
 
 .node.wall {
@@ -134,7 +142,7 @@ code {
   text-align: center;
   margin-bottom: 2px;
   border-radius: 4px;
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--main-font-size);
   font-weight: 500;
   cursor: pointer;
@@ -196,7 +204,7 @@ code {
   text-align: center;
   margin-bottom: 2px;
   border-radius: 4px;
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--main-font-size);
   font-weight: 500;
   background-color: var(--dropdown-container-background);
@@ -211,7 +219,7 @@ code {
 .choose-algo::before {
   position: absolute;
   content: "choose algorithm";
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
   text-transform: uppercase;
@@ -237,7 +245,7 @@ code {
   padding: 10px 20px;
   text-align: left;
   border-radius: 4px;
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--main-font-size);
   font-weight: 500;
   background-color: var(--body-color);
@@ -274,7 +282,7 @@ code {
   display: inline-block;
   padding: 10px 20px;
   text-align: left;
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--main-font-size);
   font-weight: 500;
   background-color: var(--body-color);
@@ -332,7 +340,7 @@ code {
   text-align: center;
   margin-bottom: 2px;
   border-radius: 4px;
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--main-font-size);
   font-weight: 500;
   background-color: var(--dropdown-container-background);
@@ -347,7 +355,7 @@ code {
 .choose-terrain::before {
   position: absolute;
   content: "choose terrain";
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
   text-transform: uppercase;
@@ -368,7 +376,7 @@ code {
   text-align: center;
   margin-bottom: 2px;
   border-radius: 4px;
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--main-font-size);
   font-weight: 500;
   background-color: var(--dropdown-container-background);
@@ -383,7 +391,7 @@ code {
 .choose-obstacle::before {
   position: absolute;
   content: "choose obstacle";
-  font-family: 'Whitney','Helvetica Neue','Helvetica','Arial','sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
   text-transform: uppercase;
@@ -396,19 +404,21 @@ code {
 /* INFO BOX */
 .info-box {
   position: fixed;
-  background-color: var(--body-color);
+  background-color: var(--dropdown-container-background);
   width: 500px;
   height: 500px;
   z-index: 100;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  padding: 30px;
+  /* top: 50%;
+  left: 50%; */
+  /* margin-right: -50%;
+  transform: translate(-50%, -50%); */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  padding: 0px 30px 30px 30px;
   text-align: center;
-  word-wrap: break-word;
+  resize: both;
+  overflow: auto;
   border-radius: 4px;
+  user-select: none;
 }
 
 .info-box.hidden {
@@ -420,7 +430,25 @@ code {
 }
 
 .info-box h1 {
+  user-select: none;
+  color: var(--start-node-color);
+  padding: 50px 0px 30px 0px;
+  cursor: move;
+  margin: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+}
+
+.info-box p {
   color: var(--light-text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  font-size: var(--main-font-size);
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.25rem;
+}
+.info-box p strong {
+  color: white;
+  font-weight: 800;
 }
 
 .close-info-icon {
@@ -430,6 +458,11 @@ code {
   width: 10px;
   height: 10px;
   cursor: pointer;
+  user-select: none;
+}
+
+.close-info-icon:hover {
+  fill: white  !important;
 }
 
 

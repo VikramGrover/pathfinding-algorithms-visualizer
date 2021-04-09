@@ -36,6 +36,15 @@ Object.freeze(terrainAlgos);
 
 export { ALGO1, ALGO2, terrainAlgos };
 
+const pathfindingAlgoInfo = {
+    [DIJKSTRAS]: {
+        'description': <p>Dijkstra's algorithm to find the shortest path between a and b. It picks the unvisited vertex with the <strong>lowest distance</strong>, calculates the distance through it to each unvisited neighbor, and updates the neighbor's distance if smaller. Mark visited (set to red) when done with neighbors.</p>,
+        'optimality': <p>Dijkstra's is guranteed to find the shortest path.</p>
+    }
+}
+Object.freeze(pathfindingAlgoInfo);
+export { pathfindingAlgoInfo };
+
 // NODE TYPES ------------------------------------------------------------
 const nodeTypeEnum = {
     'path': 0,

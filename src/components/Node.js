@@ -1,11 +1,16 @@
 import React from 'react'
 import { nodeColorClass, nodeTypeEnum } from '../utils/constants.js'
+// import eraser from '../images/eraser.svg'
 
 const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord, runningAlgo, selectedObstacle }) => {
-    const nodeDim = {
+    const nodeStyle = {
         width: size,
         height: size
     };
+
+    if (draggingSelection === nodeTypeEnum.start || draggingSelection === nodeTypeEnum.target) {
+        nodeStyle.cursor = 'grabbing';
+    }
 
     const mouseDowned = () => {
         if (nodeState[0] <= nodeTypeEnum.none) {
@@ -53,7 +58,7 @@ const Node = React.memo(({ nodeId, size, nodeState, setGridState, draggingSelect
     };
 
     return (
-        <div style={{ ...nodeDim }} className={`node ${nodeColorClass[nodeState[0]]}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
+        <div style={nodeStyle} className={`node ${nodeColorClass[nodeState[0]]} ${draggingSelection === nodeTypeEnum.remObstacle && 'erasing'}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
         </div>
     );
 });
