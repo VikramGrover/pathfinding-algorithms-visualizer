@@ -34,7 +34,7 @@ const InfoBox = ({ infoBoxOpen, toggleInfoBox, selectedAlgo }) => {
 
     return (
         <div style={boxStyle} className={`info-box ${infoBoxOpen ? 'visible' : 'hidden'}`} onMouseMove={beingDragged} onMouseUp={disableDragging}>
-            <img className='close-info-icon' src={closeIcon} onClick={toggleInfoBox} />
+            <img className='close-info-icon' src={closeIcon} onClick={toggleInfoBox} alt='Close info box' />
             <h1 onMouseDown={enableDragging} >{selectedAlgo}</h1>
             {(pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].description) || <p>No information.</p>}
             {(pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].optimality)}
