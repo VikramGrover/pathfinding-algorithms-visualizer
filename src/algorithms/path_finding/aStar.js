@@ -1,7 +1,7 @@
 import { getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/helper.js'
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
-export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
+export const aStar = (startCord, targetCord, gridState, rows, cols, timeout) => {
     let openSet = { [startCord]: 0 };
     let G = { [startCord]: 0 }; // G(n) => tell us the current shortest distance from start node to node n
     let H = { [startCord]: 0 }; // H(n) => tells us the estimated distance from node n to target node
@@ -24,8 +24,9 @@ export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols
         delete openSet[currNode];
 
         if (currNode !== startCord && currNode !== targetCord) {
+            const nodeStateFunc = gridState[currNode][1];
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currNode]: [nodeTypeEnum.visited, ...prevState[currNode].slice(1)] }));
+                nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
             }, timeout);
         }
         else if (currNode === targetCord) {
@@ -35,12 +36,13 @@ export const aStar = (startCord, targetCord, gridState, setGridState, rows, cols
 
         const neighbours = getNeighbourNodes(currNode, rows, cols, gridState);
         for (const neighbour of neighbours) {
-            const currGScore = G[currNode] + nodeWeight[gridState[neighbour][0]];
+            const currGScore = G[currNode] + nodeWeight[gridState[neighbour][0][0]];
 
             if (currGScore < G[neighbour]) {
                 if (neighbour !== startCord && neighbour !== targetCord) {
+                    const nodeStateFunc = gridState[neighbour][1];
                     setTimeout(() => {
-                        setGridState(prevState => ({ ...prevState, [neighbour]: [nodeTypeEnum.visiting, ...prevState[neighbour]] }));
+                        nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
                     }, timeout);
                 }
                 // newly calculated G score of neighbour is lower than the one in the table

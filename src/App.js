@@ -22,6 +22,7 @@ function App() {
   const navBarHeight = 90;
 
   useEffect(() => {
+    console.log("RESETTING BOARD");
     resetBoard();
   }, []);
 
@@ -62,99 +63,75 @@ function App() {
   };
 
   const clearPath = () => {
-    let gridMap = {};
-    let change = false;
-
+    console.log("CLEARING PATH");
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
-        gridMap[id] = gridState[id];
-        let currState = gridState[id][0];
+        let nodeState = gridState[id][0];
+        let nodeStateFunc = gridState[id][1];
+        let currState = nodeState[0];
 
-        // check under start and target node for path
-        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (gridState[id][1] === nodeTypeEnum.path || gridState[id][1] === nodeTypeEnum.visited || gridState[id][1] === nodeTypeEnum.visiting)) {
-          gridMap[id].splice(1, 1);
-          change = true;
-          continue;
+        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (nodeState[1] <= nodeTypeEnum.visiting)) {
+          nodeState.splice(1, 1);
         }
-
-        if (currState === nodeTypeEnum.path || currState === nodeTypeEnum.visited || currState === nodeTypeEnum.visiting) {
-          gridMap[id] = gridMap[id].slice(1);
-          change = true;
-        }
+        nodeStateFunc(prevState => nodeState);
       }
     }
-
-    if (change) {
-      setGridState(prevState => (gridMap));
-    }
-
-    return gridMap;
   };
 
   const clearObstacles = () => {
-    let gridMap = {};
-    let change = false;
-
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
-        gridMap[id] = gridState[id];
-        let currState = gridState[id][0];
+        let nodeState = gridState[id][0];
+        let nodeStateFunc = gridState[id][1];
+        let currState = nodeState[0];
 
         // check under start and target node for obstacle
-        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (gridState[id][1] >= nodeTypeEnum.wall)) {
-          gridMap[id].splice(1, 1);
-          change = true;
+        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (nodeState[1] >= nodeTypeEnum.wall)) {
+          nodeState.splice(1, 1);
+          nodeStateFunc(prev => nodeState);
+          setGridState(prevState => ({ ...prevState, [id]: [nodeState, prevState[id][1]] }));
           continue;
         }
 
-        if (currState === nodeTypeEnum.path || currState === nodeTypeEnum.visited || currState === nodeTypeEnum.visiting) {
-          currState = gridState[id][1];
+        if (currState <= nodeTypeEnum.visiting) {
+          currState = nodeState[1];
         }
 
         if (currState >= nodeTypeEnum.wall) {
-          gridMap[id] = [nodeTypeEnum.none];
-          change = true;
+          nodeStateFunc(prev => [nodeTypeEnum.none]);
+          setGridState(prevState => ({ ...prevState, [id]: [[nodeTypeEnum.none], prevState[id][1]] }));
         }
       }
-    }
-
-    if (change) {
-      setGridState(prevState => (gridMap));
     }
   };
 
   const clearWeightedObstacles = () => {
-    let gridMap = {};
-    let change = false;
-
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
-        gridMap[id] = gridState[id];
-        let currState = gridState[id][0];
+        let nodeState = gridState[id][0];
+        let nodeStateFunc = gridState[id][1];
+        let currState = nodeState[0];
 
         // check under start and target node for weighted obstacle
-        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (gridState[id][1] > nodeTypeEnum.wall)) {
-          gridMap[id].splice(1, 1);
-          change = true;
+        if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (nodeState[1] > nodeTypeEnum.wall)) {
+          nodeState.splice(1, 1);
+          nodeStateFunc(prev => nodeState);
+          setGridState(prevState => ({ ...prevState, [id]: [nodeState, prevState[id][1]] }));
           continue;
         }
 
-        if (currState === nodeTypeEnum.path || currState === nodeTypeEnum.visited || currState === nodeTypeEnum.visiting) {
-          currState = gridState[id][1];
+        if (currState <= nodeTypeEnum.visiting) {
+          currState = nodeState[1];
         }
 
         if (currState > nodeTypeEnum.wall) {
-          gridMap[id] = [nodeTypeEnum.none];
-          change = true;
+          nodeStateFunc(prev => [nodeTypeEnum.none]);
+          setGridState(prevState => ({ ...prevState, [id]: [[nodeTypeEnum.none], prevState[id][1]] }));
         }
       }
-    }
-
-    if (change) {
-      setGridState(prevState => (gridMap));
     }
   };
 
@@ -167,14 +144,15 @@ function App() {
     setWeightedObsDisabled(unweightedAlgo);
     setSelectedAlgo(algoName);
     if (unweightedAlgo) {
+      clearPath();
       clearWeightedObstacles();
     }
   };
 
   return (
     <>
-      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} setWeightedObsDisabled={setWeightedObsDisabled} clearWeightedObstacles={clearWeightedObstacles} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} setSelectedAlgo={alteredSetSelectedAlgo} />
-      <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} gridState={gridState} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
+      <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} setSelectedAlgo={alteredSetSelectedAlgo} />
+      <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
       <InfoBox infoBoxOpen={infoBoxOpen} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} />
     </>
   );

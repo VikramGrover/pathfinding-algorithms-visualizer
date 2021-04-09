@@ -1,7 +1,7 @@
 import { getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/helper.js'
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
-export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
+export const dijkstras = (startCord, targetCord, gridState, rows, cols, timeout) => {
     let totalCosts = {};
     let prevNodes = {};
     let minPQ = {};
@@ -26,8 +26,9 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
         visited[minKey] = 1;
 
         if (minKey !== startCord && minKey !== targetCord) {
+            const nodeStateFunc = gridState[minKey][1];
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [minKey]: [nodeTypeEnum.visited, ...prevState[minKey].slice(1)] }));
+                nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
             }, timeout);
         }
         else if (minKey === targetCord) {
@@ -36,7 +37,7 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
 
         const neighbours = getNeighbourNodes(minKey, rows, cols, gridState);
         for (const neighbour of neighbours) {
-            const currPath = totalCosts[minKey] + nodeWeight[gridState[neighbour][0]];
+            const currPath = totalCosts[minKey] + nodeWeight[gridState[neighbour][0][0]];
 
             if (neighbour in visited) {
                 continue;
@@ -47,8 +48,9 @@ export const dijkstras = (startCord, targetCord, gridState, setGridState, rows, 
                 prevNodes[neighbour] = minKey;
                 minPQ[neighbour] = currPath;
                 if (neighbour !== targetCord) {
+                    const nodeStateFunc = gridState[neighbour][1];
                     setTimeout(() => {
-                        setGridState(prevState => ({ ...prevState, [neighbour]: [nodeTypeEnum.visiting, ...prevState[neighbour]] }));
+                        nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
                     }, timeout);
                 }
             }

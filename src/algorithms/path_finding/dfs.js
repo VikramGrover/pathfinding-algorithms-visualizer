@@ -1,7 +1,7 @@
 import { getNeighbourNodes } from '../../utils/helper.js'
 import { nodeTypeEnum } from '../../utils/constants.js'
 
-export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
+export const dfs = (startCord, targetCord, gridState, rows, cols, timeout) => {
     const stack = [startCord];
     const path = [];
     const visited = { [startCord]: 1 };
@@ -9,8 +9,9 @@ export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols, 
     while (stack.length > 0) {
         const currCord = stack[0];
         if (currCord !== targetCord && currCord !== startCord) {
+            const nodeStateFunc = gridState[currCord][1];
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currCord]: [nodeTypeEnum.visiting, nodeTypeEnum.none] }));
+                nodeStateFunc(prevState => ([nodeTypeEnum.visiting, nodeTypeEnum.none]));
             }, timeout);
         }
 
@@ -23,8 +24,9 @@ export const dfs = (startCord, targetCord, gridState, setGridState, rows, cols, 
         if (currCord !== startCord) {
             path.unshift(currCord);
             visited[currCord] = 1;
+            const nodeStateFunc = gridState[currCord][1];
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currCord]: [nodeTypeEnum.visited, nodeTypeEnum.none] }));
+                nodeStateFunc(prevState => ([nodeTypeEnum.visited, nodeTypeEnum.none]));
             }, timeout);
         }
 

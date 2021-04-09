@@ -1,7 +1,7 @@
 import { getNeighbourNodes, createPath } from '../../utils/helper.js'
 import { nodeTypeEnum } from '../../utils/constants.js'
 
-export const bfs = (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
+export const bfs = (startCord, targetCord, gridState, rows, cols, timeout) => {
     let queue = [startCord];
     let visited = { [startCord]: 1 };
     let prevNodes = {};
@@ -9,8 +9,9 @@ export const bfs = (startCord, targetCord, gridState, setGridState, rows, cols, 
     while (queue.length > 0) {
         const currCord = queue.pop();
         if (currCord !== startCord && currCord !== targetCord) {
+            const nodeStateFunc = gridState[currCord][1];
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [currCord]: [nodeTypeEnum.visited, nodeTypeEnum.none] }));
+                nodeStateFunc(prevState => ([nodeTypeEnum.visited, nodeTypeEnum.none]));
             }, timeout);
         }
         const neighbours = getNeighbourNodes(currCord, rows, cols, gridState);
@@ -28,8 +29,9 @@ export const bfs = (startCord, targetCord, gridState, setGridState, rows, cols, 
                 return createPath(startCord, targetCord, prevNodes);
             }
 
+            const nodeStateFunc = gridState[neighbour][1];
             setTimeout(() => {
-                setGridState(prevState => ({ ...prevState, [neighbour]: [nodeTypeEnum.visiting, nodeTypeEnum.none] }));
+                nodeStateFunc(prevState => ([nodeTypeEnum.visiting, nodeTypeEnum.none]));
             }, timeout);
         }
     }
