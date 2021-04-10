@@ -2,24 +2,27 @@ import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
 import { dfs } from '../algorithms/path_finding/dfs.js'
 import { bfs } from '../algorithms/path_finding/bfs.js'
 import { aStar } from '../algorithms/path_finding/aStar.js'
+import { bestFirst } from '../algorithms/path_finding/bestFirst.js';
 
 // PATHFINDING ALGORITHM CONSTANTS -------------------------------------------
 const DIJKSTRAS = "Dijkstra's";
-const ASTAR = "A* (A-Star)";
-const BFS = "BFS";
-const DFS = "DFS";
+const ASTAR = 'A* (A-Star)';
+const BFS = 'Breadth-first Search';
+const DFS = 'Depth-first Search';
+const BEST_FIRST = 'Best-first Search';
 
 const algoFunctions = {
     [DIJKSTRAS]: dijkstras,
     [ASTAR]: aStar,
     [BFS]: bfs,
-    [DFS]: dfs
+    [DFS]: dfs,
+    [BEST_FIRST]: bestFirst
 }
 Object.freeze(algoFunctions);
 
-export { DIJKSTRAS, ASTAR, BFS, DFS, algoFunctions };
+export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST, algoFunctions };
 
-const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS];
+const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST];
 Object.freeze(allPathAlgos);
 const unweightedPathAlgos = [DFS, BFS];
 Object.freeze(unweightedPathAlgos);
