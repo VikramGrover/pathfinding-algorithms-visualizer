@@ -1,5 +1,5 @@
 :root {
-  --node-border-color: rgba(185, 187, 190, 0.1);
+  --node-border-color: #b9bbbe;
   --node-hover-color: #f0efeb;
   --body-color: #2f3137;
   --light-text-color: #b9bbbe;
@@ -13,15 +13,21 @@
   --start-node-color: #43b581;
   --target-node-color: #f14846;
   --obstacle-node-color: #18191c;
-  --weighted-node-color: 24, 25, 28;
   --dark-selection: #34363d;
   --visited-node-color: 63, 112, 221;
   --path-node-color: #f9a719;
   --button-deafult-color: 24, 25, 28;
   --clear-button-color: 249,167,25;
   --dropdown-container-background: #202225;
+  --info-box-background: 32, 34, 37;
   --main-font-size: 14px;
   --secondary-font-size: 11px;
+  --weighted100-node-color: #1b1c1e;
+  --weighted80-node-color: #1c1e21;
+  --weighted60-node-color: #222327;
+  --weighted40-node-color: #26272b;
+  --weighted20-node-color: #2b2c31;
+  --obstacle-preview-border-color:#5b5d68;
 }
 
 body {
@@ -72,7 +78,6 @@ code {
 .node.none {
   background-color: var(--grid-color);
   border: 1px solid var(--node-border-color);
-  
 }
 
 .node.target {
@@ -102,24 +107,24 @@ code {
 }
 
 .node.weighted100{
-  background-color: rgba(var(--weighted-node-color), 0.9);
-  border: 1px solid rgba(var(--weighted-node-color), 0.9);
+  background-color: var(--weighted100-node-color);
+  border: 1px solid var(--weighted100-node-color);
 }
 .node.weighted80{
-  background-color: rgba(var(--weighted-node-color), 0.8);
-  border: 1px solid rgba(var(--weighted-node-color), 0.8);
+  background-color: var(--weighted80-node-color);
+  border: 1px solid var(--weighted80-node-color);
 }
 .node.weighted60{
-  background-color: rgba(var(--weighted-node-color), 0.6);
-  border: 1px solid rgba(var(--weighted-node-color), 0.6);
+  background-color: var(--weighted60-node-color);
+  border: 1px solid var(--weighted60-node-color);
 }
 .node.weighted40{
-  background-color: rgba(var(--weighted-node-color), 0.4);
-  border: 1px solid rgba(var(--weighted-node-color), 0.4);
+  background-color: var(--weighted40-node-color);
+  border: 1px solid var(--weighted40-node-color);
 }
 .node.weighted20{
-  background-color: rgba(var(--weighted-node-color), 0.2);
-  border: 1px solid rgba(var(--weighted-node-color), 0.2);
+  background-color: var(--weighted20-node-color);
+  border: 1px solid var(--weighted20-node-color);
 }
 
 /* HEADER */
@@ -219,7 +224,7 @@ code {
 
 .choose-algo::before {
   position: absolute;
-  content: "choose algorithm";
+  content: "algorithm";
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
@@ -323,11 +328,17 @@ code {
   width: 14px;
   height: 14px;
   margin-left: 7px;
-  fill: var(--light-text-color);
 }
 
-.algo-property-badge path {
-  fill: var(--light-text-color);
+.obstacle-preview {
+  position: relative;
+  float: right;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  margin-left: 7px;
+  border-radius: 2px;
+  border: 1px solid var(--obstacle-preview-border-color);
 }
 
 /* CHOOSE TERRAIN */
@@ -355,7 +366,7 @@ code {
 
 .choose-terrain::before {
   position: absolute;
-  content: "choose terrain";
+  content: "terrain";
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
@@ -391,7 +402,7 @@ code {
 
 .choose-obstacle::before {
   position: absolute;
-  content: "choose obstacle";
+  content: "obstacle (weight)";
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
@@ -405,9 +416,9 @@ code {
 /* INFO BOX */
 .info-box {
   position: fixed;
-  background-color: var(--dropdown-container-background);
-  width: 500px;
-  height: 500px;
+  background-color: rgba(var(--info-box-background), 0.97);
+  width: 350px;
+  height: 600px;
   z-index: 100;
   /* top: 50%;
   left: 50%; */

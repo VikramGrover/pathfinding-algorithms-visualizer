@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { nodeColorClass, nodeTypeEnum } from '../utils/constants.js'
+import { EMPTY_NODE_BORDER_COLOR, nodeColors, nodeTypeEnum } from '../utils/constants.js'
+import { getNodeColor } from '../utils/helper.js'
 
 const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord, runningAlgo, selectedObstacle, startingState }) => {
     const [nodeState, setNodeState] = useState(startingState);
@@ -9,9 +10,12 @@ const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelect
         setGridState(prevState => ({ ...prevState, [nodeId]: [startingState, setNodeState] }));
     }, []);
 
+    const nodeColor = getNodeColor(nodeState);
     const nodeStyle = {
         width: size,
-        height: size
+        height: size,
+        backgroundColor: nodeColor,
+        border: `1px solid ${nodeState[0] === nodeTypeEnum.none ? EMPTY_NODE_BORDER_COLOR : nodeColor}`
     };
 
     if (draggingSelection === nodeTypeEnum.start || draggingSelection === nodeTypeEnum.target) {
@@ -77,7 +81,7 @@ const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelect
     };
 
     return (
-        <div style={nodeStyle} className={`node ${nodeColorClass[nodeState[0]]} ${draggingSelection === nodeTypeEnum.remObstacle && 'erasing'}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
+        <div style={nodeStyle} className={`node ${draggingSelection === nodeTypeEnum.remObstacle && 'erasing'}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
         </div>
     );
 };

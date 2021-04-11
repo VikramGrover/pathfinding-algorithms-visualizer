@@ -48,7 +48,7 @@ const pathfindingAlgoInfo = {
 Object.freeze(pathfindingAlgoInfo);
 export { pathfindingAlgoInfo };
 
-// NODE TYPES ------------------------------------------------------------
+// NODE CONSTANTS ------------------------------------------------------------
 const nodeTypeEnum = {
     'path': 0,
     'visited': 1,
@@ -85,6 +85,25 @@ const nodeColorClass = {
 Object.freeze(nodeColorClass);
 
 export { nodeColorClass };
+
+const EMPTY_NODE_BORDER_COLOR = '#42464c';
+const nodeColors = {
+    [nodeTypeEnum.none]: '#35393f',
+    [nodeTypeEnum.target]: '#f14846',
+    [nodeTypeEnum.wall]: '#18191c',
+    [nodeTypeEnum.visiting]: '#4988dc',
+    [nodeTypeEnum.start]: '#43b581',
+    [nodeTypeEnum.visited]: '#3f70dd',
+    [nodeTypeEnum.path]: '#f9a719',
+    [nodeTypeEnum.weighted100]: '#1b1c1e',
+    [nodeTypeEnum.weighted80]: '#1c1e21',
+    [nodeTypeEnum.weighted60]: '#222327',
+    [nodeTypeEnum.weighted40]: '#26272b',
+    [nodeTypeEnum.weighted20]: '#2b2c31'
+};
+Object.freeze(nodeColors);
+
+export { EMPTY_NODE_BORDER_COLOR, nodeColors };
 
 const nodeWeight = {
     [nodeTypeEnum.none]: 1,

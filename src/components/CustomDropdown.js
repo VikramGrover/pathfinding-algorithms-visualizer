@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react'
 import { isAlgoUnweighted, isAlgoOptimal } from '../utils/helper.js'
-import { allPathAlgos } from '../utils/constants.js'
+import { nodeColors, nodeTypeEnum, obsEnum } from '../utils/constants.js'
 import downArrow from '../images/down_arrow.svg';
 import weight from '../images/weight.svg'
 import weightUnfilled from '../images/weight_unfilled.svg'
 import optimal from '../images/optimal.svg'
 import optimalUnfilled from '../images/optimal_unfilled.svg'
 
-const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth }) => {
+const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth, isAlgoSelector, isObstacleSelector }) => {
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [selectedVal, setSelectedVal] = useState(items[0]);
     const [selectedId, setSelectedId] = useState(0);
-    const isAlgoSelector = (allPathAlgos[0] === items[0]);
 
     useEffect(() => {
         if (disabled) {
@@ -43,7 +42,8 @@ const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth }) => {
             {items[i]}
             {isAlgoSelector && (!isAlgoUnweighted(items[i]) ? <img className="algo-property-badge" src={weight} title={`${items[i]} is a weighted path-finding algorithm.`} alt={`${items[i]} is a weighted path-finding algorithm.`}></img> : <img className="algo-property-badge" src={weightUnfilled} title={`${items[i]} is not a weighted path-finding algorithm.`} alt={`${items[i]} is not a weighted path-finding algorithm.`}></img>)}
             {isAlgoSelector && (isAlgoOptimal(items[i]) ? <img className="algo-property-badge" src={optimal} title={`${items[i]} guarantees shortest path.`} alt={`${items[i]} guarantees shortest path.`}></img> : <img className="algo-property-badge" src={optimalUnfilled} title={`${items[i]} does not guarantee shortest path.`} alt={`${items[i]} does not guarantee shortest path.`}></img>)}
-        </div>)
+            {isObstacleSelector && <div style={{ backgroundColor: nodeColors[nodeTypeEnum[obsEnum[items[i]]]] }} className="obstacle-preview"> </div>}
+        </div >)
     }
 
     return (

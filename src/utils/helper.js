@@ -1,4 +1,25 @@
-import { nodeTypeEnum, unweightedPathAlgos, optimalPathAlgos } from './constants.js'
+import { nodeTypeEnum, unweightedPathAlgos, optimalPathAlgos, nodeColors } from './constants.js'
+
+export const getNodeColor = (nodeState) => {
+    if ((nodeState[0] === nodeTypeEnum.visited || nodeState[0] === nodeTypeEnum.visiting || nodeState[0] === nodeTypeEnum.path) && nodeState[1] > nodeTypeEnum.wall) {
+        let colorA = nodeColors[nodeState[0]];
+        const colorB = nodeColors[nodeState[1]];
+        let amount = 0.73;
+
+        if (nodeState[0] === nodeTypeEnum.visiting) {
+            colorA = nodeColors[nodeTypeEnum.visited];
+        }
+        // we need to mix colors
+        const [rA, gA, bA] = colorA.match(/\w\w/g).map((c) => parseInt(c, 16));
+        const [rB, gB, bB] = colorB.match(/\w\w/g).map((c) => parseInt(c, 16));
+        const r = Math.round(rA + (rB - rA) * amount).toString(16).padStart(2, '0');
+        const g = Math.round(gA + (gB - gA) * amount).toString(16).padStart(2, '0');
+        const b = Math.round(bA + (bB - bA) * amount).toString(16).padStart(2, '0');
+        return '#' + r + g + b;
+    }
+
+    return nodeColors[nodeState[0]];
+};
 
 export const getNeighbourNodes = (node, rows, cols, gridState) => {
     const row = parseInt(node.split(':')[0]);

@@ -8,7 +8,7 @@ const ChooseTerrain = ({ rows, cols, setGridState, startCord, targetCord, clearF
 
     return (
         <div className={`choose-terrain`}>
-            <CustomDropdown setSelection={setSelectedTerrainAlgo} items={terrainAlgos} disabled={false} dropDownWidth={dropDownWidth} />
+            <CustomDropdown setSelection={setSelectedTerrainAlgo} items={terrainAlgos} disabled={false} dropDownWidth={dropDownWidth} isAlgoSelector={false} isObstacleSelector={false} />
             <Visualize rows={rows} cols={cols} selectedAlgo={selectedTerrainAlgo} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearForReRun} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} />
         </div >
     )

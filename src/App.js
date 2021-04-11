@@ -35,31 +35,14 @@ function App() {
     const adjustedWinHeight = window.innerHeight - (navBarHeight + (margin * 3));
     const adjustedWinWidth = window.innerWidth - (2 * margin);
 
-    const rows = parseInt(adjustedWinHeight / (nodeSize + 1));
-    const cols = parseInt(adjustedWinWidth / (nodeSize + 1));
+    const currRows = parseInt(adjustedWinHeight / (nodeSize + 1));
+    const currCols = parseInt(adjustedWinWidth / (nodeSize + 1));
 
     setRunningAlgo(false);
-    setRows(rows);
-    setCols(cols);
+    setRows(currRows);
+    setCols(currCols);
     setStartCord('0:0');
-    setTargetCord(`${rows - 1}:${cols - 1}`);
-
-    let gridMap = {};
-    for (let x = 0; x < rows; x++) {
-      for (let y = 0; y < cols; y++) {
-        let nodeState = [nodeTypeEnum.none];
-        if (x === 0 && y === 0) {
-          nodeState.unshift(nodeTypeEnum.start);
-        }
-        else if (x === (rows - 1) && y === (cols - 1)) {
-          nodeState.unshift(nodeTypeEnum.target);
-        }
-
-        gridMap[`${x}:${y}`] = nodeState;
-      }
-    }
-
-    setGridState(gridMap);
+    setTargetCord(`${currRows - 1}:${currCols - 1}`);
   };
 
   const clearPath = () => {

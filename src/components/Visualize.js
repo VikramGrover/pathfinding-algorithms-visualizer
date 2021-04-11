@@ -19,7 +19,7 @@ const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCor
         for (let i = path.length - 1; i >= 0; i--) {
             const nodeStateFunc = gridState[path[i]][1];
             setTimeout(() => {
-                nodeStateFunc(prevState => ([nodeTypeEnum.path, ...prevState]));
+                nodeStateFunc(prevState => ([nodeTypeEnum.path, ...gridState[path[i]][0]]));
             }, timeout);
         }
 
