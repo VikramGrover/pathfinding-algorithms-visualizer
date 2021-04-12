@@ -23,10 +23,10 @@ Object.freeze(algoFunctions);
 const PATH_CREATION_SLEEP = 5;
 const algoSleepTimes = {
     [DIJKSTRAS]: 1,
-    [ASTAR]: 11,
-    [BFS]: 15,
-    [DFS]: 35,
-    [BEST_FIRST]: 35
+    [ASTAR]: 5,
+    [BFS]: 10,
+    [DFS]: 10,
+    [BEST_FIRST]: 10
 }
 Object.freeze(algoSleepTimes);
 

@@ -1,7 +1,7 @@
-import { getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/helper.js'
+import { getNeighbourNodes, createPath, findMinPriorityNode, sleep } from '../../utils/helper.js'
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
-export const bestFirst = (startCord, targetCord, gridState, rows, cols, timeout) => {
+export const bestFirst = async (startCord, targetCord, gridState, rows, cols, timeout) => {
     let openSet = { [startCord]: 0 };
     let H = { [startCord]: 0 }; // H(n) => tells us the estimated distance from node n to target node
     let F = { [startCord]: 0 }; // F(n) = H(n)
@@ -25,9 +25,7 @@ export const bestFirst = (startCord, targetCord, gridState, rows, cols, timeout)
 
         if (currNode !== startCord && currNode !== targetCord) {
             const nodeStateFunc = gridState[currNode][1];
-            setTimeout(() => {
-                nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
-            }, timeout);
+            nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
         }
         else if (currNode === targetCord) {
             console.log("DONNEE");
@@ -42,9 +40,7 @@ export const bestFirst = (startCord, targetCord, gridState, rows, cols, timeout)
 
                 if (neighbour !== startCord && neighbour !== targetCord) {
                     const nodeStateFunc = gridState[neighbour][1];
-                    setTimeout(() => {
-                        nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
-                    }, timeout);
+                    nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
                 }
                 // newly calculated G score of neighbour is lower than the one in the table
                 // update all the scores
@@ -54,6 +50,8 @@ export const bestFirst = (startCord, targetCord, gridState, rows, cols, timeout)
                 openSet[neighbour] = F[neighbour];
             }
         }
+
+        await sleep(timeout);
     }
 
     return [];

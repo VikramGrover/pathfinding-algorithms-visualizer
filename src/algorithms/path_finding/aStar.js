@@ -1,7 +1,7 @@
-import { getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/helper.js'
+import { getNeighbourNodes, createPath, findMinPriorityNode, sleep } from '../../utils/helper.js'
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
-export const aStar = (startCord, targetCord, gridState, rows, cols, timeout) => {
+export const aStar = async (startCord, targetCord, gridState, rows, cols, timeout) => {
     let openSet = { [startCord]: 0 };
     let G = { [startCord]: 0 }; // G(n) => tell us the current shortest distance from start node to node n
     let H = { [startCord]: 0 }; // H(n) => tells us the estimated distance from node n to target node
@@ -26,9 +26,7 @@ export const aStar = (startCord, targetCord, gridState, rows, cols, timeout) => 
 
         if (currNode !== startCord && currNode !== targetCord) {
             const nodeStateFunc = gridState[currNode][1];
-            setTimeout(() => {
-                nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
-            }, timeout);
+            nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
         }
         else if (currNode === targetCord) {
             // we have reached target, return path
@@ -42,9 +40,7 @@ export const aStar = (startCord, targetCord, gridState, rows, cols, timeout) => 
             if (currGScore < G[neighbour]) {
                 if (neighbour !== startCord && neighbour !== targetCord && !(neighbour in visited)) {
                     const nodeStateFunc = gridState[neighbour][1];
-                    setTimeout(() => {
-                        nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
-                    }, timeout);
+                    nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
                 }
                 visited[neighbour] = 1;
                 // newly calculated G score of neighbour is lower than the one in the table
@@ -56,6 +52,8 @@ export const aStar = (startCord, targetCord, gridState, rows, cols, timeout) => 
                 openSet[neighbour] = F[neighbour];
             }
         }
+
+        await sleep(timeout);
     }
 
     return [];

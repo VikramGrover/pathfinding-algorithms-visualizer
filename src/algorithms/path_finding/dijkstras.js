@@ -27,9 +27,7 @@ export const dijkstras = async (startCord, targetCord, gridState, rows, cols, ti
 
         if (minKey !== startCord && minKey !== targetCord) {
             const nodeStateFunc = gridState[minKey][1];
-            // setTimeout(() => {
             nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
-            // }, timeout);
         }
         else if (minKey === targetCord) {
             return createPath(startCord, targetCord, prevNodes);
@@ -49,9 +47,7 @@ export const dijkstras = async (startCord, targetCord, gridState, rows, cols, ti
                 minPQ[neighbour] = currPath;
                 if (neighbour !== targetCord) {
                     const nodeStateFunc = gridState[neighbour][1];
-                    // setTimeout(() => {
                     nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
-                    // }, timeout);
                 }
             }
         }
