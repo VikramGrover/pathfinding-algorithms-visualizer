@@ -17,17 +17,17 @@ const algoFunctions = {
     [BFS]: bfs,
     [DFS]: dfs,
     [BEST_FIRST]: bestFirst
-}
+};
 Object.freeze(algoFunctions);
 
 const PATH_CREATION_SLEEP = 7;
 const algoSleepTimes = {
     [DIJKSTRAS]: 1,
-    [ASTAR]: 5,
-    [BFS]: 7,
+    [ASTAR]: 4,
+    [BFS]: 5,
     [DFS]: 10,
-    [BEST_FIRST]: 10
-}
+    [BEST_FIRST]: 11
+};
 Object.freeze(algoSleepTimes);
 
 export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST, algoFunctions, PATH_CREATION_SLEEP, algoSleepTimes };
@@ -54,7 +54,7 @@ const pathfindingAlgoInfo = {
         'description': <p>Dijkstra's algorithm to find the shortest path between a and b. It picks the unvisited vertex with the <strong>lowest distance</strong>, calculates the distance through it to each unvisited neighbor, and updates the neighbor's distance if smaller. Mark visited (set to red) when done with neighbors.</p>,
         'optimality': <p>Dijkstra's is guranteed to find the shortest path.</p>
     }
-}
+};
 Object.freeze(pathfindingAlgoInfo);
 export { pathfindingAlgoInfo };
 
@@ -91,7 +91,7 @@ const nodeColorClass = {
     [nodeTypeEnum.weighted60]: 'weighted60',
     [nodeTypeEnum.weighted40]: 'weighted40',
     [nodeTypeEnum.weighted20]: 'weighted20'
-}
+};
 Object.freeze(nodeColorClass);
 
 export { nodeColorClass };
@@ -125,7 +125,7 @@ const nodeWeight = {
     [nodeTypeEnum.weighted60]: 60,
     [nodeTypeEnum.weighted40]: 40,
     [nodeTypeEnum.weighted20]: 20
-}
+};
 Object.freeze(nodeWeight);
 export { nodeWeight };
 
@@ -138,6 +138,7 @@ const obsEnum = {
     [obstacleTypes[3]]: nodeColorClass[nodeTypeEnum.weighted60],
     [obstacleTypes[4]]: nodeColorClass[nodeTypeEnum.weighted40],
     [obstacleTypes[5]]: nodeColorClass[nodeTypeEnum.weighted20]
-}
+};
 Object.freeze(obsEnum);
+
 export { obstacleTypes, obsEnum };

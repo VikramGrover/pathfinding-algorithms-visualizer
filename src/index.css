@@ -60,71 +60,12 @@ code {
   user-select: none;
   margin-top: -1px;
   margin-left: -1px;
-  border: 1px solid var(--node-border-color);
   float: left;
   position: relative;
 }
 
 .erasing {
   cursor: url(./images/eraser.svg), auto;
-}
-
-.node.start {
-  background-color: var(--start-node-color);
-  border: 1px solid var(--start-node-color);
-  cursor: grab;
-}
-
-.node.none {
-  background-color: var(--grid-color);
-  border: 1px solid var(--node-border-color);
-}
-
-.node.target {
-  background-color: var(--target-node-color);
-  border: 1px solid var(--target-node-color);
-  cursor: grab;
-}
-
-.node.wall {
-  background-color: var(--obstacle-node-color);
-  border: 1px solid var(--obstacle-node-color);
-}
-
-.node.visiting {
-  background-color: var(--visiting-node-color);
-  border: 1px solid var(--visiting-node-color);
-}
-
-.node.visited {
-  background-color: rgba(var(--visited-node-color), 1);
-  border: 1px solid rgba(var(--visited-node-color), 1);
-}
-
-.node.path {
-  background-color: var(--path-node-color);
-  border: 1px solid var(--path-node-color);
-}
-
-.node.weighted100{
-  background-color: var(--weighted100-node-color);
-  border: 1px solid var(--weighted100-node-color);
-}
-.node.weighted80{
-  background-color: var(--weighted80-node-color);
-  border: 1px solid var(--weighted80-node-color);
-}
-.node.weighted60{
-  background-color: var(--weighted60-node-color);
-  border: 1px solid var(--weighted60-node-color);
-}
-.node.weighted40{
-  background-color: var(--weighted40-node-color);
-  border: 1px solid var(--weighted40-node-color);
-}
-.node.weighted20{
-  background-color: var(--weighted20-node-color);
-  border: 1px solid var(--weighted20-node-color);
 }
 
 /* HEADER */
