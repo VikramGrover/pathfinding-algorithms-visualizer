@@ -98,7 +98,7 @@ export { nodeColorClass };
 
 const EMPTY_NODE_BORDER_COLOR = '#3C4046';
 const nodeColors = {
-    [nodeTypeEnum.none]: '#35393f',
+    [nodeTypeEnum.none]: 'transparent',
     [nodeTypeEnum.target]: '#f14846',
     [nodeTypeEnum.wall]: '#18191c',
     [nodeTypeEnum.visiting]: '#4988dc',

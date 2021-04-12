@@ -53,6 +53,7 @@ code {
   transform: translate(-50%);
   border-radius: 4px;
   border: 10px solid var(--grid-color);
+  background-color: var(--grid-color);
 }
 
 /* NODE */

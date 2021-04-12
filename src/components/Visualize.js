@@ -12,7 +12,6 @@ const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCor
         console.log("STARTING: ", selectedAlgo);
 
         let path = [];
-        let timeout = 5;
         path = await algoFunctions[selectedAlgo](startCord, targetCord, gridState, rows, cols, algoSleepTimes[selectedAlgo]);
 
         console.log("ENDED: ", selectedAlgo);
