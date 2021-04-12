@@ -421,10 +421,6 @@ code {
   width: 350px;
   height: 600px;
   z-index: 100;
-  /* top: 50%;
-  left: 50%; */
-  /* margin-right: -50%;
-  transform: translate(-50%, -50%); */
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   padding: 0px 30px 30px 30px;
   text-align: center;
@@ -435,11 +431,11 @@ code {
 }
 
 .info-box.hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .info-box.visible {
-  visibility: visible;
+  display: block;
 }
 
 .info-box h1 {

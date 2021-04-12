@@ -20,11 +20,11 @@ const algoFunctions = {
 }
 Object.freeze(algoFunctions);
 
-const PATH_CREATION_SLEEP = 5;
+const PATH_CREATION_SLEEP = 7;
 const algoSleepTimes = {
     [DIJKSTRAS]: 1,
     [ASTAR]: 5,
-    [BFS]: 10,
+    [BFS]: 7,
     [DFS]: 10,
     [BEST_FIRST]: 10
 }
@@ -96,7 +96,7 @@ Object.freeze(nodeColorClass);
 
 export { nodeColorClass };
 
-const EMPTY_NODE_BORDER_COLOR = '#42464c';
+const EMPTY_NODE_BORDER_COLOR = '#3C4046';
 const nodeColors = {
     [nodeTypeEnum.none]: '#35393f',
     [nodeTypeEnum.target]: '#f14846',

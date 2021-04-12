@@ -18,11 +18,13 @@ const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelect
         border: `1px solid ${nodeState[0] === nodeTypeEnum.none ? EMPTY_NODE_BORDER_COLOR : nodeColor}`
     };
 
-    if (draggingSelection === nodeTypeEnum.start || draggingSelection === nodeTypeEnum.target) {
-        nodeStyle.cursor = 'grabbing';
-    }
-    else if (draggingSelection === nodeTypeEnum.none && (nodeState[0] === nodeTypeEnum.start || nodeState[0] === nodeTypeEnum.target)) {
-        nodeStyle.cursor = 'grab';
+    if (!runningAlgo) {
+        if (draggingSelection === nodeTypeEnum.start || draggingSelection === nodeTypeEnum.target) {
+            nodeStyle.cursor = 'grabbing';
+        }
+        else if (draggingSelection === nodeTypeEnum.none && (nodeState[0] === nodeTypeEnum.start || nodeState[0] === nodeTypeEnum.target)) {
+            nodeStyle.cursor = 'grab';
+        }
     }
 
     const mouseDowned = () => {

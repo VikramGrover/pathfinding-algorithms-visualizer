@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/pathfinding-algorithms-visualizer/static/css/main.2bcff0e8.chunk.css",
-    "main.js": "/pathfinding-algorithms-visualizer/static/js/main.9fae2213.chunk.js",
-    "main.js.map": "/pathfinding-algorithms-visualizer/static/js/main.9fae2213.chunk.js.map",
+    "main.js": "/pathfinding-algorithms-visualizer/static/js/main.8b7de8b5.chunk.js",
+    "main.js.map": "/pathfinding-algorithms-visualizer/static/js/main.8b7de8b5.chunk.js.map",
     "runtime-main.js": "/pathfinding-algorithms-visualizer/static/js/runtime-main.7d7e4c7f.js",
     "runtime-main.js.map": "/pathfinding-algorithms-visualizer/static/js/runtime-main.7d7e4c7f.js.map",
-    "static/js/2.b5190356.chunk.js": "/pathfinding-algorithms-visualizer/static/js/2.b5190356.chunk.js",
-    "static/js/2.b5190356.chunk.js.map": "/pathfinding-algorithms-visualizer/static/js/2.b5190356.chunk.js.map",
+    "static/js/2.44d0739c.chunk.js": "/pathfinding-algorithms-visualizer/static/js/2.44d0739c.chunk.js",
+    "static/js/2.44d0739c.chunk.js.map": "/pathfinding-algorithms-visualizer/static/js/2.44d0739c.chunk.js.map",
     "static/js/3.ca7d9bf7.chunk.js": "/pathfinding-algorithms-visualizer/static/js/3.ca7d9bf7.chunk.js",
     "static/js/3.ca7d9bf7.chunk.js.map": "/pathfinding-algorithms-visualizer/static/js/3.ca7d9bf7.chunk.js.map",
     "index.html": "/pathfinding-algorithms-visualizer/index.html",
     "static/css/main.2bcff0e8.chunk.css.map": "/pathfinding-algorithms-visualizer/static/css/main.2bcff0e8.chunk.css.map",
-    "static/js/2.b5190356.chunk.js.LICENSE.txt": "/pathfinding-algorithms-visualizer/static/js/2.b5190356.chunk.js.LICENSE.txt",
+    "static/js/2.44d0739c.chunk.js.LICENSE.txt": "/pathfinding-algorithms-visualizer/static/js/2.44d0739c.chunk.js.LICENSE.txt",
     "static/media/close.494fd48f.svg": "/pathfinding-algorithms-visualizer/static/media/close.494fd48f.svg",
     "static/media/down_arrow.8fed4a28.svg": "/pathfinding-algorithms-visualizer/static/media/down_arrow.8fed4a28.svg",
     "static/media/index.css": "/pathfinding-algorithms-visualizer/static/media/eraser.2fb14725.svg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7d7e4c7f.js",
-    "static/js/2.b5190356.chunk.js",
+    "static/js/2.44d0739c.chunk.js",
     "static/css/main.2bcff0e8.chunk.css",
-    "static/js/main.9fae2213.chunk.js"
+    "static/js/main.8b7de8b5.chunk.js"
   ]
 }
