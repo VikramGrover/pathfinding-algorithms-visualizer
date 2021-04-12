@@ -1,4 +1,4 @@
-import { algoFunctions, nodeTypeEnum } from '../utils/constants.js'
+import { algoFunctions, nodeTypeEnum, algoSleepTimes } from '../utils/constants.js'
 import { sleep } from '../utils/helper.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
@@ -13,7 +13,7 @@ const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCor
 
         let path = [];
         let timeout = 5;
-        path = await algoFunctions[selectedAlgo](startCord, targetCord, gridState, rows, cols, timeout);
+        path = await algoFunctions[selectedAlgo](startCord, targetCord, gridState, rows, cols, algoSleepTimes[selectedAlgo]);
 
         console.log("ENDED: ", selectedAlgo);
 

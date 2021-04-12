@@ -52,11 +52,9 @@ const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth, isAlgoSe
                 {selectedVal}
                 {!disabled && <img className="down-arrow" src={downArrow} alt=""></img>}
             </div>
-            {dropDownOpen &&
-                <div className='dropdown-list'>
-                    {dropdownItems}
-                </div>
-            }
+            <div style={{ display: (dropDownOpen ? 'flex' : 'none') }} className='dropdown-list'>
+                {dropdownItems}
+            </div>
         </div >
     )
 }

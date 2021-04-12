@@ -299,6 +299,7 @@ code {
   text-rendering: optimizeLegibility;
   white-space: nowrap;
   height: auto;
+  margin-top: -1px;
 }
 
 .dropdown-list-item.selected {

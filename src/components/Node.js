@@ -11,7 +11,7 @@ const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelect
     }, []);
 
     const nodeColor = getNodeColor(nodeState);
-    const nodeStyle = {
+    let nodeStyle = {
         width: size,
         height: size,
         backgroundColor: nodeColor,
@@ -20,6 +20,9 @@ const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelect
 
     if (draggingSelection === nodeTypeEnum.start || draggingSelection === nodeTypeEnum.target) {
         nodeStyle.cursor = 'grabbing';
+    }
+    else if (draggingSelection === nodeTypeEnum.none && (nodeState[0] === nodeTypeEnum.start || nodeState[0] === nodeTypeEnum.target)) {
+        nodeStyle.cursor = 'grab';
     }
 
     const mouseDowned = () => {
