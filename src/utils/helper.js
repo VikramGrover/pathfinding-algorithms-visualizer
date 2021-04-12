@@ -1,10 +1,10 @@
 import { nodeTypeEnum, unweightedPathAlgos, optimalPathAlgos, nodeColors } from './constants.js'
 
 export const getNodeColor = (nodeState) => {
-    if ((nodeState[0] === nodeTypeEnum.visited || nodeState[0] === nodeTypeEnum.visiting || nodeState[0] === nodeTypeEnum.path) && nodeState[1] > nodeTypeEnum.wall) {
+    if ((nodeState[0] === nodeTypeEnum.visited || nodeState[0] === nodeTypeEnum.visiting) && nodeState[1] > nodeTypeEnum.wall) {
         let colorA = nodeColors[nodeState[0]];
         const colorB = nodeColors[nodeState[1]];
-        let amount = 0.73;
+        let amount = 0.78;
 
         if (nodeState[0] === nodeTypeEnum.visiting) {
             colorA = nodeColors[nodeTypeEnum.visited];
@@ -76,3 +76,7 @@ export const isAlgoUnweighted = (algo) => {
 export const isAlgoOptimal = (algo) => {
     return optimalPathAlgos.includes(algo);
 };
+
+export const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

@@ -1,7 +1,7 @@
-import { getNeighbourNodes, createPath, findMinPriorityNode } from '../../utils/helper.js'
+import { getNeighbourNodes, createPath, findMinPriorityNode, sleep } from '../../utils/helper.js'
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
-export const dijkstras = (startCord, targetCord, gridState, rows, cols, timeout) => {
+export const dijkstras = async (startCord, targetCord, gridState, rows, cols, timeout) => {
     let totalCosts = {};
     let prevNodes = {};
     let minPQ = {};
@@ -27,9 +27,9 @@ export const dijkstras = (startCord, targetCord, gridState, rows, cols, timeout)
 
         if (minKey !== startCord && minKey !== targetCord) {
             const nodeStateFunc = gridState[minKey][1];
-            setTimeout(() => {
-                nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
-            }, timeout);
+            // setTimeout(() => {
+            nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
+            // }, timeout);
         }
         else if (minKey === targetCord) {
             return createPath(startCord, targetCord, prevNodes);
@@ -49,12 +49,14 @@ export const dijkstras = (startCord, targetCord, gridState, rows, cols, timeout)
                 minPQ[neighbour] = currPath;
                 if (neighbour !== targetCord) {
                     const nodeStateFunc = gridState[neighbour][1];
-                    setTimeout(() => {
-                        nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
-                    }, timeout);
+                    // setTimeout(() => {
+                    nodeStateFunc(prevState => ([nodeTypeEnum.visiting, ...prevState]));
+                    // }, timeout);
                 }
             }
         }
+
+        await sleep(timeout);
     }
 
     return [];

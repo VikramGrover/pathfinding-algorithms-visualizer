@@ -1,4 +1,5 @@
 import { algoFunctions, nodeTypeEnum } from '../utils/constants.js'
+import { sleep } from '../utils/helper.js'
 
 const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCord, targetCord, clearForReRun, runningAlgo, setRunningAlgo }) => {
     const run = async () => {
@@ -11,21 +12,20 @@ const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCor
         console.log("STARTING: ", selectedAlgo);
 
         let path = [];
-        let timeout = 1;
-        path = algoFunctions[selectedAlgo](startCord, targetCord, gridState, rows, cols, timeout);
+        let timeout = 5;
+        path = await algoFunctions[selectedAlgo](startCord, targetCord, gridState, rows, cols, timeout);
 
         console.log("ENDED: ", selectedAlgo);
 
         for (let i = path.length - 1; i >= 0; i--) {
+            await sleep(timeout);
             const nodeStateFunc = gridState[path[i]][1];
-            setTimeout(() => {
-                nodeStateFunc(prevState => ([nodeTypeEnum.path, ...gridState[path[i]][0]]));
-            }, timeout);
+            // setTimeout(() => {
+            nodeStateFunc(prevState => ([nodeTypeEnum.path, ...gridState[path[i]][0]]));
+            // }, timeout);
         }
 
-        setTimeout(() => {
-            setRunningAlgo(false);
-        }, timeout);
+        setRunningAlgo(false);
     };
 
     return (
