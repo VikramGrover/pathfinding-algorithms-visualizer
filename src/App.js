@@ -57,6 +57,10 @@ function App() {
         if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (nodeState[1] <= nodeTypeEnum.visiting)) {
           nodeState.splice(1, 1);
         }
+        else if (currState <= nodeTypeEnum.visiting) {
+          nodeState.splice(0, 1);
+        }
+
         nodeStateFunc(prevState => nodeState);
       }
     }

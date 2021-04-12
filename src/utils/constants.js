@@ -20,6 +20,7 @@ const algoFunctions = {
 }
 Object.freeze(algoFunctions);
 
+const PATH_CREATION_SLEEP = 5;
 const algoSleepTimes = {
     [DIJKSTRAS]: 2,
     [ASTAR]: 2,
@@ -29,7 +30,7 @@ const algoSleepTimes = {
 }
 Object.freeze(algoSleepTimes);
 
-export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST, algoFunctions, algoSleepTimes };
+export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST, algoFunctions, PATH_CREATION_SLEEP, algoSleepTimes };
 
 const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST];
 Object.freeze(allPathAlgos);

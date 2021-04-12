@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { EMPTY_NODE_BORDER_COLOR, nodeColors, nodeTypeEnum } from '../utils/constants.js'
+import { EMPTY_NODE_BORDER_COLOR, nodeTypeEnum } from '../utils/constants.js'
 import { getNodeColor } from '../utils/helper.js'
 
 const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelection, setStartCord, setTargetCord, runningAlgo, selectedObstacle, startingState }) => {
