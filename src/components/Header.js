@@ -4,7 +4,7 @@ import ChooseAlgorithm from './ChooseAlgorithm.js'
 import ChooseTerrain from './ChooseTerrain.js'
 import ChooseObstacle from './ChooseObstacle.js'
 
-const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, gridState, setGridState, startCord, targetCord, clearObstacles, clearPath, setSelectedObstacle, weightedObsDisabled, toggleInfoBox, selectedAlgo, setSelectedAlgo }) => {
+const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, gridState, setGridState, startCord, targetCord, clearObstacles, clearPath, setSelectedObstacle, weightedObsDisabled, toggleInfoBox, selectedAlgo, setSelectedAlgo, resetGrid }) => {
     const style = {
         padding: padding,
         paddingBottom: padding / 2,
@@ -15,9 +15,9 @@ const Header = ({ rows, cols, runningAlgo, setRunningAlgo, padding, height, grid
         <div style={style} className='header'>
             <Reset clearObstacles={clearObstacles} runningAlgo={runningAlgo} />
             <Clear clearPath={clearPath} runningAlgo={runningAlgo} />
-            <ChooseAlgorithm rows={rows} cols={cols} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearPath} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} dropDownWidth={250} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} setSelectedAlgo={setSelectedAlgo} />
+            <ChooseAlgorithm rows={rows} cols={cols} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearPath} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} dropDownWidth={220} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} setSelectedAlgo={setSelectedAlgo} />
             <ChooseObstacle setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} dropDownWidth={190} />
-            <ChooseTerrain rows={rows} cols={cols} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearPath} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} dropDownWidth={150} />
+            <ChooseTerrain rows={rows} cols={cols} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} resetGrid={resetGrid} dropDownWidth={200} />
         </div>
     )
 }

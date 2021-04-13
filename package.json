@@ -1,6 +1,6 @@
 {
   "homepage": "https://vikramgrover.github.io/pathfinding-algorithms-visualizer/",
-  "name": "path-finding-visualizer",
+  "name": "pathfinding-algorithms-visualizer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

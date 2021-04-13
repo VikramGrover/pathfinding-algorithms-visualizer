@@ -166,7 +166,7 @@ code {
 
 .choose-algo::before {
   position: absolute;
-  content: "algorithm";
+  content: "pathfinding algorithms";
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
@@ -309,7 +309,7 @@ code {
 
 .choose-terrain::before {
   position: absolute;
-  content: "terrain";
+  content: "mazes / patterns";
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;
@@ -345,7 +345,7 @@ code {
 
 .choose-obstacle::before {
   position: absolute;
-  content: "obstacle (weight)";
+  content: "obstacles (weight)";
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
   font-size: var(--secondary-font-size);
   font-weight: 600;

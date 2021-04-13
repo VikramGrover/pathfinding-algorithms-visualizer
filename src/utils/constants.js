@@ -3,6 +3,7 @@ import { dfs } from '../algorithms/path_finding/dfs.js'
 import { bfs } from '../algorithms/path_finding/bfs.js'
 import { aStar } from '../algorithms/path_finding/aStar.js'
 import { bestFirst } from '../algorithms/path_finding/bestFirst.js';
+import { recursiveDivision } from '../algorithms/terrain/recursiveDivision.js'
 
 // PATHFINDING ALGORITHM CONSTANTS -------------------------------------------
 const DIJKSTRAS = "Dijkstra's";
@@ -42,12 +43,18 @@ Object.freeze(optimalPathAlgos);
 export { allPathAlgos, unweightedPathAlgos, optimalPathAlgos };
 
 // TERRAIN ALGORTHIM CONSTANTS -------------------------------------------
-const ALGO1 = "ALGO 1";
+const MAZE_GENERATION_SLEEP = 5;
+const RECURSIVE_DIVISION = "Recursive Division";
 const ALGO2 = "ALGO 2";
-const terrainAlgos = [ALGO1, ALGO2];
+const terrainAlgos = [RECURSIVE_DIVISION, ALGO2];
 Object.freeze(terrainAlgos);
 
-export { ALGO1, ALGO2, terrainAlgos };
+const terrainFunctions = {
+    [RECURSIVE_DIVISION]: recursiveDivision
+};
+Object.freeze(terrainFunctions);
+
+export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, ALGO2, terrainAlgos, terrainFunctions };
 
 const pathfindingAlgoInfo = {
     [DIJKSTRAS]: {
