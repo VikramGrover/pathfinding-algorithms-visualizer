@@ -41,8 +41,8 @@ function App() {
     setRunningAlgo(false);
     setRows(currRows);
     setCols(currCols);
-    setStartCord('0:0');
-    setTargetCord(`${currRows - 1}:${currCols - 1}`);
+    setStartCord('1:1');
+    setTargetCord(`${currRows - 2}:${currCols - 2}`);
   };
 
   const clearPath = () => {
@@ -123,13 +123,13 @@ function App() {
   };
 
   const resetGrid = () => {
+    let gridMap = {};
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
         let nodeState = gridState[id][0];
         let nodeStateFunc = gridState[id][1];
         let currState = nodeState[0];
-
         let newState = [nodeTypeEnum.none];
 
         if (currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) {
@@ -137,9 +137,11 @@ function App() {
         }
 
         nodeStateFunc(prev => newState);
-        setGridState(prevState => ({ ...prevState, [id]: [newState, prevState[id][1]] }));
+        gridMap[id] = [newState, nodeStateFunc];
       }
     }
+
+    setGridState(prevState => gridMap);
   };
 
   const toggleInfoBox = () => {

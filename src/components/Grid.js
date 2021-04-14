@@ -14,10 +14,10 @@ const Grid = React.memo(({ rows, cols, padding, nodeSize, setGridState, selected
             let nodeId = `${x}:${y}`
 
             let startingState = [nodeTypeEnum.none];
-            if (x === 0 && y === 0) {
+            if (x === 1 && y === 1) {
                 startingState.unshift(nodeTypeEnum.start);
             }
-            else if (x === (rows - 1) && y === (cols - 1)) {
+            else if (x === (rows - 2) && y === (cols - 2)) {
                 startingState.unshift(nodeTypeEnum.target);
             }
 
