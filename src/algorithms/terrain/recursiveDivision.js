@@ -73,16 +73,7 @@ const divide = async (startCord, targetCord, gridState, setGridState, startRow, 
                 continue;
             }
             const currCord = `${randRow}:${i}`;
-            const nodeStateFunc = gridState[currCord][1];
-            let state = [nodeTypeEnum.wall, nodeTypeEnum.none];
-            if (currCord === startCord) {
-                state = [nodeTypeEnum.start, nodeTypeEnum.wall, nodeTypeEnum.none];
-            }
-            else if (currCord === targetCord) {
-                state = [nodeTypeEnum.target, nodeTypeEnum.wall, nodeTypeEnum.none];
-            }
-            nodeStateFunc(prevState => state);
-            setGridState(prevState => ({ ...prevState, [currCord]: [state, prevState[currCord][1]] }));
+            setWall(currCord, startCord, targetCord, gridState, setGridState);
             await sleep(timeout);
         }
 
@@ -112,16 +103,7 @@ const divide = async (startCord, targetCord, gridState, setGridState, startRow, 
                 continue;
             }
             const currCord = `${i}:${randCol}`;
-            const nodeStateFunc = gridState[currCord][1];
-            let state = [nodeTypeEnum.wall, nodeTypeEnum.none];
-            if (currCord === startCord) {
-                state = [nodeTypeEnum.start, nodeTypeEnum.wall, nodeTypeEnum.none];
-            }
-            else if (currCord === targetCord) {
-                state = [nodeTypeEnum.target, nodeTypeEnum.wall, nodeTypeEnum.none];
-            }
-            nodeStateFunc(prevState => state);
-            setGridState(prevState => ({ ...prevState, [currCord]: [state, prevState[currCord][1]] }));
+            setWall(currCord, startCord, targetCord, gridState, setGridState);
             await sleep(timeout);
         }
 
