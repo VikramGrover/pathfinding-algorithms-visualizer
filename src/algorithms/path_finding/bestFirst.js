@@ -1,5 +1,5 @@
 import { getNeighbourNodes, createPath, findMinPriorityNode, sleep } from '../../utils/helper.js'
-import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
+import { nodeTypeEnum } from '../../utils/constants.js'
 
 export const bestFirst = async (startCord, targetCord, gridState, rows, cols, timeout) => {
     let openSet = { [startCord]: 0 };
@@ -44,7 +44,7 @@ export const bestFirst = async (startCord, targetCord, gridState, rows, cols, ti
                 }
                 // newly calculated G score of neighbour is lower than the one in the table
                 // update all the scores
-                H[neighbour] = h(neighbour, targetCord) + nodeWeight[gridState[neighbour][0][0]];
+                H[neighbour] = h(neighbour, targetCord);
                 F[neighbour] = H[neighbour];
                 prevNodes[neighbour] = currNode;
                 openSet[neighbour] = F[neighbour];
@@ -69,5 +69,5 @@ const h = (currNodeCord, targetCord) => {
     const targetRow = parseInt(targetCord.split(':')[0]);
     const targetCol = parseInt(targetCord.split(':')[1]);
 
-    return Math.abs(currRow - targetRow) + Math.abs(currCol - targetCol);
+    return Math.sqrt(Math.pow(currRow - targetRow, 2) + Math.pow(currCol - targetCol, 2));
 };

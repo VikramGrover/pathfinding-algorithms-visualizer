@@ -71,5 +71,5 @@ const h = (currNodeCord, targetCord) => {
     const targetRow = parseInt(targetCord.split(':')[0]);
     const targetCol = parseInt(targetCord.split(':')[1]);
 
-    return Math.abs(currRow - targetRow) + Math.abs(currCol - targetCol);
+    return Math.sqrt(Math.pow(currRow - targetRow, 2) + Math.pow(currCol - targetCol, 2));
 };

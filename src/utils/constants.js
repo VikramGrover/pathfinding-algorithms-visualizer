@@ -38,7 +38,7 @@ export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST, algoFunctions, PATH_CREATION_SL
 
 const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST];
 Object.freeze(allPathAlgos);
-const unweightedPathAlgos = [DFS, BFS];
+const unweightedPathAlgos = [DFS, BFS, BEST_FIRST];
 Object.freeze(unweightedPathAlgos);
 const optimalPathAlgos = [DIJKSTRAS, ASTAR, BFS];
 Object.freeze(optimalPathAlgos);
