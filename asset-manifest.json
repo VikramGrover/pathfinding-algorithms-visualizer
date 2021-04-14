@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/pathfinding-algorithms-visualizer/static/css/main.37531a72.chunk.css",
-    "main.js": "/pathfinding-algorithms-visualizer/static/js/main.f06c72b7.chunk.js",
-    "main.js.map": "/pathfinding-algorithms-visualizer/static/js/main.f06c72b7.chunk.js.map",
+    "main.css": "/pathfinding-algorithms-visualizer/static/css/main.fb843c00.chunk.css",
+    "main.js": "/pathfinding-algorithms-visualizer/static/js/main.2127705a.chunk.js",
+    "main.js.map": "/pathfinding-algorithms-visualizer/static/js/main.2127705a.chunk.js.map",
     "runtime-main.js": "/pathfinding-algorithms-visualizer/static/js/runtime-main.8e2e783e.js",
     "runtime-main.js.map": "/pathfinding-algorithms-visualizer/static/js/runtime-main.8e2e783e.js.map",
     "static/js/2.7a3db69f.chunk.js": "/pathfinding-algorithms-visualizer/static/js/2.7a3db69f.chunk.js",
@@ -10,11 +10,11 @@
     "static/js/3.b81daef8.chunk.js": "/pathfinding-algorithms-visualizer/static/js/3.b81daef8.chunk.js",
     "static/js/3.b81daef8.chunk.js.map": "/pathfinding-algorithms-visualizer/static/js/3.b81daef8.chunk.js.map",
     "index.html": "/pathfinding-algorithms-visualizer/index.html",
-    "static/css/main.37531a72.chunk.css.map": "/pathfinding-algorithms-visualizer/static/css/main.37531a72.chunk.css.map",
+    "static/css/main.fb843c00.chunk.css.map": "/pathfinding-algorithms-visualizer/static/css/main.fb843c00.chunk.css.map",
     "static/js/2.7a3db69f.chunk.js.LICENSE.txt": "/pathfinding-algorithms-visualizer/static/js/2.7a3db69f.chunk.js.LICENSE.txt",
     "static/media/close.494fd48f.svg": "/pathfinding-algorithms-visualizer/static/media/close.494fd48f.svg",
     "static/media/down_arrow.8fed4a28.svg": "/pathfinding-algorithms-visualizer/static/media/down_arrow.8fed4a28.svg",
-    "static/media/index.css": "/pathfinding-algorithms-visualizer/static/media/eraser.2fb14725.svg",
+    "static/media/index.css": "/pathfinding-algorithms-visualizer/static/media/pencil.223fa26b.svg",
     "static/media/optimal.5649a19a.svg": "/pathfinding-algorithms-visualizer/static/media/optimal.5649a19a.svg",
     "static/media/optimal_unfilled.e461ee2c.svg": "/pathfinding-algorithms-visualizer/static/media/optimal_unfilled.e461ee2c.svg",
     "static/media/weight.e51e9729.svg": "/pathfinding-algorithms-visualizer/static/media/weight.e51e9729.svg",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.8e2e783e.js",
     "static/js/2.7a3db69f.chunk.js",
-    "static/css/main.37531a72.chunk.css",
-    "static/js/main.f06c72b7.chunk.js"
+    "static/css/main.fb843c00.chunk.css",
+    "static/js/main.2127705a.chunk.js"
   ]
 }
