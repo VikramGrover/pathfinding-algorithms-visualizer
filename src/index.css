@@ -69,6 +69,10 @@ code {
   cursor: url(./images/eraser.svg), auto;
 }
 
+.ready-to-draw {
+  cursor: url(./images/pencil.svg), auto;
+}
+
 /* HEADER */
 .header {
   z-index: 3;

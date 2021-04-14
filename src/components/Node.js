@@ -86,7 +86,8 @@ const Node = ({ nodeId, size, setGridState, draggingSelection, setDraggingSelect
     };
 
     return (
-        <div style={nodeStyle} className={`node ${draggingSelection === nodeTypeEnum.remObstacle && 'erasing'}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
+        <div style={nodeStyle} className={`node ${((nodeState[0] >= nodeTypeEnum.wall && draggingSelection === nodeTypeEnum.none) || draggingSelection === nodeTypeEnum.remObstacle) && 'erasing'}
+        ${draggingSelection !== nodeTypeEnum.remObstacle && (nodeState[0] <= nodeTypeEnum.none || draggingSelection >= nodeTypeEnum.wall) && !runningAlgo && 'ready-to-draw'}`} onMouseDown={runningAlgo ? null : mouseDowned} onMouseUp={runningAlgo ? null : mouseUped} onMouseEnter={runningAlgo ? null : mouseEntered} onMouseLeave={runningAlgo ? null : mouseLeft} >
         </div>
     );
 };
