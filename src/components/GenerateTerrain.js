@@ -1,4 +1,4 @@
-import { terrainFunctions, MAZE_GENERATION_SLEEP } from '../utils/constants.js'
+import { terrainFunctions, terrainAlgoSleepTimes } from '../utils/constants.js'
 
 const GenerateTerrain = ({ rows, cols, selectedTerrainAlgo, gridState, setGridState, startCord, targetCord, runningAlgo, setRunningAlgo, resetGrid }) => {
     const run = async () => {
@@ -7,7 +7,7 @@ const GenerateTerrain = ({ rows, cols, selectedTerrainAlgo, gridState, setGridSt
         setRunningAlgo(true);
         console.log("STARTING: ", selectedTerrainAlgo);
 
-        await terrainFunctions[selectedTerrainAlgo](startCord, targetCord, gridState, setGridState, rows, cols, MAZE_GENERATION_SLEEP);
+        await terrainFunctions[selectedTerrainAlgo](startCord, targetCord, gridState, setGridState, rows, cols, terrainAlgoSleepTimes[selectedTerrainAlgo]);
 
         console.log("ENDED: ", selectedTerrainAlgo);
         setRunningAlgo(false);

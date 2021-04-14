@@ -56,7 +56,13 @@ const terrainFunctions = {
 };
 Object.freeze(terrainFunctions);
 
-export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, PERLIN_NOISE, terrainAlgos, terrainFunctions };
+const terrainAlgoSleepTimes = {
+    [RECURSIVE_DIVISION]: 5,
+    [PERLIN_NOISE]: 1
+};
+Object.freeze(terrainAlgoSleepTimes);
+
+export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, PERLIN_NOISE, terrainAlgos, terrainFunctions, terrainAlgoSleepTimes };
 
 const pathfindingAlgoInfo = {
     [DIJKSTRAS]: {

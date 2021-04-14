@@ -126,33 +126,33 @@ const simplex2 = (xin, yin) => {
 const SCALE = 12;
 export const perlinNoise = async (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
     seed(Math.random());
-
-    for (let x = 0; x < rows; x++) {
-        for (let y = 0; y < cols; y++) {
+    let gridMap = {};
+    for (let x = 0; x < cols; x++) {
+        for (let y = 0; y < rows; y++) {
             // All noise functions return values in the range of -1 to 1.
-            const currCord = `${x}:${y}`;
+            const currCord = `${y}:${x}`;
             const nodeStateFunc = gridState[currCord][1];
 
             // noise.simplex2 and noise.perlin2 for 2d noise
             let value = simplex2(x / SCALE, y / SCALE);
             const state = [nodeTypeEnum.none];
 
-            if (value >= -1 && value <= -0.66) {
+            if (value >= -1 && value <= -0.50) {
                 state.unshift(nodeTypeEnum.wall);
             }
-            else if (value > -0.66 && value <= -0.33) {
+            else if (value > -0.50 && value <= -0.20) {
                 state.unshift(nodeTypeEnum.weighted100);
             }
-            else if (value > -0.33 && value <= 0) {
+            else if (value > -0.20 && value <= 0.10) {
                 state.unshift(nodeTypeEnum.weighted80);
             }
-            else if (value > 0 && value <= 0.33) {
+            else if (value > 0.10 && value <= 0.40) {
                 state.unshift(nodeTypeEnum.weighted60);
             }
-            else if (value > 0.33 && value <= 0.66) {
+            else if (value > 0.40 && value <= 0.70) {
                 state.unshift(nodeTypeEnum.weighted40);
             }
-            else if (value > 0.66 && value <= 1) {
+            else if (value > 0.70 && value <= 1) {
                 state.unshift(nodeTypeEnum.weighted20);
             }
 
@@ -164,8 +164,10 @@ export const perlinNoise = async (startCord, targetCord, gridState, setGridState
             }
 
             nodeStateFunc(prevState => state);
-            setGridState(prevState => ({ ...prevState, [currCord]: [state, prevState[currCord][1]] }));
+            gridMap[currCord] = [state, nodeStateFunc];
             await sleep(timeout);
         }
     }
+
+    setGridState(prevState => gridMap);
 };
