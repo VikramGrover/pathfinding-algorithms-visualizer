@@ -75,7 +75,7 @@ code {
   position: relative;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-evenly
+  justify-content: space-evenly;
 }
 
 /* BUTTON */
