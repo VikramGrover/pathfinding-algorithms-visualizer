@@ -1,5 +1,4 @@
 import { nodeTypeEnum } from "../../utils/constants";
-import { sleep } from "../../utils/helper";
 
 function Grad(x, y, z) {
     this.x = x; this.y = y; this.z = z;
@@ -165,7 +164,6 @@ export const perlinNoise = async (startCord, targetCord, gridState, setGridState
 
             nodeStateFunc(prevState => state);
             gridMap[currCord] = [state, nodeStateFunc];
-            await sleep(timeout);
         }
     }
 
