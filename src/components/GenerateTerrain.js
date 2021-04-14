@@ -2,7 +2,7 @@ import { terrainFunctions, terrainAlgoSleepTimes } from '../utils/constants.js'
 
 const GenerateTerrain = ({ rows, cols, selectedTerrainAlgo, gridState, setGridState, startCord, targetCord, runningAlgo, setRunningAlgo, resetGrid }) => {
     const run = async () => {
-        resetGrid();
+        await resetGrid();
 
         setRunningAlgo(true);
         console.log("STARTING: ", selectedTerrainAlgo);

@@ -5,6 +5,8 @@ import { aStar } from '../algorithms/path_finding/aStar.js'
 import { bestFirst } from '../algorithms/path_finding/bestFirst.js';
 import { recursiveDivision } from '../algorithms/terrain/recursiveDivision.js'
 import { perlinNoise } from '../algorithms/terrain/perlin.js'
+import { random } from '../algorithms/terrain/random.js';
+import { randomWeighted } from '../algorithms/terrain/randomWeighted.js';
 
 // PATHFINDING ALGORITHM CONSTANTS -------------------------------------------
 const DIJKSTRAS = "Dijkstra's";
@@ -47,22 +49,31 @@ export { allPathAlgos, unweightedPathAlgos, optimalPathAlgos };
 const MAZE_GENERATION_SLEEP = 5;
 const RECURSIVE_DIVISION = "Recursive Division";
 const PERLIN_NOISE = "Perlin Noise";
-const terrainAlgos = [RECURSIVE_DIVISION, PERLIN_NOISE];
-Object.freeze(terrainAlgos);
+const RANDOM_UNWEIGHTED = "Random";
+const RANDOM_WEIGHTED = "Random (Weighted)"
+const allTerrainAlgos = [RECURSIVE_DIVISION, PERLIN_NOISE, RANDOM_UNWEIGHTED, RANDOM_WEIGHTED];
+Object.freeze(allTerrainAlgos);
+
+const unweightedTerrainAlgos = [RECURSIVE_DIVISION, RANDOM_UNWEIGHTED];
+Object.freeze(unweightedTerrainAlgos);
 
 const terrainFunctions = {
     [RECURSIVE_DIVISION]: recursiveDivision,
-    [PERLIN_NOISE]: perlinNoise
+    [PERLIN_NOISE]: perlinNoise,
+    [RANDOM_UNWEIGHTED]: random,
+    [RANDOM_WEIGHTED]: randomWeighted,
 };
 Object.freeze(terrainFunctions);
 
 const terrainAlgoSleepTimes = {
     [RECURSIVE_DIVISION]: 5,
-    [PERLIN_NOISE]: 1
+    [PERLIN_NOISE]: 1,
+    [RANDOM_UNWEIGHTED]: 1,
+    [RANDOM_WEIGHTED]: 1
 };
 Object.freeze(terrainAlgoSleepTimes);
 
-export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, PERLIN_NOISE, terrainAlgos, terrainFunctions, terrainAlgoSleepTimes };
+export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, PERLIN_NOISE, allTerrainAlgos, unweightedTerrainAlgos, terrainFunctions, terrainAlgoSleepTimes };
 
 const pathfindingAlgoInfo = {
     [DIJKSTRAS]: {

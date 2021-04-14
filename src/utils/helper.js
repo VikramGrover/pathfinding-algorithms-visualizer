@@ -1,4 +1,4 @@
-import { nodeTypeEnum, unweightedPathAlgos, optimalPathAlgos, nodeColors } from './constants.js'
+import { nodeTypeEnum, unweightedPathAlgos, optimalPathAlgos, nodeColors, unweightedTerrainAlgos } from './constants.js'
 
 export const getNodeColor = (nodeState) => {
     if ((nodeState[0] === nodeTypeEnum.visited || nodeState[0] === nodeTypeEnum.visiting) && nodeState[1] > nodeTypeEnum.wall) {
@@ -71,6 +71,10 @@ export const findMinPriorityNode = (minPQ) => {
 
 export const isAlgoUnweighted = (algo) => {
     return unweightedPathAlgos.includes(algo);
+};
+
+export const isTerrainAlgoUnweighted = (algo) => {
+    return unweightedTerrainAlgos.includes(algo);
 };
 
 export const isAlgoOptimal = (algo) => {
