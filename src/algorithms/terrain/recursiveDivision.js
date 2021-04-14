@@ -6,23 +6,28 @@ const VERTICAL = 1;
 
 export const recursiveDivision = async (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
     // make border around the screen
-    for (var x = 0; x < rows; x++) {
-        for (var y = 0; y < cols; y++) {
-            const currCord = `${x}:${y}`;
-            const nodeStateFunc = gridState[currCord][1];
-            if (x === 0 || x === (rows - 1) || y === 0 || y === (cols - 1)) {
-                await sleep(timeout);
-                let state = [nodeTypeEnum.wall, nodeTypeEnum.none];
-                if (currCord === startCord) {
-                    state = [nodeTypeEnum.start, nodeTypeEnum.wall, nodeTypeEnum.none];
-                }
-                else if (currCord === targetCord) {
-                    state = [nodeTypeEnum.target, nodeTypeEnum.wall, nodeTypeEnum.none];
-                }
-                nodeStateFunc(prevState => state);
-                setGridState(prevState => ({ ...prevState, [currCord]: [state, prevState[currCord][1]] }));
-            }
-        }
+    for (let y = 0; y < cols; y++) {
+        const currCord = `${0}:${y}`;
+        setWall(currCord, startCord, targetCord, gridState, setGridState);
+        await sleep(timeout);
+    }
+
+    for (let y = 1; y < rows; y++) {
+        const currCord = `${y}:${cols - 1}`;
+        setWall(currCord, startCord, targetCord, gridState, setGridState);
+        await sleep(timeout);
+    }
+
+    for (let y = cols - 2; y >= 0; y--) {
+        const currCord = `${rows - 1}:${y}`;
+        setWall(currCord, startCord, targetCord, gridState, setGridState);
+        await sleep(timeout);
+    }
+
+    for (let y = rows - 2; y > 0; y--) {
+        const currCord = `${y}:${0}`;
+        setWall(currCord, startCord, targetCord, gridState, setGridState);
+        await sleep(timeout);
     }
 
     // await divide(1, 1, rows - 2, cols - 2, gridState, setGridState, timeout);
@@ -124,4 +129,19 @@ const divide = async (startCord, targetCord, gridState, setGridState, startRow, 
 
         await divide(startCord, targetCord, gridState, setGridState, startRow, endRow, randCol + 1, endCol, timeout, rows, cols);
     }
+};
+
+const setWall = (currCord, startCord, targetCord, gridState, setGridState) => {
+    const nodeStateFunc = gridState[currCord][1];
+
+    let state = [nodeTypeEnum.wall, nodeTypeEnum.none];
+    if (currCord === startCord) {
+        state = [nodeTypeEnum.start, nodeTypeEnum.wall, nodeTypeEnum.none];
+    }
+    else if (currCord === targetCord) {
+        state = [nodeTypeEnum.target, nodeTypeEnum.wall, nodeTypeEnum.none];
+    }
+
+    nodeStateFunc(prevState => state);
+    setGridState(prevState => ({ ...prevState, [currCord]: [state, prevState[currCord][1]] }));
 };

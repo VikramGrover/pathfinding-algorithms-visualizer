@@ -67,6 +67,8 @@ function App() {
   };
 
   const clearObstacles = () => {
+    let gridMap = {};
+    let updateGrid = false;
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
@@ -74,11 +76,14 @@ function App() {
         let nodeStateFunc = gridState[id][1];
         let currState = nodeState[0];
 
+        gridMap[id] = [nodeState, nodeStateFunc];
+
         // check under start and target node for obstacle
         if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (nodeState[1] >= nodeTypeEnum.wall)) {
+          updateGrid = true;
           nodeState.splice(1, 1);
           nodeStateFunc(prev => nodeState);
-          setGridState(prevState => ({ ...prevState, [id]: [nodeState, prevState[id][1]] }));
+          gridMap[id] = [nodeState, nodeStateFunc];
           continue;
         }
 
@@ -87,14 +92,21 @@ function App() {
         }
 
         if (currState >= nodeTypeEnum.wall) {
+          updateGrid = true;
           nodeStateFunc(prev => [nodeTypeEnum.none]);
-          setGridState(prevState => ({ ...prevState, [id]: [[nodeTypeEnum.none], prevState[id][1]] }));
+          gridMap[id] = [[nodeTypeEnum.none], nodeStateFunc];
         }
       }
+    }
+
+    if (updateGrid) {
+      setGridState(prevState => gridMap);
     }
   };
 
   const clearWeightedObstacles = () => {
+    let gridMap = {};
+    let updateGrid = false;
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;
@@ -102,11 +114,14 @@ function App() {
         let nodeStateFunc = gridState[id][1];
         let currState = nodeState[0];
 
+        gridMap[id] = [nodeState, nodeStateFunc];
+
         // check under start and target node for weighted obstacle
         if ((currState === nodeTypeEnum.start || currState === nodeTypeEnum.target) && (nodeState[1] > nodeTypeEnum.wall)) {
+          updateGrid = true;
           nodeState.splice(1, 1);
           nodeStateFunc(prev => nodeState);
-          setGridState(prevState => ({ ...prevState, [id]: [nodeState, prevState[id][1]] }));
+          gridMap[id] = [nodeState, nodeStateFunc];
           continue;
         }
 
@@ -115,10 +130,15 @@ function App() {
         }
 
         if (currState > nodeTypeEnum.wall) {
+          updateGrid = true;
           nodeStateFunc(prev => [nodeTypeEnum.none]);
-          setGridState(prevState => ({ ...prevState, [id]: [[nodeTypeEnum.none], prevState[id][1]] }));
+          gridMap[id] = [[nodeTypeEnum.none], nodeStateFunc];
         }
       }
+    }
+
+    if (updateGrid) {
+      setGridState(prevState => gridMap);
     }
   };
 
