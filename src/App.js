@@ -27,8 +27,8 @@ function App() {
   }, []);
 
   // useEffect(() => {
-  //   window.addEventListener("resize", resetBoard);
-  //   return () => window.removeEventListener("resize", resetBoard)
+  //   window.addEventListener("resize", resizeGrid);
+  //   return () => window.removeEventListener("resize", resizeGrid);
   // }, []);
 
   const initializeGrid = () => {

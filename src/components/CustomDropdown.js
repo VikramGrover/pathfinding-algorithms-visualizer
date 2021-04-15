@@ -13,7 +13,7 @@ const CustomDropdown = ({ setSelection, items, disabled, dropDownWidth, isAlgoSe
     const [selectedId, setSelectedId] = useState(0);
 
     useEffect(() => {
-        if (disabled) {
+        if (disabled && isObstacleSelector) {
             setSelectedVal(items[0]);
             setSelectedId(0);
             setDropDownOpen(false);

@@ -8,7 +8,7 @@ const ChooseAlgorithm = ({ rows, cols, gridState, setGridState, startCord, targe
 
     return (
         <div className={`choose-algo`}>
-            <CustomDropdown setSelection={setSelectedAlgo} items={allPathAlgos} disabled={false} dropDownWidth={dropDownWidth} isAlgoSelector={true} isObstacleSelector={false} />
+            <CustomDropdown setSelection={setSelectedAlgo} items={allPathAlgos} disabled={runningAlgo} dropDownWidth={dropDownWidth} isAlgoSelector={true} isObstacleSelector={false} />
             <ShowInfo toggleInfoBox={toggleInfoBox} />
             <Visualize rows={rows} cols={cols} selectedAlgo={selectedAlgo} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearForReRun={clearForReRun} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} />
         </div >
