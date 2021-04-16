@@ -15,7 +15,7 @@ const DIJKSTRAS = "Dijkstra's";
 const ASTAR = 'A* (A-Star)';
 const BFS = 'Breadth-first Search';
 const DFS = 'Depth-first Search';
-const BEST_FIRST = 'Best-first Search';
+const BEST_FIRST = 'Greedy Best-first Search';
 
 const algoFunctions = {
     [DIJKSTRAS]: dijkstras,
@@ -180,7 +180,8 @@ const inLineCodeBlockCustomStyle = {
     borderRadius: 4,
     padding: 4,
     display: 'inline',
-    color: 'white'
+    color: 'white',
+    fontWeight: 600
 };
 
 const pathfindingAlgoInfo = {
@@ -251,10 +252,93 @@ return`}
         </SyntaxHighlighter>
     },
     [BFS]: {
-        'summary': <h4>{BFS} is an <strong>uninformed</strong> search algorithm that is <strong>optimal</strong> in finding the shortest path only in <strong>unweighted</strong> graphs</h4>
+        'summary': <h4>{BFS} is an <strong>uninformed/blind</strong> search algorithm that gurantees finding the <strong>optimal (shortest)</strong> paths only in <strong>unweighted</strong> graphs</h4>,
+        'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
+            {`queue = [start_node]
+visited = { start_node: 1 }
+prev = {}
+
+while queue.len:
+    curr_node = queue.dequeue()
+    
+    for neighbour in curr_node.neighbours:
+        if neighbour in visited:
+            continue # skip nodes that are already visited
+        
+        prev[neighbour] = curr_node
+        queue.enqueue(neighbour)
+        visited[neighbour] = 1
+
+        if neighbour == target_node:
+            # we path to target_node
+            return create_path(prev)
+
+# no path found 
+return`}
+        </SyntaxHighlighter>
     },
     [DFS]: {
-        'summary': <h4>{DFS} is an <strong>uninformed</strong> search algorithm that is <strong>unoptimal</strong> in finding the shortest path, even in <strong>unweighted</strong> graphs</h4>
+        'summary': <h4>{DFS} is an <strong>uninformed/blind</strong> search algorithm that is <strong>unoptimal (may or may not find shortest path)</strong> and <strong>unweighted</strong></h4>,
+        'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
+            {`stack = [start_node]
+visited = { start_node: 1 }
+
+while stack.len:
+    curr_node = stack.pop()
+    stack.push(curr_node)
+
+    if curr_node == target_node:
+        return stack # our stack is the path to target_node
+    
+    flag = False
+    for neighbour in curr_node.neighbours:
+        if neighbour in visited:
+            continue # skip nodes that are already visited
+        
+        stack.push(neighbour)
+        visited[neighbour] = 1
+        flag = True
+
+    if flag:
+        # no neighbours that need to be visited, pop the node from stack
+        stack.pop()
+
+# no path found 
+return`}
+        </SyntaxHighlighter>
+    },
+    [BEST_FIRST]: {
+        'summary': <h4>{BEST_FIRST} is an <strong>informed</strong> and <strong>greedy</strong> pathfinding algorithm that is <strong>unoptimal</strong> (may or may not find the shortest paths) and <strong>unweighted</strong></h4>,
+        'description': <p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p>,
+        'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
+            {`min_pq = min_heap(start_node: 0)
+dist = { start_node: 0 }
+prev = {}
+
+for node in nodes:
+if node != start_node:
+    dist[node] = Infinity
+    min_pq[node] = Infinity
+        
+while min_pq.len:
+curr_node = min_pq.delete_min()
+
+if curr_node == target_node:
+    return create_path(prev) # found path to target
+    
+for neighbour in curr_node.neighbours:
+    new_cost = distance[curr_node] + 
+               edge(curr_node, neighbour).weight
+
+    if new_cost < dist[neighbour]:
+        # found better path, update the distance
+        dist[neighbour] = new_cost
+        min_pq[neighbour] = new_cost
+        prev[neighbour] = curr_node
+
+# no path found
+return`}
+        </SyntaxHighlighter>
     }
 };
 Object.freeze(pathfindingAlgoInfo);

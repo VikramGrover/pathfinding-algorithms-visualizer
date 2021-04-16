@@ -3,7 +3,6 @@ import { nodeTypeEnum } from '../../utils/constants.js'
 
 export const dfs = async (startCord, targetCord, gridState, rows, cols, timeout) => {
     const stack = [startCord];
-    const path = [];
     const visited = { [startCord]: 1 };
 
     while (stack.length > 0) {
@@ -20,7 +19,6 @@ export const dfs = async (startCord, targetCord, gridState, rows, cols, timeout)
         }
 
         if (currCord !== startCord) {
-            path.unshift(currCord);
             visited[currCord] = 1;
             const nodeStateFunc = gridState[currCord][1];
             nodeStateFunc(prevState => ([nodeTypeEnum.visited, nodeTypeEnum.none]));
