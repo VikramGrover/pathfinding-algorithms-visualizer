@@ -171,7 +171,8 @@ const codeBlockCustomStyle = {
     padding: 20,
     lineHeight: 1.5,
     maxHeight: 250,
-    marginTop: 7
+    marginTop: 7,
+    marginBottom: 0
 };
 
 const inLineCodeBlockCustomStyle = {
