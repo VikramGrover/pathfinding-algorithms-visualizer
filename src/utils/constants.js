@@ -4,7 +4,7 @@ import { bfs } from '../algorithms/path_finding/bfs.js'
 import { aStar } from '../algorithms/path_finding/aStar.js'
 import { bestFirst } from '../algorithms/path_finding/bestFirst.js';
 import { recursiveDivision } from '../algorithms/terrain/recursiveDivision.js'
-import { perlinNoise } from '../algorithms/terrain/perlin.js'
+import { simplexNoise } from '../algorithms/terrain/simplexNoise.js'
 import { random } from '../algorithms/terrain/random.js';
 import { randomWeighted } from '../algorithms/terrain/randomWeighted.js';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -50,10 +50,10 @@ export { allPathAlgos, unweightedPathAlgos, optimalPathAlgos };
 // TERRAIN ALGORTHIM CONSTANTS -------------------------------------------
 const MAZE_GENERATION_SLEEP = 5;
 const RECURSIVE_DIVISION = "Recursive Division";
-const PERLIN_NOISE = "Perlin Noise";
+const SIMPLEX_NOISE = "Simplex Noise";
 const RANDOM_UNWEIGHTED = "Random";
 const RANDOM_WEIGHTED = "Random (Weighted)"
-const allTerrainAlgos = [RECURSIVE_DIVISION, PERLIN_NOISE, RANDOM_UNWEIGHTED, RANDOM_WEIGHTED];
+const allTerrainAlgos = [RECURSIVE_DIVISION, SIMPLEX_NOISE, RANDOM_UNWEIGHTED, RANDOM_WEIGHTED];
 Object.freeze(allTerrainAlgos);
 
 const unweightedTerrainAlgos = [RECURSIVE_DIVISION, RANDOM_UNWEIGHTED];
@@ -61,7 +61,7 @@ Object.freeze(unweightedTerrainAlgos);
 
 const terrainFunctions = {
     [RECURSIVE_DIVISION]: recursiveDivision,
-    [PERLIN_NOISE]: perlinNoise,
+    [SIMPLEX_NOISE]: simplexNoise,
     [RANDOM_UNWEIGHTED]: random,
     [RANDOM_WEIGHTED]: randomWeighted,
 };
@@ -69,13 +69,13 @@ Object.freeze(terrainFunctions);
 
 const terrainAlgoSleepTimes = {
     [RECURSIVE_DIVISION]: 5,
-    [PERLIN_NOISE]: 1,
+    [SIMPLEX_NOISE]: 1,
     [RANDOM_UNWEIGHTED]: 1,
     [RANDOM_WEIGHTED]: 1
 };
 Object.freeze(terrainAlgoSleepTimes);
 
-export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, PERLIN_NOISE, allTerrainAlgos, unweightedTerrainAlgos, terrainFunctions, terrainAlgoSleepTimes };
+export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, SIMPLEX_NOISE, allTerrainAlgos, unweightedTerrainAlgos, terrainFunctions, terrainAlgoSleepTimes };
 
 // NODE CONSTANTS ------------------------------------------------------------
 const nodeTypeEnum = {

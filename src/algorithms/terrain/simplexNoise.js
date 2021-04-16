@@ -123,7 +123,7 @@ const simplex2 = (xin, yin) => {
 };
 
 const SCALE = 12;
-export const perlinNoise = async (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
+export const simplexNoise = async (startCord, targetCord, gridState, setGridState, rows, cols, timeout) => {
     seed(Math.random());
     let gridMap = {};
     for (let x = 0; x < cols; x++) {
