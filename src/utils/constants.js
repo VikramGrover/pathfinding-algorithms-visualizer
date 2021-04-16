@@ -187,7 +187,8 @@ const pathfindingAlgoInfo = {
     [DIJKSTRAS]: {
         'summary': <h4>{DIJKSTRAS} is a <strong>greedy</strong> pathfinding algorithm that is able find <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
         'description': null,
-        'pseudocode': `min_pq = min_heap(start_node: 0)
+        'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
+            {`min_pq = min_heap(start_node: 0)
 dist = { start_node: 0 }
 prev = {}
 
@@ -213,38 +214,41 @@ while min_pq.len:
             prev[neighbour] = curr_node
 
 # no path found
-return`
+return`}
+        </SyntaxHighlighter>
     },
     [ASTAR]: {
         'summary': <h4>{ASTAR} is an <strong>informed</strong> pathfinding algorithm that combines ideas from {DIJKSTRAS} and {BEST_FIRST} to guarantee <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
         'description': <p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = g(node) + h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>g(node)</SyntaxHighlighter> is the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> and <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p>,
-        'pseudocode': `min_pq = min_heap(start_node: 0)
+        'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
+            {`min_pq = min_heap(start_node: 0)
 dist = { start_node: 0 }
 prev = {}
 
 for node in nodes:
-    if node != start_node:
-        dist[node] = Infinity
-        min_pq[node] = Infinity
-            
-while min_pq.len:
-    curr_node = min_pq.delete_min()
-    
-    if curr_node == target_node:
-        return create_path(prev) # found path to target
+if node != start_node:
+    dist[node] = Infinity
+    min_pq[node] = Infinity
         
-    for neighbour in curr_node.neighbours:
-        new_cost = distance[curr_node] + 
-                   edge(curr_node, neighbour).weight
+while min_pq.len:
+curr_node = min_pq.delete_min()
 
-        if new_cost < dist[neighbour]:
-            # found better path, update the distance
-            dist[neighbour] = new_cost
-            min_pq[neighbour] = new_cost
-            prev[neighbour] = curr_node
+if curr_node == target_node:
+    return create_path(prev) # found path to target
+    
+for neighbour in curr_node.neighbours:
+    new_cost = distance[curr_node] + 
+               edge(curr_node, neighbour).weight
+
+    if new_cost < dist[neighbour]:
+        # found better path, update the distance
+        dist[neighbour] = new_cost
+        min_pq[neighbour] = new_cost
+        prev[neighbour] = curr_node
 
 # no path found
-return`
+return`}
+        </SyntaxHighlighter>
     },
     [BFS]: {
         'summary': <h4>{BFS} is an <strong>uninformed</strong> search algorithm that is <strong>optimal</strong> in finding the shortest path only in <strong>unweighted</strong> graphs</h4>
@@ -254,5 +258,5 @@ return`
     }
 };
 Object.freeze(pathfindingAlgoInfo);
-export { codeBlockCustomStyle, pathfindingAlgoInfo };
+export { pathfindingAlgoInfo };
 

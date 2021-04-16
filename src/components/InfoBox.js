@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import closeIcon from '../images/close.svg'
-import { codeBlockCustomStyle, pathfindingAlgoInfo } from '../utils/constants.js'
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { pathfindingAlgoInfo } from '../utils/constants.js'
 
 const InfoBox = ({ infoBoxOpen, toggleInfoBox, selectedAlgo, startingPos }) => {
     const [dragging, setDragging] = useState(false);
@@ -29,9 +27,7 @@ const InfoBox = ({ infoBoxOpen, toggleInfoBox, selectedAlgo, startingPos }) => {
             {(pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].summary) || <p>No information.</p>}
             {pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].description}
             {pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].pseudocode && <p className='identifier'>Pseudocode:</p>}
-            {pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].pseudocode && <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
-                {pathfindingAlgoInfo[selectedAlgo].pseudocode}
-            </SyntaxHighlighter>}
+            {pathfindingAlgoInfo[selectedAlgo] && pathfindingAlgoInfo[selectedAlgo].pseudocode}
         </div >
     )
 }
