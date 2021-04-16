@@ -7,6 +7,8 @@ import { recursiveDivision } from '../algorithms/terrain/recursiveDivision.js'
 import { perlinNoise } from '../algorithms/terrain/perlin.js'
 import { random } from '../algorithms/terrain/random.js';
 import { randomWeighted } from '../algorithms/terrain/randomWeighted.js';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 // PATHFINDING ALGORITHM CONSTANTS -------------------------------------------
 const DIJKSTRAS = "Dijkstra's";
@@ -74,15 +76,6 @@ const terrainAlgoSleepTimes = {
 Object.freeze(terrainAlgoSleepTimes);
 
 export { MAZE_GENERATION_SLEEP, RECURSIVE_DIVISION, PERLIN_NOISE, allTerrainAlgos, unweightedTerrainAlgos, terrainFunctions, terrainAlgoSleepTimes };
-
-const pathfindingAlgoInfo = {
-    [DIJKSTRAS]: {
-        'description': <p>Dijkstra's algorithm to find the shortest path between a and b. It picks the unvisited vertex with the <strong>lowest distance</strong>, calculates the distance through it to each unvisited neighbor, and updates the neighbor's distance if smaller. Mark visited (set to red) when done with neighbors.</p>,
-        'optimality': <p>Dijkstra's is guranteed to find the shortest path.</p>
-    }
-};
-Object.freeze(pathfindingAlgoInfo);
-export { pathfindingAlgoInfo };
 
 // NODE CONSTANTS ------------------------------------------------------------
 const nodeTypeEnum = {
@@ -168,3 +161,98 @@ const obsEnum = {
 Object.freeze(obsEnum);
 
 export { obstacleTypes, obsEnum };
+
+// ALGO INFO BOX --------------------------------------------------------
+
+const codeBlockCustomStyle = {
+    fontSize: 13,
+    backgroundColor: '#18191c',
+    borderRadius: 4,
+    padding: 20,
+    lineHeight: 1.5,
+    maxHeight: 250,
+    marginTop: 7
+};
+
+const inLineCodeBlockCustomStyle = {
+    fontSize: 12,
+    backgroundColor: '#18191c',
+    borderRadius: 4,
+    padding: 4,
+    display: 'inline',
+    color: 'white'
+};
+
+const pathfindingAlgoInfo = {
+    [DIJKSTRAS]: {
+        'summary': <h4>{DIJKSTRAS} is a <strong>greedy</strong> pathfinding algorithm that is able find <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
+        'description': null,
+        'pseudocode': `min_pq = min_heap(start_node: 0)
+dist = { start_node: 0 }
+prev = {}
+
+for node in nodes:
+    if node != start_node:
+        dist[node] = Infinity
+        min_pq[node] = Infinity
+            
+while min_pq.len:
+    curr_node = min_pq.delete_min()
+    
+    if curr_node == target_node:
+        return create_path(prev) # found path to target
+        
+    for neighbour in curr_node.neighbours:
+        new_cost = distance[curr_node] + 
+                   edge(curr_node, neighbour).weight
+
+        if new_cost < dist[neighbour]:
+            # found better path, update the distance
+            dist[neighbour] = new_cost
+            min_pq[neighbour] = new_cost
+            prev[neighbour] = curr_node
+
+# no path found
+return`
+    },
+    [ASTAR]: {
+        'summary': <h4>{ASTAR} is an <strong>informed</strong> pathfinding algorithm that combines ideas from {DIJKSTRAS} and {BEST_FIRST} to guarantee <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
+        'description': <p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = g(node) + h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>g(node)</SyntaxHighlighter> is the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> and <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p>,
+        'pseudocode': `min_pq = min_heap(start_node: 0)
+dist = { start_node: 0 }
+prev = {}
+
+for node in nodes:
+    if node != start_node:
+        dist[node] = Infinity
+        min_pq[node] = Infinity
+            
+while min_pq.len:
+    curr_node = min_pq.delete_min()
+    
+    if curr_node == target_node:
+        return create_path(prev) # found path to target
+        
+    for neighbour in curr_node.neighbours:
+        new_cost = distance[curr_node] + 
+                   edge(curr_node, neighbour).weight
+
+        if new_cost < dist[neighbour]:
+            # found better path, update the distance
+            dist[neighbour] = new_cost
+            min_pq[neighbour] = new_cost
+            prev[neighbour] = curr_node
+
+# no path found
+return`
+    },
+    [BFS]: {
+        'summary': <h4>{BFS} is an <strong>uninformed</strong> search algorithm that is <strong>optimal</strong> in finding the shortest path only in <strong>unweighted</strong> graphs</h4>
+    },
+    [DFS]: {
+        'summary': <h4>{DFS} is an <strong>uninformed</strong> search algorithm that is <strong>unoptimal</strong> in finding the shortest path, even in <strong>unweighted</strong> graphs</h4>
+    }
+};
+Object.freeze(pathfindingAlgoInfo);
+export { codeBlockCustomStyle, pathfindingAlgoInfo };
+

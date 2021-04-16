@@ -2,12 +2,12 @@ import { getNeighbourNodes, createPath, findMinPriorityNode, sleep } from '../..
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
 export const dijkstras = async (startCord, targetCord, gridState, rows, cols, timeout) => {
-    let totalCosts = {};
+    let distance = {};
     let prevNodes = {};
     let minPQ = {};
     let visited = {};
 
-    totalCosts[startCord] = 0;
+    distance[startCord] = 0;
     minPQ[startCord] = 0;
 
     for (let x = 0; x < rows; x++) {
@@ -15,7 +15,7 @@ export const dijkstras = async (startCord, targetCord, gridState, rows, cols, ti
             let cord = `${x}:${y}`
 
             if (cord !== startCord) {
-                totalCosts[cord] = Infinity;
+                distance[cord] = Infinity;
             }
         }
     }
@@ -35,14 +35,14 @@ export const dijkstras = async (startCord, targetCord, gridState, rows, cols, ti
 
         const neighbours = getNeighbourNodes(minKey, rows, cols, gridState);
         for (const neighbour of neighbours) {
-            const currPath = totalCosts[minKey] + nodeWeight[gridState[neighbour][0][0]];
+            const currPath = distance[minKey] + nodeWeight[gridState[neighbour][0][0]];
 
             if (neighbour in visited) {
                 continue;
             }
 
-            if (((neighbour in minPQ) && currPath < totalCosts[neighbour]) || !(neighbour in minPQ)) {
-                totalCosts[neighbour] = currPath;
+            if (((neighbour in minPQ) && currPath < distance[neighbour]) || !(neighbour in minPQ)) {
+                distance[neighbour] = currPath;
                 prevNodes[neighbour] = minKey;
                 minPQ[neighbour] = currPath;
                 if (neighbour !== targetCord) {
