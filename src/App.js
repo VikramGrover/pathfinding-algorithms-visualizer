@@ -24,7 +24,6 @@ function App() {
   const footerHeight = 15;
 
   useEffect(() => {
-    console.log("RESETTING BOARD");
     initializeGrid();
   }, []);
 
@@ -48,7 +47,6 @@ function App() {
   };
 
   const clearPath = () => {
-    console.log("CLEARING PATH");
     for (let x = 0; x < rows; x++) {
       for (let y = 0; y < cols; y++) {
         let id = `${x}:${y}`;

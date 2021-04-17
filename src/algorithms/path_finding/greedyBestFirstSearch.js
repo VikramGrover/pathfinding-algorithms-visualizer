@@ -28,7 +28,6 @@ export const greedyBestFirstSearch = async (startCord, targetCord, gridState, ro
             nodeStateFunc(prevState => ([nodeTypeEnum.visited, ...prevState.slice(1)]));
         }
         else if (currNode === targetCord) {
-            console.log("DONNEE");
             // we have reached target, return path
             return createPath(startCord, targetCord, prevNodes);
         }

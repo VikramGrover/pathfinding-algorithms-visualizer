@@ -5,11 +5,9 @@ const GenerateTerrain = ({ rows, cols, selectedTerrainAlgo, gridState, setGridSt
         await resetGrid();
 
         setRunningAlgo(true);
-        console.log("STARTING: ", selectedTerrainAlgo);
 
         await terrainFunctions[selectedTerrainAlgo](startCord, targetCord, gridState, setGridState, rows, cols, terrainAlgoSleepTimes[selectedTerrainAlgo]);
 
-        console.log("ENDED: ", selectedTerrainAlgo);
         setRunningAlgo(false);
     };
 

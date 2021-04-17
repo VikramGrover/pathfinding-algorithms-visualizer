@@ -3,7 +3,6 @@ import { obstacleTypes, obsEnum } from '../utils/constants.js'
 
 const ChooseObstacle = ({ setSelectedObstacle, weightedObsDisabled, dropDownWidth }) => {
     const setObstacle = (obstacleName) => {
-        console.log("selected obs: ", obsEnum[obstacleName]);
         setSelectedObstacle(obsEnum[obstacleName]);
     };
 

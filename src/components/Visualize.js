@@ -9,12 +9,9 @@ const Visualize = ({ rows, cols, selectedAlgo, gridState, setGridState, startCor
 
         clearForReRun();
         setRunningAlgo(true);
-        console.log("STARTING: ", selectedAlgo);
 
         let path = [];
         path = await algoFunctions[selectedAlgo](startCord, targetCord, gridState, rows, cols, algoSleepTimes[selectedAlgo]);
-
-        console.log("ENDED: ", selectedAlgo);
 
         for (let i = path.length - 1; i >= 0; i--) {
             await sleep(PATH_CREATION_SLEEP);
