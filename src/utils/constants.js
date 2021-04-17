@@ -187,7 +187,7 @@ const inLineCodeBlockCustomStyle = {
 
 const pathfindingAlgoInfo = {
     [DIJKSTRAS]: {
-        'summary': <h4>{DIJKSTRAS} is a <strong>greedy</strong> pathfinding algorithm that guarantees <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
+        'summary': <h4>{DIJKSTRAS} is a <strong>greedy</strong> pathfinding algorithm that guarantees <strong>optimal</strong> (shortest) paths, even in <strong>weighted</strong> graphs</h4>,
         'description': null,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
             {`min_pq = min_heap(start_node: 0)
@@ -220,7 +220,7 @@ return`}
         </SyntaxHighlighter>
     },
     [ASTAR]: {
-        'summary': <h4>{ASTAR} is an <strong>informed</strong> pathfinding algorithm that guarantees <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
+        'summary': <h4>{ASTAR} is an <strong>informed</strong> pathfinding algorithm that guarantees <strong>optimal</strong> (shortest) paths, even in <strong>weighted</strong> graphs</h4>,
         'description': <><p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = g(node) + h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>g(node)</SyntaxHighlighter> is the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> and <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p><p>The current chosen heuristic function is known as <strong>Manhattan Distance</strong>, which is just a sum of the differences in the <strong>x</strong> and <strong>y</strong> co-ordinates of 2 points. This heuristic was chosen as it works best for grids where there are 4 directions of movement allowed.</p></>,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
             {`open_set = min_heap(start_node: 0)
@@ -257,7 +257,7 @@ return`}
         </SyntaxHighlighter>
     },
     [BFS]: {
-        'summary': <h4>{BFS} is an <strong>uninformed/blind</strong> search algorithm that gurantees finding the <strong>optimal (shortest)</strong> paths only in <strong>unweighted</strong> graphs</h4>,
+        'summary': <h4>{BFS} is an <strong>uninformed/blind</strong> search algorithm that gurantees finding the <strong>optimal</strong> (shortest) paths only in <strong>unweighted</strong> graphs</h4>,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
             {`queue = [start_node]
 visited = { start_node: 1 }
@@ -283,7 +283,7 @@ return`}
         </SyntaxHighlighter>
     },
     [DFS]: {
-        'summary': <h4>{DFS} is an <strong>uninformed/blind</strong> search algorithm that is <strong>unoptimal (may or may not find shortest path)</strong> and <strong>unweighted</strong></h4>,
+        'summary': <h4>{DFS} is an <strong>uninformed/blind</strong> search algorithm that is <strong>unoptimal</strong> (may or may not find shortest path) and <strong>unweighted</strong></h4>,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
             {`stack = [start_node]
 visited = { start_node: 1 }
