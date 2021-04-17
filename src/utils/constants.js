@@ -2,7 +2,7 @@ import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
 import { dfs } from '../algorithms/path_finding/dfs.js'
 import { bfs } from '../algorithms/path_finding/bfs.js'
 import { aStar } from '../algorithms/path_finding/aStar.js'
-import { bestFirst } from '../algorithms/path_finding/bestFirst.js';
+import { bestFirstSearch } from '../algorithms/path_finding/bestFirstSearch.js';
 import { recursiveDivision } from '../algorithms/terrain/recursiveDivision.js'
 import { simplexNoise } from '../algorithms/terrain/simplexNoise.js'
 import { random } from '../algorithms/terrain/random.js';
@@ -15,14 +15,14 @@ const DIJKSTRAS = "Dijkstra's";
 const ASTAR = 'A* (A-Star)';
 const BFS = 'Breadth-first Search';
 const DFS = 'Depth-first Search';
-const BEST_FIRST = 'Greedy Best-first Search';
+const BEST_FIRST_SEARCH = 'Greedy Best-first Search';
 
 const algoFunctions = {
     [DIJKSTRAS]: dijkstras,
     [ASTAR]: aStar,
     [BFS]: bfs,
     [DFS]: dfs,
-    [BEST_FIRST]: bestFirst
+    [BEST_FIRST_SEARCH]: bestFirstSearch
 };
 Object.freeze(algoFunctions);
 
@@ -32,15 +32,15 @@ const algoSleepTimes = {
     [ASTAR]: 4,
     [BFS]: 5,
     [DFS]: 10,
-    [BEST_FIRST]: 11
+    [BEST_FIRST_SEARCH]: 11
 };
 Object.freeze(algoSleepTimes);
 
-export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST, algoFunctions, PATH_CREATION_SLEEP, algoSleepTimes };
+export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST_SEARCH, algoFunctions, PATH_CREATION_SLEEP, algoSleepTimes };
 
-const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST];
+const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST_SEARCH];
 Object.freeze(allPathAlgos);
-const unweightedPathAlgos = [DFS, BFS, BEST_FIRST];
+const unweightedPathAlgos = [DFS, BFS, BEST_FIRST_SEARCH];
 Object.freeze(unweightedPathAlgos);
 const optimalPathAlgos = [DIJKSTRAS, ASTAR, BFS];
 Object.freeze(optimalPathAlgos);
@@ -187,7 +187,7 @@ const inLineCodeBlockCustomStyle = {
 
 const pathfindingAlgoInfo = {
     [DIJKSTRAS]: {
-        'summary': <h4>{DIJKSTRAS} is a <strong>greedy</strong> pathfinding algorithm that is able find <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
+        'summary': <h4>{DIJKSTRAS} is a <strong>greedy</strong> pathfinding algorithm that guarantees <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
         'description': null,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
             {`min_pq = min_heap(start_node: 0)
@@ -220,33 +220,37 @@ return`}
         </SyntaxHighlighter>
     },
     [ASTAR]: {
-        'summary': <h4>{ASTAR} is an <strong>informed</strong> pathfinding algorithm that combines ideas from {DIJKSTRAS} and {BEST_FIRST} to guarantee <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
-        'description': <p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = g(node) + h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>g(node)</SyntaxHighlighter> is the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> and <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p>,
+        'summary': <h4>{ASTAR} is an <strong>informed</strong> pathfinding algorithm that guarantees <strong>optimal (shortest)</strong> paths, even in <strong>weighted</strong> graphs</h4>,
+        'description': <><p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = g(node) + h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>g(node)</SyntaxHighlighter> is the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> and <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p><p>The current chosen heuristic function is known as <strong>Manhattan Distance</strong>, which is just a sum of the differences in the <strong>x</strong> and <strong>y</strong> co-ordinates of 2 points. This heuristic was chosen as it works best for grids where there are 4 directions of movement allowed.</p></>,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
-            {`min_pq = min_heap(start_node: 0)
-dist = { start_node: 0 }
+            {`open_set = min_heap(start_node: 0)
+G = { start_node: 0 } # G(n) => tell us the current shortest distance from start node to node n
+H = { start_node: 0 } # H(n) => tells us the estimated distance from node n to target node
+F = { start_node: 0 } # F(n) = G(n) + H(n)
 prev = {}
 
 for node in nodes:
-if node != start_node:
-    dist[node] = Infinity
-    min_pq[node] = Infinity
-        
-while min_pq.len:
-curr_node = min_pq.delete_min()
-
-if curr_node == target_node:
-    return create_path(prev) # found path to target
+    if node == start_node:
+        continue
     
-for neighbour in curr_node.neighbours:
-    new_cost = distance[curr_node] + 
-               edge(curr_node, neighbour).weight
-
-    if new_cost < dist[neighbour]:
-        # found better path, update the distance
-        dist[neighbour] = new_cost
-        min_pq[neighbour] = new_cost
-        prev[neighbour] = curr_node
+    F[node] = G[node] = H[node] = Infinity
+    
+while open_set not empty:
+    curr_node = open_set.delete_min()
+    
+    if curr_node == target_node:
+        return create_path(prev)
+        
+    for neighbour in curr_node.neighbours:
+        new_G_score = G[curr_node] + weight(edge(curr_node, neighbour))
+        
+        if new_G_score < G[curr_node]:
+            # update all scores
+            G[neighbour] = new_G_score
+            H[neighbour] = manhattan_distance_heuristic(neighbour, targetCord); # get estimated cost from neighbour -> target
+            F[neighbour] = G[neighbour] + H[neighbour];
+            prev[neighbour] = curr_node;
+            openSet[neighbour] = F[neighbour]; # update priority of neighbour in open_set
 
 # no path found
 return`}
@@ -308,34 +312,36 @@ while stack.len:
 return`}
         </SyntaxHighlighter>
     },
-    [BEST_FIRST]: {
-        'summary': <h4>{BEST_FIRST} is an <strong>informed</strong> and <strong>greedy</strong> pathfinding algorithm that is <strong>unoptimal</strong> (may or may not find the shortest paths) and <strong>unweighted</strong></h4>,
-        'description': <p>The algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>.</p>,
+    [BEST_FIRST_SEARCH]: {
+        'summary': <h4>{BEST_FIRST_SEARCH} is an <strong>informed</strong> and <strong>greedy</strong> pathfinding algorithm that is <strong>unoptimal</strong> (may or may not find the shortest paths) and <strong>unweighted</strong></h4>,
+        'description': <><p>Similar to {ASTAR}, this algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>. Unlike {ASTAR}, {BEST_FIRST_SEARCH} does not perform optimally because it only cares about the estimated distance from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>, however, fails to optimize for the cost to get from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter>.</p><p>The current chosen heuristic function is known as <strong>Manhattan Distance</strong>, which is just a sum of the differences in the <strong>x</strong> and <strong>y</strong> co-ordinates of 2 points. This heuristic was chosen as it works best for grids where there are 4 directions of movement allowed.</p></>,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
-            {`min_pq = min_heap(start_node: 0)
-dist = { start_node: 0 }
+            {`open_set = min_heap(start_node: 0)
+H = { start_node: 0 } # H(n) => tells us the estimated distance from node n to target node
+F = { start_node: 0 } # F(n) = H(n)
 prev = {}
+visited = {}
 
 for node in nodes:
-if node != start_node:
-    dist[node] = Infinity
-    min_pq[node] = Infinity
-        
-while min_pq.len:
-curr_node = min_pq.delete_min()
-
-if curr_node == target_node:
-    return create_path(prev) # found path to target
+    if node == start_node:
+        continue
     
-for neighbour in curr_node.neighbours:
-    new_cost = distance[curr_node] + 
-               edge(curr_node, neighbour).weight
-
-    if new_cost < dist[neighbour]:
-        # found better path, update the distance
-        dist[neighbour] = new_cost
-        min_pq[neighbour] = new_cost
-        prev[neighbour] = curr_node
+    F[node] = H[node] = Infinity
+    
+while open_set not empty:
+    curr_node = open_set.delete_min()
+    
+    if curr_node == target_node:
+        return create_path(prev)
+        
+    for neighbour in curr_node.neighbours:  # check all unvisited neighbours 
+        if neighbout not in visited:
+            # update all scores
+            visited[neighbours] = 1
+            H[neighbour] = manhattan_distance_heuristic(neighbour, targetCord); # get estimated cost from neighbour -> target
+            F[neighbour] = H[neighbour];
+            prev[neighbour] = curr_node;
+            openSet[neighbour] = F[neighbour]; # update priority of neighbour in open_set
 
 # no path found
 return`}

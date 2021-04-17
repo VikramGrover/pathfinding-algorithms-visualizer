@@ -93,3 +93,18 @@ export const getRandomNum = (num1, num2) => {
     const max = Math.max(num1, num2);
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+// this implements our H score heuristic
+// current heuristic: take the absolute sum of the difference in node N's co-ordinates and target's co-ordinates. Hence, the greater the distance between N and target, the greater the H score for node N. This is known as the "Manhattan Distance"
+export const manhattanDistanceHeuristic = (currNodeCord, targetCord) => {
+    if (currNodeCord === targetCord) {
+        return 0;
+    }
+
+    const currRow = parseInt(currNodeCord.split(':')[0]);
+    const currCol = parseInt(currNodeCord.split(':')[1]);
+    const targetRow = parseInt(targetCord.split(':')[0]);
+    const targetCol = parseInt(targetCord.split(':')[1]);
+
+    return Math.abs(currRow - targetRow) + Math.abs(currCol - targetCol);
+};

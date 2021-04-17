@@ -1,4 +1,4 @@
-import { getNeighbourNodes, createPath, findMinPriorityNode, sleep } from '../../utils/helper.js'
+import { getNeighbourNodes, createPath, findMinPriorityNode, sleep, manhattanDistanceHeuristic } from '../../utils/helper.js'
 import { nodeWeight, nodeTypeEnum } from '../../utils/constants.js'
 
 export const aStar = async (startCord, targetCord, gridState, rows, cols, timeout) => {
@@ -9,7 +9,7 @@ export const aStar = async (startCord, targetCord, gridState, rows, cols, timeou
     let visited = {};
     let prevNodes = {};
 
-    // intialize all the scores to infinity for all node !== start node
+    // intialize all the scores to infinity for all nodes !== start_node
     for (let x = 0; x < rows; x++) {
         for (let y = 0; y < cols; y++) {
             let cord = `${x}:${y}`
@@ -46,7 +46,7 @@ export const aStar = async (startCord, targetCord, gridState, rows, cols, timeou
                 // newly calculated G score of neighbour is lower than the one in the table
                 // update all the scores
                 G[neighbour] = currGScore;
-                H[neighbour] = h(neighbour, targetCord);
+                H[neighbour] = manhattanDistanceHeuristic(neighbour, targetCord);
                 F[neighbour] = G[neighbour] + H[neighbour];
                 prevNodes[neighbour] = currNode;
                 openSet[neighbour] = F[neighbour];
@@ -57,19 +57,4 @@ export const aStar = async (startCord, targetCord, gridState, rows, cols, timeou
     }
 
     return [];
-};
-
-// this implements our H score heuristic
-// current heuristic: take the absolute sum of the difference in node N's co-ordinates and target's co-ordinates. Hence, the greater the distance between N and target, the greater the H score for node N
-const h = (currNodeCord, targetCord) => {
-    if (currNodeCord === targetCord) {
-        return 0;
-    }
-
-    const currRow = parseInt(currNodeCord.split(':')[0]);
-    const currCol = parseInt(currNodeCord.split(':')[1]);
-    const targetRow = parseInt(targetCord.split(':')[0]);
-    const targetCol = parseInt(targetCord.split(':')[1]);
-
-    return Math.sqrt(Math.pow(currRow - targetRow, 2) + Math.pow(currCol - targetCol, 2));
 };
