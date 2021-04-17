@@ -2,7 +2,7 @@ import { dijkstras } from '../algorithms/path_finding/dijkstras.js'
 import { dfs } from '../algorithms/path_finding/dfs.js'
 import { bfs } from '../algorithms/path_finding/bfs.js'
 import { aStar } from '../algorithms/path_finding/aStar.js'
-import { bestFirstSearch } from '../algorithms/path_finding/bestFirstSearch.js';
+import { greedyBestFirstSearch } from '../algorithms/path_finding/greedyBestFirstSearch.js';
 import { recursiveDivision } from '../algorithms/terrain/recursiveDivision.js'
 import { simplexNoise } from '../algorithms/terrain/simplexNoise.js'
 import { random } from '../algorithms/terrain/random.js';
@@ -15,14 +15,14 @@ const DIJKSTRAS = "Dijkstra's";
 const ASTAR = 'A* (A-Star)';
 const BFS = 'Breadth-first Search';
 const DFS = 'Depth-first Search';
-const BEST_FIRST_SEARCH = 'Greedy Best-first Search';
+const GREEDY_BEST_FIRST_SEARCH = 'Greedy Best-first Search';
 
 const algoFunctions = {
     [DIJKSTRAS]: dijkstras,
     [ASTAR]: aStar,
     [BFS]: bfs,
     [DFS]: dfs,
-    [BEST_FIRST_SEARCH]: bestFirstSearch
+    [GREEDY_BEST_FIRST_SEARCH]: greedyBestFirstSearch
 };
 Object.freeze(algoFunctions);
 
@@ -32,15 +32,15 @@ const algoSleepTimes = {
     [ASTAR]: 4,
     [BFS]: 5,
     [DFS]: 10,
-    [BEST_FIRST_SEARCH]: 11
+    [GREEDY_BEST_FIRST_SEARCH]: 11
 };
 Object.freeze(algoSleepTimes);
 
-export { DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST_SEARCH, algoFunctions, PATH_CREATION_SLEEP, algoSleepTimes };
+export { DIJKSTRAS, ASTAR, BFS, DFS, GREEDY_BEST_FIRST_SEARCH, algoFunctions, PATH_CREATION_SLEEP, algoSleepTimes };
 
-const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, BEST_FIRST_SEARCH];
+const allPathAlgos = [DIJKSTRAS, ASTAR, BFS, DFS, GREEDY_BEST_FIRST_SEARCH];
 Object.freeze(allPathAlgos);
-const unweightedPathAlgos = [DFS, BFS, BEST_FIRST_SEARCH];
+const unweightedPathAlgos = [DFS, BFS, GREEDY_BEST_FIRST_SEARCH];
 Object.freeze(unweightedPathAlgos);
 const optimalPathAlgos = [DIJKSTRAS, ASTAR, BFS];
 Object.freeze(optimalPathAlgos);
@@ -312,9 +312,9 @@ while stack.len:
 return`}
         </SyntaxHighlighter>
     },
-    [BEST_FIRST_SEARCH]: {
-        'summary': <h4>{BEST_FIRST_SEARCH} is an <strong>informed</strong> and <strong>greedy</strong> pathfinding algorithm that is <strong>unoptimal</strong> (may or may not find the shortest paths) and <strong>unweighted</strong></h4>,
-        'description': <><p>Similar to {ASTAR}, this algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>. Unlike {ASTAR}, {BEST_FIRST_SEARCH} does not perform optimally because it only cares about the estimated distance from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>, however, fails to optimize for the cost to get from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter>.</p><p>The current chosen heuristic function is known as <strong>Manhattan Distance</strong>, which is just a sum of the differences in the <strong>x</strong> and <strong>y</strong> co-ordinates of 2 points. This heuristic was chosen as it works best for grids where there are 4 directions of movement allowed.</p></>,
+    [GREEDY_BEST_FIRST_SEARCH]: {
+        'summary': <h4>{GREEDY_BEST_FIRST_SEARCH} is an <strong>informed</strong> and <strong>greedy</strong> pathfinding algorithm that is <strong>unoptimal</strong> (may or may not find the shortest paths) and <strong>unweighted</strong></h4>,
+        'description': <><p>Similar to {ASTAR}, this algorithm explores paths that minimize the function <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>f(node) = h(node)</SyntaxHighlighter> where <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>h(node)</SyntaxHighlighter> is the <strong>heuristic function</strong> which estimates the cost of the path from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>. Unlike {ASTAR}, {GREEDY_BEST_FIRST_SEARCH} does not perform optimally because it only cares about the estimated distance from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.target] }}>target_node</SyntaxHighlighter>, however, fails to optimize for the cost to get from <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={{ ...inLineCodeBlockCustomStyle, color: nodeColors[nodeTypeEnum.start] }}>start_node</SyntaxHighlighter> to <SyntaxHighlighter language={'text'} style={atomOneDark} customStyle={inLineCodeBlockCustomStyle}>node</SyntaxHighlighter>.</p><p>The current chosen heuristic function is known as <strong>Manhattan Distance</strong>, which is just a sum of the differences in the <strong>x</strong> and <strong>y</strong> co-ordinates of 2 points. This heuristic was chosen as it works best for grids where there are 4 directions of movement allowed.</p></>,
         'pseudocode': <SyntaxHighlighter language="python" style={atomOneDark} showLineNumbers={true} wrapLines={true} customStyle={codeBlockCustomStyle}>
             {`open_set = min_heap(start_node: 0)
 H = { start_node: 0 } # H(n) => tells us the estimated distance from node n to target node

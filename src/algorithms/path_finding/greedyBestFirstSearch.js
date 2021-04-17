@@ -1,7 +1,7 @@
 import { getNeighbourNodes, createPath, findMinPriorityNode, sleep, manhattanDistanceHeuristic } from '../../utils/helper.js'
 import { nodeTypeEnum } from '../../utils/constants.js'
 
-export const bestFirstSearch = async (startCord, targetCord, gridState, rows, cols, timeout) => {
+export const greedyBestFirstSearch = async (startCord, targetCord, gridState, rows, cols, timeout) => {
     let openSet = { [startCord]: 0 };
     let H = { [startCord]: 0 }; // H(n) => tells us the estimated distance from node n to target node
     let F = { [startCord]: 0 }; // F(n) = H(n)
