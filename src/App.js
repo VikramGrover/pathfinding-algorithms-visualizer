@@ -2,6 +2,7 @@ import Grid from './components/Grid.js'
 import Header from './components/Header.js'
 import InfoBox from './components/InfoBox.js'
 import Footer from './components/Footer.js'
+import ReactGA from 'react-ga';
 
 import { allPathAlgos, nodeTypeEnum } from './utils/constants.js'
 import { useState, useEffect } from 'react'
@@ -24,13 +25,10 @@ function App() {
   const footerHeight = 15;
 
   useEffect(() => {
+    ReactGA.initialize('UA-194875214-1');
+    ReactGA.pageview('/');
     initializeGrid();
   }, []);
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", resizeGrid);
-  //   return () => window.removeEventListener("resize", resizeGrid);
-  // }, []);
 
   const initializeGrid = () => {
     const adjustedWinHeight = window.innerHeight - (navBarHeight + (margin * 3)) - footerHeight;
