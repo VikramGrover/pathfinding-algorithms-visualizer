@@ -1,6 +1,7 @@
 import Grid from './components/Grid.js'
 import Header from './components/Header.js'
 import InfoBox from './components/InfoBox.js'
+import Footer from './components/Footer.js'
 
 import { allPathAlgos, nodeTypeEnum } from './utils/constants.js'
 import { useState, useEffect } from 'react'
@@ -20,6 +21,7 @@ function App() {
   const margin = 30;
   const nodeSize = 28;
   const navBarHeight = 90;
+  const footerHeight = 15;
 
   useEffect(() => {
     console.log("RESETTING BOARD");
@@ -32,7 +34,7 @@ function App() {
   // }, []);
 
   const initializeGrid = () => {
-    const adjustedWinHeight = window.innerHeight - (navBarHeight + (margin * 3));
+    const adjustedWinHeight = window.innerHeight - (navBarHeight + (margin * 3)) - footerHeight;
     const adjustedWinWidth = window.innerWidth - (2 * margin);
 
     const currRows = parseInt(adjustedWinHeight / (nodeSize + 1));
@@ -183,6 +185,7 @@ function App() {
       <Header rows={rows} cols={cols} runningAlgo={runningAlgo} setRunningAlgo={setRunningAlgo} padding={margin} height={navBarHeight} gridState={gridState} setGridState={setGridState} startCord={startCord} targetCord={targetCord} clearObstacles={clearObstacles} clearPath={clearPath} setSelectedObstacle={setSelectedObstacle} weightedObsDisabled={weightedObsDisabled} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} setSelectedAlgo={alteredSetSelectedAlgo} resetGrid={resetGrid} />
       <Grid rows={rows} cols={cols} padding={margin} nodeSize={nodeSize} setGridState={setGridState} selectedObstacle={selectedObstacle} setStartCord={setStartCord} setTargetCord={setTargetCord} runningAlgo={runningAlgo} />
       <InfoBox infoBoxOpen={infoBoxOpen} toggleInfoBox={toggleInfoBox} selectedAlgo={selectedAlgo} startingPos={[(window.innerWidth / 2) - 285, (navBarHeight + (margin * 2))]} />
+      <Footer />
     </>
   );
 }

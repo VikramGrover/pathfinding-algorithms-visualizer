@@ -446,4 +446,28 @@ code {
   user-select: none;
 }
 
+.footer {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--light-text-color);
+  position: fixed;
+  bottom: 0px;
+}
+
+.footer a {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(var(--visited-node-color), 1);
+  text-decoration: none;
+  transition: color 0.1s linear;
+}
+
+.footer a:hover {
+  color: white;
+}
 
