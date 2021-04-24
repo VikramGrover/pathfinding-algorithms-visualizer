@@ -15,7 +15,7 @@ const DIJKSTRAS = "Dijkstra's";
 const ASTAR = 'A* (A-Star)';
 const BFS = 'Breadth-first Search';
 const DFS = 'Depth-first Search';
-const GREEDY_BEST_FIRST_SEARCH = 'Greedy Best-first Search';
+const GREEDY_BEST_FIRST_SEARCH = 'Greedy Best-First Search';
 
 const algoFunctions = {
     [DIJKSTRAS]: dijkstras,
