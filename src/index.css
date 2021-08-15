@@ -103,7 +103,7 @@ code {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
   white-space: nowrap;
-  height: auto;
+  height: 37px;
   transition: color 70ms linear;
   transition: background-color 70ms linear;
 }
@@ -187,7 +187,7 @@ code {
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  height: auto;
+  height: 37px;
   display: table;
   cursor: pointer;
 }
